@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.room.Room
+import com.example.roomlearning.room.Accounting
+import com.example.roomlearning.room.tBookDatabase
 import org.jetbrains.anko.find
 
 class ShowActivity : AppCompatActivity() {
@@ -38,16 +40,12 @@ class ShowActivity : AppCompatActivity() {
             //toast(:Double.toString())
             val money = if (data?.getStringExtra("money") == null) 0.00 else data?.getStringExtra("money").toDouble()
             val type = data?.getStringExtra("type") + ""
-            val date = data?.getStringExtra("date") + ""
+            val time = data?.getStringExtra("time") + ""
             val remark = data?.getStringExtra("remark") + ""
 
-            var roomdb = Room.databaseBuilder(this,SQLDatabase::class.java,"item_db").build()
+            val roomdb = tBookDatabase.getDBInstace(this.application)
             Thread({
-                roomdb.item().insert(Item(money = money,first_class = type,date = date,remark = remark, index = 0,account = "me"))
-                val ilist = roomdb.item().qeuryAll()
-                for(it in ilist){
-                    Log.d(TAG,"show"+it)
-                }
+                roomdb.actDao().addAccountingData(Accounting(accountingAmount = money,accountingFirstClass = type,accountingTime = time,accountingRemark = remark,accountingAcconut = "me",accountingType = "收入"))
             }).start()
         }
     }
