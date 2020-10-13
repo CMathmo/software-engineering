@@ -1,0 +1,58 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.wad_official.t_book"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:5:5-20:19
+12        android:allowBackup="true"
+12-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\18a7b40690f2084446c7d9b0edd02f1e\core-1.2.0\AndroidManifest.xml:24:18-86
+14        android:debuggable="true"
+15        android:extractNativeLibs="false"
+16        android:icon="@mipmap/ic_launcher"
+16-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:7:9-43
+17        android:label="@string/app_name"
+17-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:8:9-41
+18        android:roundIcon="@mipmap/ic_launcher_round"
+18-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:9:9-54
+19        android:supportsRtl="true"
+19-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:10:9-35
+20        android:testOnly="true"
+21        android:theme="@style/AppTheme" >
+21-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:11:9-40
+22        <activity android:name="com.wad.tBook.AddActivity" />
+22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:9-62
+22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:19-59
+23        <activity android:name="com.wad.tBook.MainActivity" >
+23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:9-19:20
+23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:19-60
+24            <intent-filter>
+24-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:14:13-18:29
+25                <action android:name="android.intent.action.MAIN" />
+25-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:15:17-69
+25-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:15:25-66
+26
+27                <category android:name="android.intent.category.LAUNCHER" />
+27-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:17:17-77
+27-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:17:27-74
+28            </intent-filter>
+29        </activity>
+30
+31        <service
+31-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\60de051df7926879b8c7f1bdd2a1f0dc\room-runtime-2.2.0-rc01\AndroidManifest.xml:25:9-27:40
+32            android:name="androidx.room.MultiInstanceInvalidationService"
+32-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\60de051df7926879b8c7f1bdd2a1f0dc\room-runtime-2.2.0-rc01\AndroidManifest.xml:26:13-74
+33            android:exported="false" />
+33-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\60de051df7926879b8c7f1bdd2a1f0dc\room-runtime-2.2.0-rc01\AndroidManifest.xml:27:13-37
+34    </application>
+35
+36</manifest>
