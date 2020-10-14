@@ -5,33 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/type_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/income_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:checked="true"
+            android:text="收入" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/expenditure_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:text="支出" />
 
         <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/transfer_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="RadioButton" />
-    </LinearLayout>
+            android:text="转账" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,11 @@
 package com.wad.tBook
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ToggleButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -13,25 +17,83 @@ import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.wad.tBook.analysis.AnalysisFragment
+import com.wad.tBook.room.*
 import com.wad.tBook.statistical.AccountFragment
 import com.wad.tBook.statistical.PipelineFragment
+import org.jetbrains.anko.find
+import kotlin.Any as KotlinAny
 
 class MainActivity : FragmentActivity() {
+
+    private val TAG = MainActivity::class.qualifiedName
+
     var titleList:MutableList<String> = arrayListOf()
     var accountFragment: AccountFragment = AccountFragment()
-    var pipelineFragment:PipelineFragment = PipelineFragment()
-    var analysisFragment:AnalysisFragment = AnalysisFragment()
+    var pipelineFragment: PipelineFragment = PipelineFragment()
+    var analysisFragment: AnalysisFragment = AnalysisFragment()
     var settingFragment : SettingFragment = SettingFragment()
-    var fragmentList: MutableList<Any> = mutableListOf(accountFragment,pipelineFragment,
+    var fragmentList: MutableList<KotlinAny> = mutableListOf(accountFragment,pipelineFragment,
         analysisFragment,settingFragment)
     var mViewPagerAdapter: ViewPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
+        val add_button : Button = find(R.id.add_button)
+        //val button = findViewById(R.id.button1) as Button
+        add_button.setOnClickListener{startActivityForResult(Intent(this, AddActivity::class.java),1)}
+        Log.d(TAG,"create_show")
         initView()
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG,"start_show")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG,"restart_show")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            //toast(:Double.toString())
+            val amount = if (data?.getStringExtra("amount") == null || data?.getStringExtra("amount") == "") 0.00 else data?.getStringExtra("amount").toDouble()
+            val type = data?.getStringExtra("type") + ""
+            val date = data?.getStringExtra("date") + ""
+            val first_class = data?.getStringExtra("class") + ""
+            val member = if (data?.getStringExtra("member") == "") null else data?.getStringExtra("member")
+            val project = if (data?.getStringExtra("project") == "") null else data?.getStringExtra("project")
+            val account = data?.getStringExtra("account") + ""
+            val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
+            val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
+
+            val roomdb = tBookDatabase.getDBInstace(this.application)
+            Thread({
+                roomdb.actDao().addAccountingData(Accounting(
+                    accountingAmount = amount,
+                    accountingFirstClass = first_class,
+                    accountingType = type,
+                    accountingMember = member,
+                    accountingProject = project,
+                    accountingTime = date,
+                    accountingMerchant = merchant,
+                    accountingRemark = remark,
+                    accountingAcconut = account
+                ))
+            }).start()
+        }
+    }
+    /**
+     * 初始化方法
+     * 设置TabLayout
+     * 创建ViewPagerAdapter对象
+     * 关联Tablayout与ViewPager
+     * 给每一个TabView设置点击监听事件
+     * 给ViewPager设置pageChange改变的事件
+     */
     private fun initView(){
         //关联TabLayout和ViewPager
         tabLayout.setupWithViewPager(viewPager)

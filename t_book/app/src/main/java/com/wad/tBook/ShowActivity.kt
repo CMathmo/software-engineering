@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.room.Room
-import com.example.roomlearning.room.Accounting
-import com.example.roomlearning.room.tBookDatabase
+import com.wad.tBook.room.Accounting
+import com.wad.tBook.room.tBookDatabase
 import org.jetbrains.anko.find
 
 class ShowActivity : AppCompatActivity() {
@@ -38,11 +38,11 @@ class ShowActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1) {
             //toast(:Double.toString())
-            val money = if (data?.getStringExtra("money") == null) 0.00 else data?.getStringExtra("money").toDouble()
+            val money = if (data?.getStringExtra("money") == null || data?.getStringExtra("money") == "") 0.00 else data?.getStringExtra("money").toDouble()
             val type = data?.getStringExtra("type") + ""
             val time = data?.getStringExtra("time") + ""
             val remark = data?.getStringExtra("remark") + ""
-
+            Log.d(TAG,"momo:ok")
             val roomdb = tBookDatabase.getDBInstace(this.application)
             Thread({
                 roomdb.actDao().addAccountingData(Accounting(accountingAmount = money,accountingFirstClass = type,accountingTime = time,accountingRemark = remark,accountingAcconut = "me",accountingType = "收入"))
