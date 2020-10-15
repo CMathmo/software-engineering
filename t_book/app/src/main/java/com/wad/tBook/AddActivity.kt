@@ -13,10 +13,7 @@ import android.widget.RadioGroup
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
-import com.wad.tBook.room.Property
 import com.wad.tBook.room.tBookDatabase
-import kotlinx.android.synthetic.main.activity_add.*
-import kotlinx.android.synthetic.main.type.*
 import org.jetbrains.anko.find
 
 class AddActivity : AppCompatActivity() {
@@ -31,7 +28,7 @@ class AddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
         val pvoptions : OptionsPickerView<String> = OptionsPickerBuilder(this, OnOptionsSelectListener{
-            options1, options2, options3, v ->
+                options1, options2, options3, v ->
             val tx = OptionsItems_1.get(options1) + "->" + OptionsItems_2.get(options1).get(options2)
             find<EditText>(R.id.class_editText).setText(tx)
         }).build()

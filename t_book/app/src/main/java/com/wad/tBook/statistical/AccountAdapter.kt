@@ -37,7 +37,7 @@ class AccountAdapter(
         if (convertView == null){
             view = View.inflate(context, R.layout.list_account_view,null)
             viewHolder = ViewHolder()
-            viewHolder.accountView = view.findViewById(R.id.textAccount)
+            viewHolder.accountView = view.findViewById(R.id.textAccounttype)
             viewHolder.amountView = view.findViewById(R.id.textAmount)
             view.tag = viewHolder
         }else{

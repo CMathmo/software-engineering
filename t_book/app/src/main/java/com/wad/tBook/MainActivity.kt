@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.wad.tBook.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
+import com.wad.tBook.room.tBookDatabase
 import com.google.android.material.tabs.TabLayout
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.*
@@ -28,10 +29,13 @@ class MainActivity : FragmentActivity() {
     private val TAG = MainActivity::class.qualifiedName
 
     var titleList:MutableList<String> = arrayListOf()
+
     var accountFragment: AccountFragment = AccountFragment()
     var pipelineFragment: PipelineFragment = PipelineFragment()
     var analysisFragment: AnalysisFragment = AnalysisFragment()
     var settingFragment : SettingFragment = SettingFragment()
+
+
     var fragmentList: MutableList<KotlinAny> = mutableListOf(accountFragment,pipelineFragment,
         analysisFragment,settingFragment)
     var mViewPagerAdapter: ViewPagerAdapter? = null
@@ -71,6 +75,7 @@ class MainActivity : FragmentActivity() {
             val account = data?.getStringExtra("account") + ""
             val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
             val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
+
 
         }
     }

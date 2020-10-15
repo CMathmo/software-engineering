@@ -27,21 +27,25 @@ public final class tBookDatabase_Impl extends tBookDatabase {
 
   private volatile UserDao _userDao;
 
+  private volatile PropertyDao _propertyDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(3) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `accounting_table` (`accounting_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `accounting_amount` REAL NOT NULL, `accounting_first_class` TEXT NOT NULL, `accounting_second_class` TEXT, `accounting_project` TEXT, `accounting_member` TEXT, `accounting_type` TEXT NOT NULL, `accounting_account` TEXT NOT NULL, `accounting_merchant` TEXT, `accounting_Time` TEXT NOT NULL, `accounting_remark` TEXT, `accounting_imagine` TEXT)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `accounting_table` (`accounting_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `accounting_type` TEXT NOT NULL, `accounting_amount` REAL NOT NULL, `accounting_Time` TEXT NOT NULL, `accounting_remark` TEXT, `accounting_imagine` TEXT, `accounting_classfirst_class` TEXT NOT NULL, `accounting_classsecond_class` TEXT NOT NULL, `accounting_accountfirst_class` TEXT NOT NULL, `accounting_accountsecond_class` TEXT NOT NULL, `accounting_memberfirst_class` TEXT, `accounting_membersecond_class` TEXT, `accounting_projectfirst_class` TEXT, `accounting_projectsecond_class` TEXT, `accounting_merchantfirst_class` TEXT, `accounting_merchantsecond_class` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `user_table` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `user_password` TEXT NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `property_table` (`property_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `property_type` TEXT NOT NULL, `property_item` TEXT NOT NULL, `property_first_class` TEXT NOT NULL, `property_second_class` TEXT NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1eb7940db2bd8737047f09dd635e4e56')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd4a3e4fd547206f5264ca576a5c1aae7')");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `accounting_table`");
         _db.execSQL("DROP TABLE IF EXISTS `user_table`");
+        _db.execSQL("DROP TABLE IF EXISTS `property_table`");
         if (mCallbacks != null) {
           for (int _i = 0, _size = mCallbacks.size(); _i < _size; _i++) {
             mCallbacks.get(_i).onDestructiveMigration(_db);
@@ -80,19 +84,23 @@ public final class tBookDatabase_Impl extends tBookDatabase {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsAccountingTable = new HashMap<String, TableInfo.Column>(12);
+        final HashMap<String, TableInfo.Column> _columnsAccountingTable = new HashMap<String, TableInfo.Column>(16);
         _columnsAccountingTable.put("accounting_id", new TableInfo.Column("accounting_id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_amount", new TableInfo.Column("accounting_amount", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_first_class", new TableInfo.Column("accounting_first_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_second_class", new TableInfo.Column("accounting_second_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_project", new TableInfo.Column("accounting_project", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_member", new TableInfo.Column("accounting_member", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAccountingTable.put("accounting_type", new TableInfo.Column("accounting_type", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_account", new TableInfo.Column("accounting_account", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAccountingTable.put("accounting_merchant", new TableInfo.Column("accounting_merchant", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_amount", new TableInfo.Column("accounting_amount", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAccountingTable.put("accounting_Time", new TableInfo.Column("accounting_Time", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAccountingTable.put("accounting_remark", new TableInfo.Column("accounting_remark", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAccountingTable.put("accounting_imagine", new TableInfo.Column("accounting_imagine", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_classfirst_class", new TableInfo.Column("accounting_classfirst_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_classsecond_class", new TableInfo.Column("accounting_classsecond_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_accountfirst_class", new TableInfo.Column("accounting_accountfirst_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_accountsecond_class", new TableInfo.Column("accounting_accountsecond_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_memberfirst_class", new TableInfo.Column("accounting_memberfirst_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_membersecond_class", new TableInfo.Column("accounting_membersecond_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_projectfirst_class", new TableInfo.Column("accounting_projectfirst_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_projectsecond_class", new TableInfo.Column("accounting_projectsecond_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_merchantfirst_class", new TableInfo.Column("accounting_merchantfirst_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAccountingTable.put("accounting_merchantsecond_class", new TableInfo.Column("accounting_merchantsecond_class", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysAccountingTable = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesAccountingTable = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoAccountingTable = new TableInfo("accounting_table", _columnsAccountingTable, _foreignKeysAccountingTable, _indicesAccountingTable);
@@ -115,9 +123,24 @@ public final class tBookDatabase_Impl extends tBookDatabase {
                   + " Expected:\n" + _infoUserTable + "\n"
                   + " Found:\n" + _existingUserTable);
         }
+        final HashMap<String, TableInfo.Column> _columnsPropertyTable = new HashMap<String, TableInfo.Column>(5);
+        _columnsPropertyTable.put("property_id", new TableInfo.Column("property_id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPropertyTable.put("property_type", new TableInfo.Column("property_type", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPropertyTable.put("property_item", new TableInfo.Column("property_item", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPropertyTable.put("property_first_class", new TableInfo.Column("property_first_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsPropertyTable.put("property_second_class", new TableInfo.Column("property_second_class", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysPropertyTable = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesPropertyTable = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoPropertyTable = new TableInfo("property_table", _columnsPropertyTable, _foreignKeysPropertyTable, _indicesPropertyTable);
+        final TableInfo _existingPropertyTable = TableInfo.read(_db, "property_table");
+        if (! _infoPropertyTable.equals(_existingPropertyTable)) {
+          return new RoomOpenHelper.ValidationResult(false, "property_table(com.wad.tBook.room.Property).\n"
+                  + " Expected:\n" + _infoPropertyTable + "\n"
+                  + " Found:\n" + _existingPropertyTable);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "1eb7940db2bd8737047f09dd635e4e56", "47678eb83e8e34111f8ffaed2e748a01");
+    }, "d4a3e4fd547206f5264ca576a5c1aae7", "172d111cf847dfff5f6142ecbcb46923");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -130,7 +153,7 @@ public final class tBookDatabase_Impl extends tBookDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "accounting_table","user_table");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "accounting_table","user_table","property_table");
   }
 
   @Override
@@ -141,6 +164,7 @@ public final class tBookDatabase_Impl extends tBookDatabase {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `accounting_table`");
       _db.execSQL("DELETE FROM `user_table`");
+      _db.execSQL("DELETE FROM `property_table`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -175,6 +199,20 @@ public final class tBookDatabase_Impl extends tBookDatabase {
           _userDao = new UserDao_Impl(this);
         }
         return _userDao;
+      }
+    }
+  }
+
+  @Override
+  public PropertyDao proDao() {
+    if (_propertyDao != null) {
+      return _propertyDao;
+    } else {
+      synchronized(this) {
+        if(_propertyDao == null) {
+          _propertyDao = new PropertyDao_Impl(this);
+        }
+        return _propertyDao;
       }
     }
   }

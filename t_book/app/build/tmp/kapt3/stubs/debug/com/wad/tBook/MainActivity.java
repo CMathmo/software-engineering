@@ -2,19 +2,19 @@ package com.wad.tBook;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 4, 0}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000R\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0000\n\u0002\u0018\u0002\n\u0002\b\b\n\u0002\u0010!\n\u0002\u0010\u0000\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u000e\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\b\n\u0002\b\b\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\b\u0018\u00002\u00020\u0001:\u0003:;<B\u0005\u00a2\u0006\u0002\u0010\u0002J\u001e\u0010$\u001a\u00020%2\u0006\u0010&\u001a\u00020\'2\u0006\u0010(\u001a\u00020)2\u0006\u0010*\u001a\u00020\u0004J\u000e\u0010+\u001a\u00020\'2\u0006\u0010,\u001a\u00020)J\b\u0010-\u001a\u00020%H\u0002J\"\u0010.\u001a\u00020%2\u0006\u0010/\u001a\u00020)2\u0006\u00100\u001a\u00020)2\b\u00101\u001a\u0004\u0018\u000102H\u0014J\u0012\u00103\u001a\u00020%2\b\u00104\u001a\u0004\u0018\u000105H\u0014J\b\u00106\u001a\u00020%H\u0014J\b\u00107\u001a\u00020%H\u0014J\u0010\u00108\u001a\u00020%2\u0006\u00109\u001a\u00020)H\u0002R\u0010\u0010\u0003\u001a\u0004\u0018\u00010\u0004X\u0082\u0004\u00a2\u0006\u0002\n\u0000R\u001a\u0010\u0005\u001a\u00020\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0007\u0010\b\"\u0004\b\t\u0010\nR\u001a\u0010\u000b\u001a\u00020\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\f\u0010\b\"\u0004\b\r\u0010\nR \u0010\u000e\u001a\b\u0012\u0004\u0012\u00020\u00100\u000fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0011\u0010\u0012\"\u0004\b\u0013\u0010\u0014R \u0010\u0015\u001a\b\u0018\u00010\u0016R\u00020\u0000X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0017\u0010\u0018\"\u0004\b\u0019\u0010\u001aR\u001a\u0010\u001b\u001a\u00020\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001c\u0010\b\"\u0004\b\u001d\u0010\nR\u001a\u0010\u001e\u001a\u00020\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001f\u0010\b\"\u0004\b \u0010\nR \u0010!\u001a\b\u0012\u0004\u0012\u00020\u00040\u000fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\"\u0010\u0012\"\u0004\b#\u0010\u0014\u00a8\u0006="}, d2 = {"Lcom/wad/tBook/MainActivity;", "Landroidx/fragment/app/FragmentActivity;", "()V", "TAG", "", "accountFragment", "Landroidx/fragment/app/Fragment;", "getAccountFragment", "()Landroidx/fragment/app/Fragment;", "setAccountFragment", "(Landroidx/fragment/app/Fragment;)V", "analysisFragment", "getAnalysisFragment", "setAnalysisFragment", "fragmentList", "", "", "getFragmentList", "()Ljava/util/List;", "setFragmentList", "(Ljava/util/List;)V", "mViewPagerAdapter", "Lcom/wad/tBook/MainActivity$ViewPagerAdapter;", "getMViewPagerAdapter", "()Lcom/wad/tBook/MainActivity$ViewPagerAdapter;", "setMViewPagerAdapter", "(Lcom/wad/tBook/MainActivity$ViewPagerAdapter;)V", "pipelineFragment", "getPipelineFragment", "setPipelineFragment", "settingFragment", "getSettingFragment", "setSettingFragment", "titleList", "getTitleList", "setTitleList", "formatToggleButtonTab", "", "mToggleButton", "Landroid/widget/ToggleButton;", "resId", "", "txt", "getTabView", "position", "initView", "onActivityResult", "requestCode", "resultCode", "data", "Landroid/content/Intent;", "onCreate", "savedInstanceState", "Landroid/os/Bundle;", "onRestart", "onStart", "setTabShow", "id", "TabClickListener", "TabViewOnPageChangeListener", "ViewPagerAdapter", "app_debug"})
+@kotlin.Metadata(mv = {1, 4, 0}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000j\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010!\n\u0002\u0010\u0000\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\b\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\b\n\u0002\b\b\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\b\u0018\u00002\u00020\u0001:\u0003CDEB\u0005\u00a2\u0006\u0002\u0010\u0002J\u001e\u0010-\u001a\u00020.2\u0006\u0010/\u001a\u0002002\u0006\u00101\u001a\u0002022\u0006\u00103\u001a\u00020\u0004J\u000e\u00104\u001a\u0002002\u0006\u00105\u001a\u000202J\b\u00106\u001a\u00020.H\u0002J\"\u00107\u001a\u00020.2\u0006\u00108\u001a\u0002022\u0006\u00109\u001a\u0002022\b\u0010:\u001a\u0004\u0018\u00010;H\u0014J\u0012\u0010<\u001a\u00020.2\b\u0010=\u001a\u0004\u0018\u00010>H\u0014J\b\u0010?\u001a\u00020.H\u0014J\b\u0010@\u001a\u00020.H\u0014J\u0010\u0010A\u001a\u00020.2\u0006\u0010B\u001a\u000202H\u0002R\u0010\u0010\u0003\u001a\u0004\u0018\u00010\u0004X\u0082\u0004\u00a2\u0006\u0002\n\u0000R\u001a\u0010\u0005\u001a\u00020\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0007\u0010\b\"\u0004\b\t\u0010\nR\u001a\u0010\u000b\u001a\u00020\fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\r\u0010\u000e\"\u0004\b\u000f\u0010\u0010R \u0010\u0011\u001a\b\u0012\u0004\u0012\u00020\u00130\u0012X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0014\u0010\u0015\"\u0004\b\u0016\u0010\u0017R \u0010\u0018\u001a\b\u0018\u00010\u0019R\u00020\u0000X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001a\u0010\u001b\"\u0004\b\u001c\u0010\u001dR\u001a\u0010\u001e\u001a\u00020\u001fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b \u0010!\"\u0004\b\"\u0010#R\u001a\u0010$\u001a\u00020%X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b&\u0010\'\"\u0004\b(\u0010)R \u0010*\u001a\b\u0012\u0004\u0012\u00020\u00040\u0012X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b+\u0010\u0015\"\u0004\b,\u0010\u0017\u00a8\u0006F"}, d2 = {"Lcom/wad/tBook/MainActivity;", "Landroidx/fragment/app/FragmentActivity;", "()V", "TAG", "", "accountFragment", "Lcom/wad/tBook/statistical/AccountFragment;", "getAccountFragment", "()Lcom/wad/tBook/statistical/AccountFragment;", "setAccountFragment", "(Lcom/wad/tBook/statistical/AccountFragment;)V", "analysisFragment", "Lcom/wad/tBook/analysis/AnalysisFragment;", "getAnalysisFragment", "()Lcom/wad/tBook/analysis/AnalysisFragment;", "setAnalysisFragment", "(Lcom/wad/tBook/analysis/AnalysisFragment;)V", "fragmentList", "", "", "getFragmentList", "()Ljava/util/List;", "setFragmentList", "(Ljava/util/List;)V", "mViewPagerAdapter", "Lcom/wad/tBook/MainActivity$ViewPagerAdapter;", "getMViewPagerAdapter", "()Lcom/wad/tBook/MainActivity$ViewPagerAdapter;", "setMViewPagerAdapter", "(Lcom/wad/tBook/MainActivity$ViewPagerAdapter;)V", "pipelineFragment", "Lcom/wad/tBook/statistical/PipelineFragment;", "getPipelineFragment", "()Lcom/wad/tBook/statistical/PipelineFragment;", "setPipelineFragment", "(Lcom/wad/tBook/statistical/PipelineFragment;)V", "settingFragment", "Lcom/wad/tBook/setting/SettingFragment;", "getSettingFragment", "()Lcom/wad/tBook/setting/SettingFragment;", "setSettingFragment", "(Lcom/wad/tBook/setting/SettingFragment;)V", "titleList", "getTitleList", "setTitleList", "formatToggleButtonTab", "", "mToggleButton", "Landroid/widget/ToggleButton;", "resId", "", "txt", "getTabView", "position", "initView", "onActivityResult", "requestCode", "resultCode", "data", "Landroid/content/Intent;", "onCreate", "savedInstanceState", "Landroid/os/Bundle;", "onRestart", "onStart", "setTabShow", "id", "TabClickListener", "TabViewOnPageChangeListener", "ViewPagerAdapter", "app_debug"})
 public final class MainActivity extends androidx.fragment.app.FragmentActivity {
     private final java.lang.String TAG = null;
     @org.jetbrains.annotations.NotNull()
     private java.util.List<java.lang.String> titleList;
     @org.jetbrains.annotations.NotNull()
-    private androidx.fragment.app.Fragment accountFragment;
+    private com.wad.tBook.statistical.AccountFragment accountFragment;
     @org.jetbrains.annotations.NotNull()
-    private androidx.fragment.app.Fragment pipelineFragment;
+    private com.wad.tBook.statistical.PipelineFragment pipelineFragment;
     @org.jetbrains.annotations.NotNull()
-    private androidx.fragment.app.Fragment analysisFragment;
+    private com.wad.tBook.analysis.AnalysisFragment analysisFragment;
     @org.jetbrains.annotations.NotNull()
-    private androidx.fragment.app.Fragment settingFragment;
+    private com.wad.tBook.setting.SettingFragment settingFragment;
     @org.jetbrains.annotations.NotNull()
     private java.util.List<java.lang.Object> fragmentList;
     @org.jetbrains.annotations.Nullable()
@@ -31,39 +31,39 @@ public final class MainActivity extends androidx.fragment.app.FragmentActivity {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final androidx.fragment.app.Fragment getAccountFragment() {
+    public final com.wad.tBook.statistical.AccountFragment getAccountFragment() {
         return null;
     }
     
     public final void setAccountFragment(@org.jetbrains.annotations.NotNull()
-    androidx.fragment.app.Fragment p0) {
+    com.wad.tBook.statistical.AccountFragment p0) {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final androidx.fragment.app.Fragment getPipelineFragment() {
+    public final com.wad.tBook.statistical.PipelineFragment getPipelineFragment() {
         return null;
     }
     
     public final void setPipelineFragment(@org.jetbrains.annotations.NotNull()
-    androidx.fragment.app.Fragment p0) {
+    com.wad.tBook.statistical.PipelineFragment p0) {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final androidx.fragment.app.Fragment getAnalysisFragment() {
+    public final com.wad.tBook.analysis.AnalysisFragment getAnalysisFragment() {
         return null;
     }
     
     public final void setAnalysisFragment(@org.jetbrains.annotations.NotNull()
-    androidx.fragment.app.Fragment p0) {
+    com.wad.tBook.analysis.AnalysisFragment p0) {
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final androidx.fragment.app.Fragment getSettingFragment() {
+    public final com.wad.tBook.setting.SettingFragment getSettingFragment() {
         return null;
     }
     
     public final void setSettingFragment(@org.jetbrains.annotations.NotNull()
-    androidx.fragment.app.Fragment p0) {
+    com.wad.tBook.setting.SettingFragment p0) {
     }
     
     @org.jetbrains.annotations.NotNull()

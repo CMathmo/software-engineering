@@ -1,9 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.room:room-rxjava2:2.2.0-rc01@aar">
     <CLASSES>
+<<<<<<< Updated upstream:t_book/app/.idea/libraries/Gradle__androidx_room_room_rxjava2_2_2_0_rc01_aar.xml
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4d57540278be5b861640fd57a9ec4311/room-rxjava2-2.2.0-rc01/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4d57540278be5b861640fd57a9ec4311/room-rxjava2-2.2.0-rc01/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4d57540278be5b861640fd57a9ec4311/room-rxjava2-2.2.0-rc01/res" />
+=======
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9743e1b37455a7071e3445d4cd58ef43/lifecycle-livedata-core-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9743e1b37455a7071e3445d4cd58ef43/lifecycle-livedata-core-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9743e1b37455a7071e3445d4cd58ef43/lifecycle-livedata-core-2.0.0/res" />
+>>>>>>> Stashed changes:t_book/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.wad.tBook.statistical.NewAccountActivity" />
         <activity android:name="com.wad.tBook.AddActivity" />
         <activity android:name="com.wad.tBook.MainActivity" >
             <intent-filter>
@@ -33,6 +32,12 @@
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"
             android:exported="false" />
+
+        <provider
+            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="com.wad_official.t_book.lifecycle-process"
+            android:exported="false"
+            android:multiprocess="true" />
     </application>
 
 </manifest>

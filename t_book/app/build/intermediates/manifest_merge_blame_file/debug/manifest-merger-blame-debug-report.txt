@@ -29,33 +29,41 @@
 20        android:testOnly="true"
 21        android:theme="@style/AppTheme" >
 21-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:11:9-40
-22        <activity android:name="com.wad.tBook.statistical.NewAccountActivity" />
-22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:9-77
-22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:19-65
-23        <activity android:name="com.wad.tBook.AddActivity" />
-23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:9-49
-23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:19-46
-24        <activity android:name="com.wad.tBook.MainActivity" >
-24-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:14:9-20:20
-24-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:14:19-47
-25            <intent-filter>
-25-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:15:13-19:29
-26                <action android:name="android.intent.action.MAIN" />
-26-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:16:17-69
-26-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:16:25-66
-27
-28                <category android:name="android.intent.category.LAUNCHER" />
-28-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:18:17-77
-28-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:18:27-74
-29            </intent-filter>
-30        </activity>
-31
-32        <service
-32-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:25:9-27:40
-33            android:name="androidx.room.MultiInstanceInvalidationService"
-33-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:26:13-74
-34            android:exported="false" />
-34-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:27:13-37
-35    </application>
-36
-37</manifest>
+22        <activity android:name="com.wad.tBook.AddActivity" />
+22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:9-71
+22-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:12:19-59
+23        <activity android:name="com.wad.tBook.MainActivity" >
+23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:9-20:20
+23-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:13:19-60
+24            <intent-filter>
+24-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:15:13-19:29
+25                <action android:name="android.intent.action.MAIN" />
+25-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:16:17-69
+25-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:16:25-66
+26
+27                <category android:name="android.intent.category.LAUNCHER" />
+27-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:18:17-77
+27-->D:\Code\software-engineering\t_book\app\src\main\AndroidManifest.xml:18:27-74
+28            </intent-filter>
+29        </activity>
+30
+31        <service
+31-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:25:9-27:40
+32            android:name="androidx.room.MultiInstanceInvalidationService"
+32-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:26:13-74
+33            android:exported="false" />
+33-->[androidx.room:room-runtime:2.2.0-rc01] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b32618309f6587e191c328f7ee293817\room-runtime-2.2.0-rc01\AndroidManifest.xml:27:13-37
+34
+35        <provider
+35-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b6215ce5e8a05a69a580737bf81f7a8d\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+36            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+36-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b6215ce5e8a05a69a580737bf81f7a8d\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+37            android:authorities="com.wad_official.t_book.lifecycle-process"
+37-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b6215ce5e8a05a69a580737bf81f7a8d\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+38            android:exported="false"
+38-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b6215ce5e8a05a69a580737bf81f7a8d\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+39            android:multiprocess="true" />
+39-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\tuohuang\.gradle\caches\transforms-2\files-2.1\b6215ce5e8a05a69a580737bf81f7a8d\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+40    </application>
+41
+42</manifest>
