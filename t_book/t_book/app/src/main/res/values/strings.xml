@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">t_book</string>
+    <string name="main_tab_account">账户</string>
+    <string name="main_tab_pipeline">流水</string>
+    <string name="main_tab_analysis">分析</string>
+    <string name="main_tab_setting">设置</string>
+    <string name="main_tab_default">  </string>
+</resources>

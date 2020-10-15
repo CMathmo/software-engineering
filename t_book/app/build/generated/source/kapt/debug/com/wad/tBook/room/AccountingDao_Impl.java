@@ -241,6 +241,70 @@ public final class AccountingDao_Impl implements AccountingDao {
   }
 
   @Override
+  public LiveData<List<Accounting>> getAlphabetizedAccountingList() {
+    final String _sql = "SELECT * from accounting_table ORDER BY accounting_account ASC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    return __db.getInvalidationTracker().createLiveData(new String[]{"accounting_table"}, false, new Callable<List<Accounting>>() {
+      @Override
+      public List<Accounting> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfAccountingId = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_id");
+          final int _cursorIndexOfAccountingAmount = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_amount");
+          final int _cursorIndexOfAccountingFirstClass = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_first_class");
+          final int _cursorIndexOfAccountingSecondClass = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_second_class");
+          final int _cursorIndexOfAccountingProject = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_project");
+          final int _cursorIndexOfAccountingMember = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_member");
+          final int _cursorIndexOfAccountingType = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_type");
+          final int _cursorIndexOfAccountingAcconut = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_account");
+          final int _cursorIndexOfAccountingMerchant = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_merchant");
+          final int _cursorIndexOfAccountingTime = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_Time");
+          final int _cursorIndexOfAccountingRemark = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_remark");
+          final int _cursorIndexOfAccountingImg = CursorUtil.getColumnIndexOrThrow(_cursor, "accounting_imagine");
+          final List<Accounting> _result = new ArrayList<Accounting>(_cursor.getCount());
+          while(_cursor.moveToNext()) {
+            final Accounting _item;
+            final int _tmpAccountingId;
+            _tmpAccountingId = _cursor.getInt(_cursorIndexOfAccountingId);
+            final double _tmpAccountingAmount;
+            _tmpAccountingAmount = _cursor.getDouble(_cursorIndexOfAccountingAmount);
+            final String _tmpAccountingFirstClass;
+            _tmpAccountingFirstClass = _cursor.getString(_cursorIndexOfAccountingFirstClass);
+            final String _tmpAccountingSecondClass;
+            _tmpAccountingSecondClass = _cursor.getString(_cursorIndexOfAccountingSecondClass);
+            final String _tmpAccountingProject;
+            _tmpAccountingProject = _cursor.getString(_cursorIndexOfAccountingProject);
+            final String _tmpAccountingMember;
+            _tmpAccountingMember = _cursor.getString(_cursorIndexOfAccountingMember);
+            final String _tmpAccountingType;
+            _tmpAccountingType = _cursor.getString(_cursorIndexOfAccountingType);
+            final String _tmpAccountingAcconut;
+            _tmpAccountingAcconut = _cursor.getString(_cursorIndexOfAccountingAcconut);
+            final String _tmpAccountingMerchant;
+            _tmpAccountingMerchant = _cursor.getString(_cursorIndexOfAccountingMerchant);
+            final String _tmpAccountingTime;
+            _tmpAccountingTime = _cursor.getString(_cursorIndexOfAccountingTime);
+            final String _tmpAccountingRemark;
+            _tmpAccountingRemark = _cursor.getString(_cursorIndexOfAccountingRemark);
+            final String _tmpAccountingImg;
+            _tmpAccountingImg = _cursor.getString(_cursorIndexOfAccountingImg);
+            _item = new Accounting(_tmpAccountingId,_tmpAccountingAmount,_tmpAccountingFirstClass,_tmpAccountingSecondClass,_tmpAccountingProject,_tmpAccountingMember,_tmpAccountingType,_tmpAccountingAcconut,_tmpAccountingMerchant,_tmpAccountingTime,_tmpAccountingRemark,_tmpAccountingImg);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
   public LiveData<List<Accounting>> readAccountingData() {
     final String _sql = "SELECT * FROM accounting_table";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);

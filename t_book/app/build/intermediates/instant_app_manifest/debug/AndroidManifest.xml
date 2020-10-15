@@ -7,7 +7,7 @@
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="29" />
+        android:targetSdkVersion="30" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.wad.tBook.statistical.NewAccountActivity" />
         <activity android:name="com.wad.tBook.AddActivity" />
         <activity android:name="com.wad.tBook.MainActivity" >
             <intent-filter>
