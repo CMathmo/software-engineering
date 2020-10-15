@@ -28,26 +28,29 @@ data class Accounting(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "accounting_id")
     var accountingId: Int = 0,//id，自动生成
+    @ColumnInfo(name = "accounting_type")
+    var accountingType: String,//账目类别
     @ColumnInfo(name = "accounting_amount")
     var accountingAmount: Double,//金额
-    @ColumnInfo(name = "accounting_first_class")
-    var accountingFirstClass: String,//一类
-    @ColumnInfo(name = "accounting_second_class")
-    var accountingSecondClass: String? = null,//二类
-    @ColumnInfo(name = "accounting_project")
-    var accountingProject: String? = null,//项目，选填
-    @ColumnInfo(name = "accounting_member")
-    var accountingMember: String? = null,//成员，选填
-    @ColumnInfo(name = "accounting_type")
-    var accountingType: String,//类别
-    @ColumnInfo(name = "accounting_account")
-    var accountingAcconut: String,//账户
-    @ColumnInfo(name = "accounting_merchant")
-    var accountingMerchant: String? = null,//商家，选填
+    @Embedded(prefix = "accounting_class")
+    var accountingClass: multilevel_classification,//分类
+    @Embedded(prefix = "accounting_account")
+    var accountingAcconut: multilevel_classification,//账户
     @ColumnInfo(name = "accounting_Time")
     var accountingTime: String,//时间
+    @Embedded(prefix = "accounting_member")
+    var accountingMember: multilevel_classification? = null,//成员，选填
+    @Embedded(prefix = "accounting_project")
+    var accountingProject: multilevel_classification? = null,//项目，选填
+    @Embedded(prefix = "accounting_merchant")
+    var accountingMerchant: multilevel_classification? = null,//商家，选填
     @ColumnInfo(name = "accounting_remark")
     var accountingRemark: String? = null,//备注，选填
     @ColumnInfo(name = "accounting_imagine")
     var accountingImg: String? = null//图片
+)
+
+data class multilevel_classification(
+    var first_class: String,
+    var second_class: String
 )

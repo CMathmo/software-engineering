@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.wad.tBook.room.*
 
-@Database(entities = [Accounting::class, User::class,ClassType::class], version = 2)
+@Database(entities = [Accounting::class, User::class,Property::class], version = 3)
 abstract class tBookDatabase : RoomDatabase() {
     //获取接口
     abstract fun actDao() : AccountingDao
     abstract fun useDao() : UserDao
-    abstract fun claDao() : ClassTypeDao
+    abstract fun proDao() : PropertyDao
 
     //生成实例
     companion object {
