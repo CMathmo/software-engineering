@@ -34,7 +34,7 @@ class AccountFragment : Fragment() {
 //            val account = accountList[position]
 //            Toast.makeText(this,account.accountingAcconut,Toast.LENGTH_SHORT).show()
 //        }
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_account,container,false)
     }
 
     private fun dataInfo(){
