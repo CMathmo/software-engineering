@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.AddActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
+import java.util.ArrayList
 
 
-class PipelineAdapter (var context: Context):
+class PipelineAdapter (accountList: ArrayList<Accounting>):
     RecyclerView.Adapter<PipelineAdapter.PipelineViewHolder>(){
 
     var itemList = emptyList<Accounting>()
+    var context: Context?=null
 
     class PipelineViewHolder(view:View):RecyclerView.ViewHolder(view){
         val textID : TextView = view.findViewById(R.id.textID)
@@ -52,7 +54,7 @@ class PipelineAdapter (var context: Context):
             intent.putExtra("merchant",currentItem.accountingMerchant.toString())
             intent.putExtra("class",currentItem.accountingClass.toString())
 
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
 

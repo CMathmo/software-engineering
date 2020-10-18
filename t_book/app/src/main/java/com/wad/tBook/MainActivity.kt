@@ -48,6 +48,23 @@ class MainActivity : FragmentActivity() {
         add_button.setOnClickListener{startActivityForResult(Intent(this, AddActivity::class.java),1)}
         Log.d(TAG,"create_show")
         initView()
+        val roomdb = tBookDatabase.getDBInstace(this.application)
+        Thread({
+            if(roomdb.proDao().getAllPropertyData().isEmpty()){
+                val typeList = mutableListOf<String>("收入","支出","转账")
+                val itemList = mutableListOf<String>("类别","账户","项目","商家","成员")
+                for(type in typeList){
+                    for(item in itemList){
+                        for(i in 1..3){
+                            for(j in 1..5){
+                                roomdb.proDao().addPropertyData(Property(0,type,item,type+item+i,type+item+i+j))
+                            }
+                        }
+                    }
+                }
+            }
+        }).start()
+
     }
 
     override fun onStart() {
@@ -68,15 +85,13 @@ class MainActivity : FragmentActivity() {
                 .toDouble()
             val type = data?.getStringExtra("type") + ""
             val date = data?.getStringExtra("date") + ""
-            val first_class = data?.getStringExtra("Fclass") + ""
-            val second_class = data?.getStringExtra("Sclass") + ""
+            val first_class = data?.getStringExtra("class") + ""
             val member = if (data?.getStringExtra("member") == "") null else data?.getStringExtra("member")
             val project = if (data?.getStringExtra("project") == "") null else data?.getStringExtra("project")
             val account = data?.getStringExtra("account") + ""
             val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
             val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
-
-
+            val roomdb = tBookDatabase.getDBInstace(this.application)
         }
     }
     /**

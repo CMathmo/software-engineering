@@ -33,24 +33,26 @@ data class Accounting(
     @ColumnInfo(name = "accounting_amount")
     var accountingAmount: Double,//金额
     @Embedded(prefix = "accounting_class")
-    var accountingClass: multilevel_classification,//分类
+    var accountingClass: MultilevelClassification,//分类
     @Embedded(prefix = "accounting_account")
-    var accountingAcconut: multilevel_classification,//账户
+    var accountingAcconut: MultilevelClassification,//账户
     @ColumnInfo(name = "accounting_Time")
     var accountingTime: String,//时间
     @Embedded(prefix = "accounting_member")
-    var accountingMember: multilevel_classification? = null,//成员，选填
+    var accountingMember: MultilevelClassification? = null,//成员，选填
     @Embedded(prefix = "accounting_project")
-    var accountingProject: multilevel_classification? = null,//项目，选填
+    var accountingProject: MultilevelClassification? = null,//项目，选填
     @Embedded(prefix = "accounting_merchant")
-    var accountingMerchant: multilevel_classification? = null,//商家，选填
+    var accountingMerchant: MultilevelClassification? = null,//商家，选填
     @ColumnInfo(name = "accounting_remark")
     var accountingRemark: String? = null,//备注，选填
     @ColumnInfo(name = "accounting_imagine")
     var accountingImg: String? = null//图片
 )
 
-data class multilevel_classification(
-    var first_class: String,
-    var second_class: String
+data class MultilevelClassification(
+    @ColumnInfo(name = "first_class")
+    var firstClass: String,
+    @ColumnInfo(name = "second_class")
+    var secondClass: String
 )

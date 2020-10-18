@@ -63,81 +63,81 @@ public final class AccountingDao_Impl implements AccountingDao {
         } else {
           stmt.bindString(6, value.getAccountingImg());
         }
-        final multilevel_classification _tmpAccountingClass = value.getAccountingClass();
+        final MultilevelClassification _tmpAccountingClass = value.getAccountingClass();
         if(_tmpAccountingClass != null) {
-          if (_tmpAccountingClass.getFirst_class() == null) {
+          if (_tmpAccountingClass.getFirstClass() == null) {
             stmt.bindNull(7);
           } else {
-            stmt.bindString(7, _tmpAccountingClass.getFirst_class());
+            stmt.bindString(7, _tmpAccountingClass.getFirstClass());
           }
-          if (_tmpAccountingClass.getSecond_class() == null) {
+          if (_tmpAccountingClass.getSecondClass() == null) {
             stmt.bindNull(8);
           } else {
-            stmt.bindString(8, _tmpAccountingClass.getSecond_class());
+            stmt.bindString(8, _tmpAccountingClass.getSecondClass());
           }
         } else {
           stmt.bindNull(7);
           stmt.bindNull(8);
         }
-        final multilevel_classification _tmpAccountingAcconut = value.getAccountingAcconut();
+        final MultilevelClassification _tmpAccountingAcconut = value.getAccountingAcconut();
         if(_tmpAccountingAcconut != null) {
-          if (_tmpAccountingAcconut.getFirst_class() == null) {
+          if (_tmpAccountingAcconut.getFirstClass() == null) {
             stmt.bindNull(9);
           } else {
-            stmt.bindString(9, _tmpAccountingAcconut.getFirst_class());
+            stmt.bindString(9, _tmpAccountingAcconut.getFirstClass());
           }
-          if (_tmpAccountingAcconut.getSecond_class() == null) {
+          if (_tmpAccountingAcconut.getSecondClass() == null) {
             stmt.bindNull(10);
           } else {
-            stmt.bindString(10, _tmpAccountingAcconut.getSecond_class());
+            stmt.bindString(10, _tmpAccountingAcconut.getSecondClass());
           }
         } else {
           stmt.bindNull(9);
           stmt.bindNull(10);
         }
-        final multilevel_classification _tmpAccountingMember = value.getAccountingMember();
+        final MultilevelClassification _tmpAccountingMember = value.getAccountingMember();
         if(_tmpAccountingMember != null) {
-          if (_tmpAccountingMember.getFirst_class() == null) {
+          if (_tmpAccountingMember.getFirstClass() == null) {
             stmt.bindNull(11);
           } else {
-            stmt.bindString(11, _tmpAccountingMember.getFirst_class());
+            stmt.bindString(11, _tmpAccountingMember.getFirstClass());
           }
-          if (_tmpAccountingMember.getSecond_class() == null) {
+          if (_tmpAccountingMember.getSecondClass() == null) {
             stmt.bindNull(12);
           } else {
-            stmt.bindString(12, _tmpAccountingMember.getSecond_class());
+            stmt.bindString(12, _tmpAccountingMember.getSecondClass());
           }
         } else {
           stmt.bindNull(11);
           stmt.bindNull(12);
         }
-        final multilevel_classification _tmpAccountingProject = value.getAccountingProject();
+        final MultilevelClassification _tmpAccountingProject = value.getAccountingProject();
         if(_tmpAccountingProject != null) {
-          if (_tmpAccountingProject.getFirst_class() == null) {
+          if (_tmpAccountingProject.getFirstClass() == null) {
             stmt.bindNull(13);
           } else {
-            stmt.bindString(13, _tmpAccountingProject.getFirst_class());
+            stmt.bindString(13, _tmpAccountingProject.getFirstClass());
           }
-          if (_tmpAccountingProject.getSecond_class() == null) {
+          if (_tmpAccountingProject.getSecondClass() == null) {
             stmt.bindNull(14);
           } else {
-            stmt.bindString(14, _tmpAccountingProject.getSecond_class());
+            stmt.bindString(14, _tmpAccountingProject.getSecondClass());
           }
         } else {
           stmt.bindNull(13);
           stmt.bindNull(14);
         }
-        final multilevel_classification _tmpAccountingMerchant = value.getAccountingMerchant();
+        final MultilevelClassification _tmpAccountingMerchant = value.getAccountingMerchant();
         if(_tmpAccountingMerchant != null) {
-          if (_tmpAccountingMerchant.getFirst_class() == null) {
+          if (_tmpAccountingMerchant.getFirstClass() == null) {
             stmt.bindNull(15);
           } else {
-            stmt.bindString(15, _tmpAccountingMerchant.getFirst_class());
+            stmt.bindString(15, _tmpAccountingMerchant.getFirstClass());
           }
-          if (_tmpAccountingMerchant.getSecond_class() == null) {
+          if (_tmpAccountingMerchant.getSecondClass() == null) {
             stmt.bindNull(16);
           } else {
-            stmt.bindString(16, _tmpAccountingMerchant.getSecond_class());
+            stmt.bindString(16, _tmpAccountingMerchant.getSecondClass());
           }
         } else {
           stmt.bindNull(15);
@@ -186,81 +186,81 @@ public final class AccountingDao_Impl implements AccountingDao {
         } else {
           stmt.bindString(6, value.getAccountingImg());
         }
-        final multilevel_classification _tmpAccountingClass = value.getAccountingClass();
+        final MultilevelClassification _tmpAccountingClass = value.getAccountingClass();
         if(_tmpAccountingClass != null) {
-          if (_tmpAccountingClass.getFirst_class() == null) {
+          if (_tmpAccountingClass.getFirstClass() == null) {
             stmt.bindNull(7);
           } else {
-            stmt.bindString(7, _tmpAccountingClass.getFirst_class());
+            stmt.bindString(7, _tmpAccountingClass.getFirstClass());
           }
-          if (_tmpAccountingClass.getSecond_class() == null) {
+          if (_tmpAccountingClass.getSecondClass() == null) {
             stmt.bindNull(8);
           } else {
-            stmt.bindString(8, _tmpAccountingClass.getSecond_class());
+            stmt.bindString(8, _tmpAccountingClass.getSecondClass());
           }
         } else {
           stmt.bindNull(7);
           stmt.bindNull(8);
         }
-        final multilevel_classification _tmpAccountingAcconut = value.getAccountingAcconut();
+        final MultilevelClassification _tmpAccountingAcconut = value.getAccountingAcconut();
         if(_tmpAccountingAcconut != null) {
-          if (_tmpAccountingAcconut.getFirst_class() == null) {
+          if (_tmpAccountingAcconut.getFirstClass() == null) {
             stmt.bindNull(9);
           } else {
-            stmt.bindString(9, _tmpAccountingAcconut.getFirst_class());
+            stmt.bindString(9, _tmpAccountingAcconut.getFirstClass());
           }
-          if (_tmpAccountingAcconut.getSecond_class() == null) {
+          if (_tmpAccountingAcconut.getSecondClass() == null) {
             stmt.bindNull(10);
           } else {
-            stmt.bindString(10, _tmpAccountingAcconut.getSecond_class());
+            stmt.bindString(10, _tmpAccountingAcconut.getSecondClass());
           }
         } else {
           stmt.bindNull(9);
           stmt.bindNull(10);
         }
-        final multilevel_classification _tmpAccountingMember = value.getAccountingMember();
+        final MultilevelClassification _tmpAccountingMember = value.getAccountingMember();
         if(_tmpAccountingMember != null) {
-          if (_tmpAccountingMember.getFirst_class() == null) {
+          if (_tmpAccountingMember.getFirstClass() == null) {
             stmt.bindNull(11);
           } else {
-            stmt.bindString(11, _tmpAccountingMember.getFirst_class());
+            stmt.bindString(11, _tmpAccountingMember.getFirstClass());
           }
-          if (_tmpAccountingMember.getSecond_class() == null) {
+          if (_tmpAccountingMember.getSecondClass() == null) {
             stmt.bindNull(12);
           } else {
-            stmt.bindString(12, _tmpAccountingMember.getSecond_class());
+            stmt.bindString(12, _tmpAccountingMember.getSecondClass());
           }
         } else {
           stmt.bindNull(11);
           stmt.bindNull(12);
         }
-        final multilevel_classification _tmpAccountingProject = value.getAccountingProject();
+        final MultilevelClassification _tmpAccountingProject = value.getAccountingProject();
         if(_tmpAccountingProject != null) {
-          if (_tmpAccountingProject.getFirst_class() == null) {
+          if (_tmpAccountingProject.getFirstClass() == null) {
             stmt.bindNull(13);
           } else {
-            stmt.bindString(13, _tmpAccountingProject.getFirst_class());
+            stmt.bindString(13, _tmpAccountingProject.getFirstClass());
           }
-          if (_tmpAccountingProject.getSecond_class() == null) {
+          if (_tmpAccountingProject.getSecondClass() == null) {
             stmt.bindNull(14);
           } else {
-            stmt.bindString(14, _tmpAccountingProject.getSecond_class());
+            stmt.bindString(14, _tmpAccountingProject.getSecondClass());
           }
         } else {
           stmt.bindNull(13);
           stmt.bindNull(14);
         }
-        final multilevel_classification _tmpAccountingMerchant = value.getAccountingMerchant();
+        final MultilevelClassification _tmpAccountingMerchant = value.getAccountingMerchant();
         if(_tmpAccountingMerchant != null) {
-          if (_tmpAccountingMerchant.getFirst_class() == null) {
+          if (_tmpAccountingMerchant.getFirstClass() == null) {
             stmt.bindNull(15);
           } else {
-            stmt.bindString(15, _tmpAccountingMerchant.getFirst_class());
+            stmt.bindString(15, _tmpAccountingMerchant.getFirstClass());
           }
-          if (_tmpAccountingMerchant.getSecond_class() == null) {
+          if (_tmpAccountingMerchant.getSecondClass() == null) {
             stmt.bindNull(16);
           } else {
-            stmt.bindString(16, _tmpAccountingMerchant.getSecond_class());
+            stmt.bindString(16, _tmpAccountingMerchant.getSecondClass());
           }
         } else {
           stmt.bindNull(15);
@@ -380,53 +380,53 @@ public final class AccountingDao_Impl implements AccountingDao {
             _tmpAccountingRemark = _cursor.getString(_cursorIndexOfAccountingRemark);
             final String _tmpAccountingImg;
             _tmpAccountingImg = _cursor.getString(_cursorIndexOfAccountingImg);
-            final multilevel_classification _tmpAccountingClass;
+            final MultilevelClassification _tmpAccountingClass;
             if (! (_cursor.isNull(_cursorIndexOfFirstClass) && _cursor.isNull(_cursorIndexOfSecondClass))) {
-              final String _tmpFirst_class;
-              _tmpFirst_class = _cursor.getString(_cursorIndexOfFirstClass);
-              final String _tmpSecond_class;
-              _tmpSecond_class = _cursor.getString(_cursorIndexOfSecondClass);
-              _tmpAccountingClass = new multilevel_classification(_tmpFirst_class,_tmpSecond_class);
+              final String _tmpFirstClass;
+              _tmpFirstClass = _cursor.getString(_cursorIndexOfFirstClass);
+              final String _tmpSecondClass;
+              _tmpSecondClass = _cursor.getString(_cursorIndexOfSecondClass);
+              _tmpAccountingClass = new MultilevelClassification(_tmpFirstClass,_tmpSecondClass);
             }  else  {
               _tmpAccountingClass = null;
             }
-            final multilevel_classification _tmpAccountingAcconut;
+            final MultilevelClassification _tmpAccountingAcconut;
             if (! (_cursor.isNull(_cursorIndexOfFirstClass_1) && _cursor.isNull(_cursorIndexOfSecondClass_1))) {
-              final String _tmpFirst_class_1;
-              _tmpFirst_class_1 = _cursor.getString(_cursorIndexOfFirstClass_1);
-              final String _tmpSecond_class_1;
-              _tmpSecond_class_1 = _cursor.getString(_cursorIndexOfSecondClass_1);
-              _tmpAccountingAcconut = new multilevel_classification(_tmpFirst_class_1,_tmpSecond_class_1);
+              final String _tmpFirstClass_1;
+              _tmpFirstClass_1 = _cursor.getString(_cursorIndexOfFirstClass_1);
+              final String _tmpSecondClass_1;
+              _tmpSecondClass_1 = _cursor.getString(_cursorIndexOfSecondClass_1);
+              _tmpAccountingAcconut = new MultilevelClassification(_tmpFirstClass_1,_tmpSecondClass_1);
             }  else  {
               _tmpAccountingAcconut = null;
             }
-            final multilevel_classification _tmpAccountingMember;
+            final MultilevelClassification _tmpAccountingMember;
             if (! (_cursor.isNull(_cursorIndexOfFirstClass_2) && _cursor.isNull(_cursorIndexOfSecondClass_2))) {
-              final String _tmpFirst_class_2;
-              _tmpFirst_class_2 = _cursor.getString(_cursorIndexOfFirstClass_2);
-              final String _tmpSecond_class_2;
-              _tmpSecond_class_2 = _cursor.getString(_cursorIndexOfSecondClass_2);
-              _tmpAccountingMember = new multilevel_classification(_tmpFirst_class_2,_tmpSecond_class_2);
+              final String _tmpFirstClass_2;
+              _tmpFirstClass_2 = _cursor.getString(_cursorIndexOfFirstClass_2);
+              final String _tmpSecondClass_2;
+              _tmpSecondClass_2 = _cursor.getString(_cursorIndexOfSecondClass_2);
+              _tmpAccountingMember = new MultilevelClassification(_tmpFirstClass_2,_tmpSecondClass_2);
             }  else  {
               _tmpAccountingMember = null;
             }
-            final multilevel_classification _tmpAccountingProject;
+            final MultilevelClassification _tmpAccountingProject;
             if (! (_cursor.isNull(_cursorIndexOfFirstClass_3) && _cursor.isNull(_cursorIndexOfSecondClass_3))) {
-              final String _tmpFirst_class_3;
-              _tmpFirst_class_3 = _cursor.getString(_cursorIndexOfFirstClass_3);
-              final String _tmpSecond_class_3;
-              _tmpSecond_class_3 = _cursor.getString(_cursorIndexOfSecondClass_3);
-              _tmpAccountingProject = new multilevel_classification(_tmpFirst_class_3,_tmpSecond_class_3);
+              final String _tmpFirstClass_3;
+              _tmpFirstClass_3 = _cursor.getString(_cursorIndexOfFirstClass_3);
+              final String _tmpSecondClass_3;
+              _tmpSecondClass_3 = _cursor.getString(_cursorIndexOfSecondClass_3);
+              _tmpAccountingProject = new MultilevelClassification(_tmpFirstClass_3,_tmpSecondClass_3);
             }  else  {
               _tmpAccountingProject = null;
             }
-            final multilevel_classification _tmpAccountingMerchant;
+            final MultilevelClassification _tmpAccountingMerchant;
             if (! (_cursor.isNull(_cursorIndexOfFirstClass_4) && _cursor.isNull(_cursorIndexOfSecondClass_4))) {
-              final String _tmpFirst_class_4;
-              _tmpFirst_class_4 = _cursor.getString(_cursorIndexOfFirstClass_4);
-              final String _tmpSecond_class_4;
-              _tmpSecond_class_4 = _cursor.getString(_cursorIndexOfSecondClass_4);
-              _tmpAccountingMerchant = new multilevel_classification(_tmpFirst_class_4,_tmpSecond_class_4);
+              final String _tmpFirstClass_4;
+              _tmpFirstClass_4 = _cursor.getString(_cursorIndexOfFirstClass_4);
+              final String _tmpSecondClass_4;
+              _tmpSecondClass_4 = _cursor.getString(_cursorIndexOfSecondClass_4);
+              _tmpAccountingMerchant = new MultilevelClassification(_tmpFirstClass_4,_tmpSecondClass_4);
             }  else  {
               _tmpAccountingMerchant = null;
             }

@@ -4,12 +4,12 @@
         "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
-    },
-    {
         "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_tab_pipeline_selector.xml.flat",
         "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\drawable\\main_tab_pipeline_selector.xml"
+    },
+    {
+        "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
         "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_account.xml.flat",
@@ -30,6 +30,10 @@
     {
         "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_analysis.xml.flat",
         "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\layout\\fragment_analysis.xml"
+    },
+    {
+        "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycle_pipeline_view.xml.flat",
+        "source": "D:\\Code\\software-engineering\\t_book\\app\\src\\main\\res\\layout\\recycle_pipeline_view.xml"
     },
     {
         "merged": "D:\\Code\\software-engineering\\t_book\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",

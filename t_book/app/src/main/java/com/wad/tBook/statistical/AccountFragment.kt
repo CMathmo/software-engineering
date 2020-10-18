@@ -27,9 +27,9 @@ class AccountFragment : Fragment() {
         //初始化数据列表
         dataInfo()
         //创建适配器
-        val adapter = AccountAdapter(this,R.layout.list_account_view,accountList)
+        val list_adapter = AccountAdapter(this,R.layout.list_account_view,accountList)
         //将适配器对象传入ListView,从而建立ListView和数据之间的联系
-        listview.adapter = adapter
+        listview.adapter = list_adapter
 //        listview.setOnItemClickListener { parent, view, position, id ->
 //            val account = accountList[position]
 //            Toast.makeText(this,account.accountingAcconut,Toast.LENGTH_SHORT).show()
