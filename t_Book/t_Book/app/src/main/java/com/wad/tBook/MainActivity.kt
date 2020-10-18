@@ -77,8 +77,7 @@ class MainActivity : FragmentActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 1) {
             //toast(:Double.toString())
-            val amount = if (data?.getStringExtra("amount") == null || data?.getStringExtra("amount") == "") 0.00 else data?.getStringExtra("amount")!!
-                .toDouble()
+            val amount = if (data?.getStringExtra("amount") == null || data?.getStringExtra("amount") == "") 0.00 else data?.getStringExtra("amount").toDouble()
             val type = data?.getStringExtra("type") + ""
             val date = data?.getStringExtra("date") + ""
             val first_class = data?.getStringExtra("class") + ""
@@ -87,7 +86,21 @@ class MainActivity : FragmentActivity() {
             val account = data?.getStringExtra("account") + ""
             val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
             val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
+
             val roomdb = tBookDatabase.getDBInstace(this.application)
+            /*Thread({
+                roomdb.actDao().addAccountingData(Accounting(
+                    accountingAmount = amount,
+                    accountingFirstClass = first_class,
+                    accountingType = type,
+                    accountingMember = member,
+                    accountingProject = project,
+                    accountingTime = date,
+                    accountingMerchant = merchant,
+                    accountingRemark = remark,
+                    accountingAcconut = account
+                ))
+            }).start()*/
         }
     }
     /**
