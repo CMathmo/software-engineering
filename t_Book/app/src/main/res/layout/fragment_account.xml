@@ -6,137 +6,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_account"
-        android:layout_width="399dp"
-        android:layout_height="145dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/account_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="398dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
-
-            <LinearLayout
-                android:layout_width="375dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/text_income"
-                    android:layout_width="125dp"
-                    android:layout_height="54dp"
-                    android:layout_weight="1"
-                    android:background="#CDDC39"
-                    android:gravity="center"
-                    android:text="Income" />
-
-                <TextView
-                    android:id="@+id/text_outcome"
-                    android:layout_width="125dp"
-                    android:layout_height="54dp"
-                    android:layout_weight="1"
-                    android:background="#00BCD4"
-                    android:gravity="center"
-                    android:text="Outcome" />
-
-                <TextView
-                    android:id="@+id/text_transaction"
-                    android:layout_width="125dp"
-                    android:layout_height="54dp"
-                    android:layout_weight="1"
-                    android:background="#FFEB3B"
-                    android:gravity="center"
-                    android:text="Transaction" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="375dp"
-                android:layout_height="29dp"
-                android:layout_marginBottom="2dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="125dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="收入" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="125dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="支出" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="125dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="转账" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="总资产："
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="111dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="4dp"
-                android:background="#4CAF50"
-                android:gravity="center"
-                android:text="Liability"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <ListView
-        android:id="@+id/account_list"
-        android:layout_width="394dp"
-        android:layout_height="460dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="16dp"
-        android:divider="@color/common_main_gray"
-        android:scrollIndicators="right"
-        android:scrollbarStyle="insideOverlay"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="402dp"
+        android:layout_height="619dp"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="396dp"
+            android:layout_height="198dp"
+            app:layout_constraintBottom_toTopOf="@+id/recycle_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="397dp"
+                    android:layout_height="28dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="收入" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="支出" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="转账" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="394dp"
+                    android:layout_height="88dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/text_income"
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#CDDC39"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/text_outcome"
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#00BCD4"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/text_transaction"
+                        android:layout_width="125dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#FFEB3B"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_liability"
+                    android:layout_width="135dp"
+                    android:layout_height="62dp"
+                    android:layout_marginStart="72dp"
+                    android:background="#4CAF50"
+                    android:gravity="center"
+                    android:text="Liability"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.842" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="66dp"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="16dp"
+                    android:text="总资产："
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_account"
+            android:layout_width="388dp"
+            android:layout_height="414dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

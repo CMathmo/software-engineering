@@ -46,7 +46,7 @@
                 android:layout_height="17dp"
                 android:layout_marginBottom="6dp"
                 android:text="Class"
-                app:layout_constraintBottom_toTopOf="@+id/textAccounttype"
+                app:layout_constraintBottom_toTopOf="@+id/text_account_type"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textAccounttype"
+                android:id="@+id/text_account_type"
                 android:layout_width="123dp"
                 android:layout_height="18dp"
                 android:layout_marginBottom="6dp"

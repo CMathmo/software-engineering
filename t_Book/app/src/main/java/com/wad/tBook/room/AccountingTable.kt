@@ -2,6 +2,7 @@ package com.wad.tBook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.wad.tBook.statistical.AccountRepository
 
 @Dao
 interface AccountingDao {
@@ -20,6 +21,10 @@ interface AccountingDao {
 
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
+
+    @Query("select accounting_type,accounting_amount from accounting_table")
+    fun readAccountTypeData() : List<AccountRepository.TypeAmount>
+
 }
 
 //账目表
@@ -56,3 +61,4 @@ data class MultilevelClassification(
     @ColumnInfo(name = "second_class")
     var secondClass: String
 )
+
