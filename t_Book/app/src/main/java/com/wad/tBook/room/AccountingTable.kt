@@ -20,6 +20,11 @@ interface AccountingDao {
 
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
+
+    @Query("SELECT * FROM accounting_table")
+    fun getAllAccountingData() : List<Accounting>
+
+
 }
 
 //账目表

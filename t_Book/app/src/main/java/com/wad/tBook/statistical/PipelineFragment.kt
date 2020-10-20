@@ -19,7 +19,7 @@ class PipelineFragment : Fragment(){
         val recycleview = View.findViewById<RecyclerView>(R.id.pipeline_recycle)
         val re_adapter = PipelineAdapter(accountList)
         recycleview.adapter = re_adapter
-        return inflater.inflate(R.layout.fragment_pipeline, container, false)
+        return View
     }
 
     companion object {

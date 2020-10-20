@@ -1,6 +1,7 @@
 package com.wad.tBook.room
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.wad.tBook.room.*
@@ -16,12 +17,12 @@ abstract class tBookDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var instance: tBookDatabase? = null
-        fun getDBInstace(application: Application): tBookDatabase {
+        fun getDBInstace(context: Context): tBookDatabase {
             if (instance == null) {
                 synchronized(tBookDatabase::class) {
                     if (instance == null) {
                         instance = Room.databaseBuilder(
-                            application,
+                            context,
                             tBookDatabase::class.java,
                             "tBook.db"
                         )

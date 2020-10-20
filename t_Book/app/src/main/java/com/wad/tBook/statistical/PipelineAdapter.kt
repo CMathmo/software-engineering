@@ -1,5 +1,6 @@
 package com.wad.tBook.statistical
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.AddActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
+import com.wad.tBook.room.tBookDatabase
 import java.util.ArrayList
 
 
@@ -27,12 +29,16 @@ class PipelineAdapter (accountList: ArrayList<Accounting>):
         val textTime : TextView = view.findViewById(R.id.textTime)
         val textMerchant : TextView = view.findViewById(R.id.textMerchant)
         val textClass : TextView = view.findViewById(R.id.textClass)
-        val imgEdit : CardView = view.findViewById(R.id.pipeline_card)
+        val cardEdit : CardView = view.findViewById(R.id.pipeline_card)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PipelineViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recycle_pipeline_view,null)
+        val roomdb = tBookDatabase.getDBInstace(context!!)
+        Thread{
+            itemList = roomdb.actDao().getAllAccountingData()
+        }.start()
         return PipelineViewHolder(view)
     }
 
@@ -45,7 +51,7 @@ class PipelineAdapter (accountList: ArrayList<Accounting>):
         holder.textMerchant.text = currentItem.accountingMerchant.toString()
         holder.textClass.text = currentItem.accountingClass.toString()
 
-        holder.imgEdit.setOnClickListener {
+        holder.cardEdit.setOnClickListener {
             val intent = Intent(context,AddActivity::class.java)
             intent.putExtra("id",currentItem.accountingId)
             intent.putExtra("account_type",currentItem.accountingType)
