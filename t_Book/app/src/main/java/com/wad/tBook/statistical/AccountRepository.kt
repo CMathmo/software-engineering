@@ -1,14 +1,12 @@
 package com.wad.tBook.statistical
 
-import androidx.lifecycle.LiveData
 import androidx.room.ColumnInfo
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.AccountingDao
 
 class AccountRepository(private val actDao: AccountingDao) {
 
-    //    val readData = actDao.readAccountingData()
-
+    val readActData = actDao.readAccountingDataWithoutLiveData()
     val readAllData = actDao.readAccountingData()
 
     fun addData(accounting: Accounting){
@@ -21,7 +19,7 @@ class AccountRepository(private val actDao: AccountingDao) {
         val cash = "现金"
         val rechargeableCard = "充值卡"
         val bond = "债券"
-        val secondClassList = mutableListOf<String>("平安银行","浦发银行","微信","支付宝","校园卡","沃尔玛购物卡","债券")
+        val secondClassList = mutableListOf<String>("平安银行","浦发银行","微信","支付宝","人民币","校园卡","沃尔玛购物卡","债券")
         val n = secondClassList.size
         val secondList = mutableListOf(AccountClass(secondClassList[0],0.0))
         for (index in 1 until n) {
@@ -29,12 +27,12 @@ class AccountRepository(private val actDao: AccountingDao) {
         }
         for (index in 0 until n) {
             for (item in accounting) {
-                val second = item.accountingClass.secondClass
-                if (second == secondClassList[index])
+                val second = item.accountingAcconut.secondClass
+                if (second == secondClassList[index]) {
                     when(item.accountingType) {
                         "收入" -> secondList[index].Amount += item.accountingAmount
                         else -> secondList[index].Amount -= item.accountingAmount
-                    }
+                    }}
             }
         }
         val firstList = listOf(
@@ -55,6 +53,7 @@ class AccountRepository(private val actDao: AccountingDao) {
                 secondClassList[6] -> firstList[3].Amount += item.Amount
             }
         }
+        println(secondList)
         return secondList
     }
 

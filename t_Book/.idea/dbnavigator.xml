@@ -24,24 +24,21 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="7b18a795-a793-4240-a2bf-e1fc297d2dd8">
-        <schema name="main" object-types="constraint, index, table, column, dataset trigger, view" />
+      <connection connection-id="b194c291-066e-43a7-9a7d-d82f3db2c28f">
+        <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="7b18a795-a793-4240-a2bf-e1fc297d2dd8">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT * FROM accounting_table]]></console>
+    <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f">
+      <console name="Connection" type="STANDARD" schema="main" session="Main">SELECT * FROM accounting_table</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="7b18a795-a793-4240-a2bf-e1fc297d2dd8" />
-  </component>
-  <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="7b18a795-a793-4240-a2bf-e1fc297d2dd8" dataset="main.accounting_table" active-filter-id="" />
+    <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -66,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="7b18a795-a793-4240-a2bf-e1fc297d2dd8" active="true">
+      <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f" active="true">
         <database>
           <name value="Connection" />
           <description value="" />

@@ -1,6 +1,5 @@
 package com.wad.tBook.statistical
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,19 +42,21 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
-        //val secondClass = viewModel.getAccountType(accountList)
-        //viewModel.readAllData.observe(viewLifecycleOwner){
-        //    view?.let { it1 -> setUpAccountCardView(it1,secondClass) }
-        //}
+
         recycle_account.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)
                 else -> GridLayoutManager(context, columnCount)
             }
+            println(TypeAccountList)
             adapter = AccountAdapter(TypeAccountList)
         }
     }
@@ -65,6 +66,14 @@ class AccountFragment : Fragment() {
         val typeList:List<AccountRepository.TypeAmount> = dataInfo()
         TAdataInfo()
         view?.let { dataDisplay(it,typeList) }
+        val readActData : List<Accounting>? =
+            activity?.application?.let { tBookDatabase.getDBInstace(it).actDao().readAccountingDataWithoutLiveData() }
+        val secondClass = readActData?.let { getAccountType(it) }
+        view?.let {
+            if (secondClass != null) {
+                setUpAccountCardView(it,secondClass)
+            }
+        }
     }
 
     private fun dataInfo(): List<AccountRepository.TypeAmount> {
@@ -102,15 +111,60 @@ class AccountFragment : Fragment() {
         return liabilityView.text
     }
 
+    private fun getAccountType(accounting: List<Accounting>): List<AccountRepository.AccountClass> {
+        val creditCard = "信用卡"
+        val eWallet = "电子钱包"
+        val cash = "现金"
+        val rechargeableCard = "充值卡"
+        val bond = "债券"
+        val secondClassList = mutableListOf<String>("平安银行","浦发银行","微信","支付宝","人民币","校园卡","沃尔玛购物卡","债券")
+        val n = secondClassList.size
+        val secondList = mutableListOf(AccountRepository.AccountClass(secondClassList[0], 0.0))
+        for (index in 1 until n) {
+            secondList.add(AccountRepository.AccountClass(secondClassList[index], 0.0))
+        }
+        for (index in 0 until n) {
+            for (item in accounting) {
+                val second = item.accountingAcconut.secondClass
+                if (second == secondClassList[index]) {
+                    when(item.accountingType) {
+                        "收入" -> secondList[index].Amount += item.accountingAmount
+                        else -> secondList[index].Amount -= item.accountingAmount
+                    }}
+            }
+        }
+        val firstList = listOf(
+            AccountRepository.AccountClass(creditCard, 0.0),
+            AccountRepository.AccountClass(eWallet, 0.0),
+            AccountRepository.AccountClass(cash, 0.0),
+            AccountRepository.AccountClass(rechargeableCard, 0.0),
+            AccountRepository.AccountClass(bond, 0.0)
+        )
+        for (item in secondList){
+            when(item.Class) {
+                secondClassList[0] -> firstList[0].Amount += item.Amount
+                secondClassList[1] -> firstList[0].Amount += item.Amount
+                secondClassList[2] -> firstList[1].Amount += item.Amount
+                secondClassList[3] -> firstList[1].Amount += item.Amount
+                secondClassList[4] -> firstList[2].Amount += item.Amount
+                secondClassList[5] -> firstList[2].Amount += item.Amount
+                secondClassList[6] -> firstList[3].Amount += item.Amount
+            }
+        }
+        println(secondList)
+        return secondList
+    }
+
     private fun setUpAccountCardView(view: View,secondClass: List<AccountRepository.AccountClass>){
-        val accountAmountView : TextView = view.findViewById(R.id.text_amount)
+        //val accountAmountView : TextView = view.findViewById(R.id.text_amount)
         for (item in TypeAccountList) {
             for (value in secondClass){
                 if (item.secondClass == value.Class) {
-                    accountAmountView.text = value.Amount.toString()
+                    item.amount = value.Amount
                 }
             }
         }
+        println(TypeAccountList)
     }
 
     private fun TAdataInfo(){
@@ -118,7 +172,7 @@ class AccountFragment : Fragment() {
     }
 
     data class TA(
-        val amount:Double,
+        var amount:Double,
         @ColumnInfo(name = "accounting_account_first_class") val firstClass:String,
         @ColumnInfo(name = "accounting_account_second_class") val secondClass:String
     )
@@ -131,7 +185,7 @@ class AccountFragment : Fragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
-        val TypeAccountList = listOf(
+        var TypeAccountList = listOf(
             TA(
                 amount = 0.00,
                 firstClass = "信用卡",
