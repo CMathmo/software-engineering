@@ -1,6 +1,7 @@
 package com.wad.tBook
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -48,25 +49,35 @@ class MainActivity : FragmentActivity() {
         Log.d(TAG,"create_show")
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
-        Thread({
+        Thread {
             roomdb.proDao().deleteAllPropertyData()
-            if(roomdb.proDao().getAllPropertyData().isEmpty()){
-                val typeList = mutableListOf<String>("收入","支出","转账")
-                val itemList = mutableListOf<String>("类别","账户","项目","商家","成员")
-                val firstclasslist = mutableListOf<String>("信用卡","电子钱包","现金")
-                val secondclasslist = mutableListOf<String>("平安银行","微信","支付宝","人民币","校园卡")
-                for(type in typeList){
-                    for(item in itemList){
-                        for(i in 0..2){
-                            for(j in 0..4){
-                                roomdb.proDao().addPropertyData(Property(0,type,item,firstclasslist[i],secondclasslist[j]))
+            if (roomdb.proDao().getAllPropertyData().isEmpty()) {
+                val typeList = mutableListOf<String>("收入", "支出", "转账")
+                val itemList = mutableListOf<String>("类别", "账户", "项目", "商家", "成员")
+                val firstclasslist = mutableListOf<String>("信用卡", "电子钱包", "现金")
+                val secondclasslist = mutableListOf<String>("平安银行", "微信", "支付宝", "人民币", "校园卡")
+                for (type in typeList) {
+                    for (item in itemList) {
+                        for (i in 0..2) {
+                            for (j in 0..4) {
+                                roomdb.proDao().addPropertyData(
+                                    Property(
+                                        0,
+                                        type,
+                                        item,
+                                        firstclasslist[i],
+                                        secondclasslist[j]
+                                    )
+                                )
                             }
                         }
                     }
                 }
             }
-        }).start()
-
+        }.start()
+        val DBpath = applicationContext.getDatabasePath("tBook.db").path
+        println(DBpath)
+        //tBookDatabase.getDBInstace(this).actDao().deleteAll()
     }
 
     override fun onStart() {
@@ -91,12 +102,12 @@ class MainActivity : FragmentActivity() {
     private fun initView(){
         //关联TabLayout和ViewPager
         tabLayout.setupWithViewPager(viewPager)
+        viewPager.offscreenPageLimit = 4
         //设置ViewPager
         mViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPager.adapter = mViewPagerAdapter
         //设置监听
         viewPager.addOnPageChangeListener(TabViewOnPageChangeListener())
-
         //设置TabLayout
         titleList.add(getString(R.string.main_tab_account))
         titleList.add(getString(R.string.main_tab_pipeline))
@@ -152,14 +163,14 @@ class MainActivity : FragmentActivity() {
 
     inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        var fm: FragmentManager? = null
+        private var fm: FragmentManager? = null
 
         init {
             this.fm = fm
         }
 
         override fun getItem(position: Int): Fragment {
-            return fragmentList.get(position) as Fragment
+            return fragmentList[position] as Fragment
         }
 
         override fun getCount(): Int {
@@ -202,3 +213,4 @@ class MainActivity : FragmentActivity() {
         mToggleButton.text = txt
     }
 }
+

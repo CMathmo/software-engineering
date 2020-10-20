@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AccountViewModel(application: Application) : AndroidViewModel(application) {
-    //    val readActData : LiveData<List<Accounting>>
+    val readActData : List<Accounting>
     val readAllData :LiveData<List<Accounting>>
     private val repo : AccountRepository
 
@@ -18,9 +18,10 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
         val dao = tBookDatabase.getDBInstace(application).actDao()
         repo = AccountRepository(dao)
         readAllData = repo.readAllData
+        readActData = repo.readActData
     }
 
-    fun getAccountType(accountinglist: List<Accounting>) = repo.getAccountType(accountinglist)
+    fun getAccountType() = repo.getAccountType(readActData)
 
     fun addActData(accounting: Accounting){
         viewModelScope.launch(Dispatchers.IO) {

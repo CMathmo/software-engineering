@@ -7,8 +7,11 @@ import com.wad.tBook.statistical.AccountRepository
 @Dao
 interface AccountingDao {
 
-    @Delete
+    @Delete()
     fun delete(uaccounting: Accounting): Int
+
+    @Query("delete from accounting_table")
+    fun deleteAll():Int
 
     @Insert
     fun addAccountingData(vararg accounting: Accounting): List<Long>
@@ -24,6 +27,9 @@ interface AccountingDao {
 
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
+
+    @Query("SELECT * FROM accounting_table")
+    fun readAccountingDataWithoutLiveData() : List<Accounting>
 
     @Query("SELECT * FROM accounting_table")
     fun getAllAccountingData() : List<Accounting>
