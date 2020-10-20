@@ -44,7 +44,7 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_show)
         val add_button : Button = find(R.id.add_button)
         //val button = findViewById(R.id.button1) as Button
-        add_button.setOnClickListener{startActivityForResult(Intent(this, AddActivity::class.java),1)}
+        add_button.setOnClickListener{startActivity(Intent(this, AddActivity::class.java))}
         Log.d(TAG,"create_show")
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
@@ -79,23 +79,7 @@ class MainActivity : FragmentActivity() {
         Log.d(TAG,"restart_show")
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
-            //toast(:Double.toString())
-            val amount = if (data?.getStringExtra("amount") == null || data?.getStringExtra("amount") == "") 0.00 else data?.getStringExtra("amount")!!
-                .toDouble()
-            val type = data?.getStringExtra("type") + ""
-            val date = data?.getStringExtra("date") + ""
-            val first_class = data?.getStringExtra("class") + ""
-            val member = if (data?.getStringExtra("member") == "") null else data?.getStringExtra("member")
-            val project = if (data?.getStringExtra("project") == "") null else data?.getStringExtra("project")
-            val account = data?.getStringExtra("account") + ""
-            val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
-            val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
-            val roomdb = tBookDatabase.getDBInstace(this.application)
-        }
-    }
+
     /**
      * 初始化方法
      * 设置TabLayout

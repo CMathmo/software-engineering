@@ -27,7 +27,7 @@ class AccountAdapter(
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val accountTypeView: TextView = view.findViewById(R.id.text_account_type)
+        val accountTypeView: TextView = view.findViewById(R.id.textAccountType)
         val accountAmountView: TextView = view.findViewById(R.id.text_amount)
 
         @SuppressLint("SetTextI18n")

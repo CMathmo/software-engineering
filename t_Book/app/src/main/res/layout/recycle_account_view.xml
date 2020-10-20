@@ -27,7 +27,7 @@
             android:layout_height="67dp">
 
             <TextView
-                android:id="@+id/text_account_type"
+                android:id="@+id/textAccountType"
                 android:layout_width="126dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="16dp"

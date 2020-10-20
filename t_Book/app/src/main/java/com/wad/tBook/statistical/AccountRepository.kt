@@ -62,7 +62,7 @@ class AccountRepository(private val actDao: AccountingDao) {
         actDao.updateAccountingData(accounting)
     }
 
-    fun deleteData(accountingId: String?){
+    fun deleteData(accountingId: Int?){
         actDao.deleteAccountingData(accountingId)
     }
 
