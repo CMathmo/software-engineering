@@ -17,7 +17,7 @@ class PipelineFragment : Fragment(){
                               savedInstanceState: Bundle?): View? {
         val View = inflater.inflate(R.layout.fragment_pipeline,container,false)
         val recycleview = View.findViewById<RecyclerView>(R.id.pipeline_recycle)
-        val re_adapter = PipelineAdapter(accountList)
+        val re_adapter = PipelineAdapter(accountList,this.activity!!)
         recycleview.adapter = re_adapter
         return View
     }

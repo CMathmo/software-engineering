@@ -1,58 +1,39 @@
 package com.wad.tBook.statistical
 
-import android.content.Context
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
-import com.wad.tBook.room.Accounting
-import java.util.ArrayList
+
 
 class AccountAdapter(
-    accountFragment: AccountFragment,
-    listAccountView: Int,
-    accountList: ArrayList<Accounting>
-) : BaseAdapter() {
+    private val values: List<AccountFragment.TA>
+) : RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
-    var context: Context?=null
-    var itemList = emptyList<Accounting>()
-
-    override fun getCount(): Int {
-        return itemList.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.recycle_account_view, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItem(position: Int): Any? {
-        return null
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(values[position])
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemCount(): Int = values.size
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        var viewHolder:ViewHolder?=null
-        var view:View?=null
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val accountTypeView: TextView = view.findViewById(R.id.text_account_type)
+        val accountAmountView: TextView = view.findViewById(R.id.text_amount)
 
-        if (convertView == null){
-            view = View.inflate(context, R.layout.list_account_view,null)
-            viewHolder = ViewHolder()
-            viewHolder.accountView = view.findViewById(R.id.textAccounttype)
-            viewHolder.amountView = view.findViewById(R.id.textAmount)
-            view.tag = viewHolder
-        }else{
-            view = convertView
-            viewHolder = view!!.tag as ViewHolder
+        @SuppressLint("SetTextI18n")
+        fun bind(model : AccountFragment.TA) {
+            accountTypeView.text = model.firstClass + "-" + model.secondClass
+            accountAmountView.text = model.amount.toString()
         }
-
-        viewHolder.accountView!!.text = itemList!![position].accountingAcconut.toString()
-        viewHolder.amountView!!.text = itemList!![position].accountingAmount.toString()
-
-        return view
     }
-    inner class ViewHolder{
-        var accountView:TextView ?= null
-        var amountView:TextView ?= null
-    }
-
 }

@@ -16,16 +16,16 @@ import com.wad.tBook.room.tBookDatabase
 import java.util.ArrayList
 
 
-class PipelineAdapter (accountList: ArrayList<Accounting>):
+class PipelineAdapter (accountList: ArrayList<Accounting>, context: Context):
     RecyclerView.Adapter<PipelineAdapter.PipelineViewHolder>(){
 
     var itemList = emptyList<Accounting>()
-    var context: Context?=null
+    var context: Context? = context
 
     class PipelineViewHolder(view:View):RecyclerView.ViewHolder(view){
         val textID : TextView = view.findViewById(R.id.textID)
-        val textAccountType : TextView = view.findViewById(R.id.textAccounttype)
-        val textAmount : TextView = view.findViewById(R.id.textAmount)
+        val textAccountType : TextView = view.findViewById(R.id.text_account_type)
+        val textAmount : TextView = view.findViewById(R.id.text_amount)
         val textTime : TextView = view.findViewById(R.id.textTime)
         val textMerchant : TextView = view.findViewById(R.id.textMerchant)
         val textClass : TextView = view.findViewById(R.id.textClass)
