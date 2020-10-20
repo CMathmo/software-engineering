@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.ColumnInfo
 import com.wad.tBook.R
-import com.wad.tBook.room.*
+import com.wad.tBook.room.Accounting
+import com.wad.tBook.room.tBookDatabase
 import kotlinx.android.synthetic.main.fragment_account.*
 import java.util.*
 
@@ -25,7 +28,6 @@ class AccountFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
@@ -36,12 +38,13 @@ class AccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("TAG","onCreateView")
+        Log.d("TAG", "onCreateView")
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onStart() {
@@ -49,8 +52,8 @@ class AccountFragment : Fragment() {
         setUpRecyclerView()
     }
 
-    private fun setUpRecyclerView() {
 
+    private fun setUpRecyclerView() {
         recycle_account.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)
@@ -61,17 +64,18 @@ class AccountFragment : Fragment() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         val typeList:List<AccountRepository.TypeAmount> = dataInfo()
         TAdataInfo()
-        view?.let { dataDisplay(it,typeList) }
+        view?.let { dataDisplay(it, typeList) }
         val readActData : List<Accounting>? =
             activity?.application?.let { tBookDatabase.getDBInstace(it).actDao().readAccountingDataWithoutLiveData() }
         val secondClass = readActData?.let { getAccountType(it) }
         view?.let {
             if (secondClass != null) {
-                setUpAccountCardView(it,secondClass)
+                setUpAccountCardView(it, secondClass)
             }
         }
     }
@@ -99,7 +103,7 @@ class AccountFragment : Fragment() {
         return typeList
     }
 
-    private fun dataDisplay(view : View,typeList : List<AccountRepository.TypeAmount>): CharSequence? {
+    private fun dataDisplay(view: View, typeList: List<AccountRepository.TypeAmount>): CharSequence? {
         val incomeView : TextView = view.findViewById(R.id.text_income)
         val outcomeView : TextView = view.findViewById(R.id.text_outcome)
         val transferView : TextView = view.findViewById(R.id.text_transaction)
@@ -117,7 +121,16 @@ class AccountFragment : Fragment() {
         val cash = "现金"
         val rechargeableCard = "充值卡"
         val bond = "债券"
-        val secondClassList = mutableListOf<String>("平安银行","浦发银行","微信","支付宝","人民币","校园卡","沃尔玛购物卡","债券")
+        val secondClassList = mutableListOf<String>(
+            "平安银行",
+            "浦发银行",
+            "微信",
+            "支付宝",
+            "人民币",
+            "校园卡",
+            "沃尔玛购物卡",
+            "债券"
+        )
         val n = secondClassList.size
         val secondList = mutableListOf(AccountRepository.AccountClass(secondClassList[0], 0.0))
         for (index in 1 until n) {
@@ -155,7 +168,7 @@ class AccountFragment : Fragment() {
         return secondList
     }
 
-    private fun setUpAccountCardView(view: View,secondClass: List<AccountRepository.AccountClass>){
+    private fun setUpAccountCardView(view: View, secondClass: List<AccountRepository.AccountClass>){
         //val accountAmountView : TextView = view.findViewById(R.id.text_amount)
         for (item in TypeAccountList) {
             for (value in secondClass){
@@ -172,9 +185,9 @@ class AccountFragment : Fragment() {
     }
 
     data class TA(
-        var amount:Double,
-        @ColumnInfo(name = "accounting_account_first_class") val firstClass:String,
-        @ColumnInfo(name = "accounting_account_second_class") val secondClass:String
+        var amount: Double,
+        @ColumnInfo(name = "accounting_account_first_class") val firstClass: String,
+        @ColumnInfo(name = "accounting_account_second_class") val secondClass: String
     )
 
     companion object {

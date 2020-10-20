@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.wad.tBook.AddActivity" />
-        <activity android:name="com.wad.tBook.MainActivity">
-
+        <activity
+            android:name=".statistical.StatisticalActivity"
+            android:label="@string/title_activity_statistical"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AddActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -23,15 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="b194c291-066e-43a7-9a7d-d82f3db2c28f">
-        <schema name="main" object-types="view, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">SELECT * FROM accounting_table</console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT * FROM accounting_table]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
