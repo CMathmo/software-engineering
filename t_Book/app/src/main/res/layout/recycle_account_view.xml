@@ -28,15 +28,30 @@
 
             <TextView
                 android:id="@+id/text_account_type"
-                android:layout_width="126dp"
-                android:layout_height="35dp"
+                android:layout_width="80dp"
+                android:layout_height="37dp"
                 android:layout_marginStart="16dp"
                 android:gravity="center"
-                android:text="账户名称"
+                android:text="一级账户"
                 android:textAlignment="gravity"
-                android:textSize="14sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.466" />
+
+            <TextView
+                android:id="@+id/text_account_type2"
+                android:layout_width="126dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="4dp"
+                android:gravity="center"
+                android:text="二级账户"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_account_type"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

@@ -67,7 +67,7 @@ class AccountRepository(private val actDao: AccountingDao) {
 
     data class TypeSummary(val type_total:Double,val accountinglist: List<Accounting>)
     data class AccountClass(
-        @ColumnInfo(name = "accounting_class") var Class:String,
+        @ColumnInfo(name = "accounting_account") var Class:String,
         @ColumnInfo(name = "accounting_amount") var Amount:Double
     )
     data class TypeAmount(
