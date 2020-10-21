@@ -18,11 +18,15 @@ import androidx.multidex.MultiDex
 import com.wad.tBook.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import com.wad.tBook.MyApplication.Companion.context
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.*
+import com.wad.tBook.statistical.AccountDetailActivity
 import com.wad.tBook.statistical.AccountFragment
 import com.wad.tBook.statistical.PipelineFragment
+import com.wad.tBook.statistical.StatisticalActivity
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
 
@@ -88,6 +92,16 @@ class MainActivity : FragmentActivity() {
     override fun onRestart() {
         super.onRestart()
         Log.d(TAG,"restart_show")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val dataButton : FloatingActionButton = find(R.id.data_button)
+        dataButton.setOnClickListener{
+            val intent = Intent(applicationContext, StatisticalActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            applicationContext.startActivity(intent)
+        }
     }
 
 
