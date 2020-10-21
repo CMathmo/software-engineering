@@ -45,7 +45,7 @@ class PipelineAdapter (accountList: ArrayList<Accounting>, context: Context):
     override fun onBindViewHolder(holder: PipelineViewHolder, position: Int) {
         val currentItem = itemList.get(position)
         holder.textID.text = currentItem.accountingId.toString()
-        holder.textAccountType.text = currentItem.accountingAcconut.toString()
+        holder.textAccountType.text = currentItem.accountingAccount.toString()
         holder.textAmount.text = currentItem.accountingAmount.toString()
         holder.textTime.text = currentItem.accountingTime.toString()
         holder.textMerchant.text = currentItem.accountingMerchant.toString()

@@ -7,6 +7,9 @@ import com.wad.tBook.statistical.AccountRepository
 @Dao
 interface AccountingDao {
 
+    @Query("delete from accounting_table")
+    fun deleteAll():Int
+
     @Delete
     fun delete(uaccounting: Accounting): Int
 
@@ -28,6 +31,8 @@ interface AccountingDao {
     @Query("select accounting_type,accounting_amount from accounting_table")
     fun readAccountTypeData() : List<AccountRepository.TypeAmount>
 
+//    fun getMatchingAccountingData(type :String, firt_class :String, )
+
 }
 
 //账目表
@@ -43,7 +48,7 @@ data class Accounting(
     @Embedded(prefix = "accounting_class")
     var accountingClass: MultilevelClassification,//分类
     @Embedded(prefix = "accounting_account")
-    var accountingAcconut: MultilevelClassification,//账户
+    var accountingAccount: MultilevelClassification,//账户
     @ColumnInfo(name = "accounting_Time")
     var accountingTime: String,//时间
     @Embedded(prefix = "accounting_member")

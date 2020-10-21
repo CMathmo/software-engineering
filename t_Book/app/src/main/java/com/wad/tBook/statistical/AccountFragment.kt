@@ -47,10 +47,23 @@ class AccountFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         //val secondClass = viewModel.getAccountType(accountList)
         //viewModel.readAllData.observe(viewLifecycleOwner){
         //    view?.let { it1 -> setUpAccountCardView(it1,secondClass) }
         //}
+<<<<<<< Updated upstream
+=======
+
+        val secondClass = viewModel.getAccountType(accountList)
+        viewModel.readAllData.observe(viewLifecycleOwner){
+//            view?.let { it1 -> setUpAccountCardView(it1,secondClass) }
+        }
+
+>>>>>>> Stashed changes
         recycle_account.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)

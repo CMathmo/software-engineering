@@ -104,7 +104,7 @@ class AddActivity : AppCompatActivity() {
                 accountingType = type,
                 accountingAmount = amount,
                 accountingClass = item_class,
-                accountingAcconut = account,
+                accountingAccount = account,
                 accountingTime = date,
                 accountingMember = member,
                 accountingProject = project,

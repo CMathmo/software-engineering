@@ -67,6 +67,15 @@ class MainActivity : FragmentActivity() {
             }
         }).start()
 
+        //清空原有数据
+        tBookDatabase.getDBInstace(this).actDao().deleteAll()
+        //生成测试数据
+        val accountList = getTestData()
+        for (data in accountList){
+            tBookDatabase.getDBInstace(this).actDao().addAccountingData(data)
+        }
+
+
     }
 
     override fun onStart() {
