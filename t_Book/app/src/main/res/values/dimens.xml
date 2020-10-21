@@ -1,6 +1,5 @@
 <resources>
 
     <dimen name="d40">40dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
 
 </resources>

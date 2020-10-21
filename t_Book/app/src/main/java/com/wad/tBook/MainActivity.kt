@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.LiveData
-import androidx.multidex.MultiDex
 import com.wad.tBook.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
@@ -40,7 +38,6 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MultiDex.install(this)
         setContentView(R.layout.activity_show)
         val add_button : Button = find(R.id.add_button)
         //val button = findViewById(R.id.button1) as Button
@@ -49,17 +46,14 @@ class MainActivity : FragmentActivity() {
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
         Thread({
-            roomdb.proDao().deleteAllPropertyData()
             if(roomdb.proDao().getAllPropertyData().isEmpty()){
                 val typeList = mutableListOf<String>("收入","支出","转账")
                 val itemList = mutableListOf<String>("类别","账户","项目","商家","成员")
-                val firstclasslist = mutableListOf<String>("信用卡","电子钱包","现金")
-                val secondclasslist = mutableListOf<String>("平安银行","微信","支付宝","人民币","校园卡")
                 for(type in typeList){
                     for(item in itemList){
-                        for(i in 0..2){
-                            for(j in 0..4){
-                                roomdb.proDao().addPropertyData(Property(0,type,item,firstclasslist[i],secondclasslist[j]))
+                        for(i in 1..3){
+                            for(j in 1..5){
+                                roomdb.proDao().addPropertyData(Property(0,type,item,type+item+i,type+item+i+j))
                             }
                         }
                     }

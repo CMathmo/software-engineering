@@ -1,17 +1,14 @@
 package com.wad.tBook
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.*
-import androidx.annotation.RequiresApi
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
@@ -49,7 +46,6 @@ class AddActivity : AppCompatActivity() {
         }).build()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
@@ -228,8 +224,6 @@ class AddActivity : AppCompatActivity() {
         find<EditText>(R.id.remark_editText).setText("")
     }
 
-    @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.N)
     fun getNow(): String {
         if (android.os.Build.VERSION.SDK_INT >= 24){
             return SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Date())
