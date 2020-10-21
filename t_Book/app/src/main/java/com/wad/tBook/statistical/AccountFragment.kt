@@ -23,6 +23,7 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Log.d("TAG","onCreateView")
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
@@ -88,6 +89,8 @@ class AccountFragment : Fragment() {
         }
         return typeList
 =======
+=======
+>>>>>>> parent of b9f5d09... 按你们要求改的数据
         val View = inflater.inflate(R.layout.fragment_account,container,false)
         val listview = View.findViewById<ListView>(R.id.account_list)
         //初始化数据列表
@@ -101,6 +104,9 @@ class AccountFragment : Fragment() {
 //            Toast.makeText(this,account.accountingAcconut,Toast.LENGTH_SHORT).show()
 //        }
         return super.onCreateView(inflater, container, savedInstanceState)
+<<<<<<< HEAD
+>>>>>>> parent of b9f5d09... 按你们要求改的数据
+=======
 >>>>>>> parent of b9f5d09... 按你们要求改的数据
     }
 
