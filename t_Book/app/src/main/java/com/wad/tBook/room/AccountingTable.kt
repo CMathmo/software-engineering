@@ -27,11 +27,10 @@ interface AccountingDao {
     @Query("SELECT * FROM accounting_table")
     fun getAllAccountingData() : List<Accounting>
 
-<<<<<<< HEAD
+
 
 //    fun getMatchingAccountingData(type :String, firt_class :String, )
-=======
->>>>>>> parent of b9f5d09... 按你们要求改的数据
+
 
 }
 
