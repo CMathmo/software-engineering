@@ -20,7 +20,10 @@ interface AccountingDao {
     fun updateAccountingData(accounting: Accounting): Int
 
     @Query("DELETE FROM accounting_table where accounting_id = :accountingId")
-    fun deleteAccountingData(accountingId: String?): Int
+    fun deleteAccountingData(accountingId: Int?): Int
+
+    @Query("SELECT * FROM accounting_table where accounting_id = :accountingId")
+    fun getAccountingData(accountingId: Int?) : List<Accounting>
 
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
@@ -62,7 +65,7 @@ data class Accounting(
     @Embedded(prefix = "accounting_merchant")
     var accountingMerchant: MultilevelClassification? = null,//商家，选填
     @ColumnInfo(name = "accounting_remark")
-    var accountingRemark: String? = null,//备注，选填
+    var accountingRemark: String,//备注，选填
     @ColumnInfo(name = "accounting_imagine")
     var accountingImg: String? = null//图片
 )

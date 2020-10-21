@@ -35,7 +35,7 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun deleteActData(accoutingId: String?){
+    fun deleteActData(accoutingId: Int?){
         viewModelScope.launch(Dispatchers.IO) {
             repo.deleteData(accoutingId)
         }
