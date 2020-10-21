@@ -7,44 +7,57 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.wad.tBook.MainActivity
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.wad.tBook.R
 
 
 
 class AccountAdapter(
     private val values: List<AccountFragment.TA>
-) : RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+) : Adapter<AccountAdapter.MyViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    var mOnRecyclerViewItemClick: OnRecyclerViewItemClick<String>? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recycle_account_view, parent, false)
-        return ViewHolder(view)
+        return MyViewHolder(view)
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(values[position])
-    }
-
-
-    override fun getItemCount(): Int = values.size
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val accountTypeView: TextView = view.findViewById(R.id.textAccountType)
-        private val accountAmountView: TextView = view.findViewById(R.id.text_amount)
-        private val accountCardView: CardView = view.findViewById(R.id.ActCard)
-        private val intent = Intent(view.context, StatisticalActivity::class.java)
-        private val context = view.context
-        @SuppressLint("SetTextI18n")
-        fun bind(model: AccountFragment.TA) {
-            accountTypeView.text = model.firstClass + "-" + model.secondClass
-            accountAmountView.text = model.amount.toString()
-            accountCardView.setOnClickListener {
-                context.startActivity(intent)
-            }
+        var context = holder.itemView.context
+        // item点击事件的处理
+        holder.itemView.setOnClickListener {
+            mOnRecyclerViewItemClick?.OnItemClick(holder.itemView, position)
         }
     }
+
+
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val accountTypeFView: TextView = itemView.findViewById(R.id.text_account_type)
+        private val accountTypeSView: TextView = itemView.findViewById(R.id.text_account_type2)
+        private val accountAmountView: TextView = itemView.findViewById(R.id.text_amount)
+//        private val accountCardView: CardView = itemView.findViewById(R.id.ActCard)
+//        private val intent = Intent(itemView.context, StatisticalActivity::class.java)
+
+        @SuppressLint("SetTextI18n")
+        fun bind(model: AccountFragment.TA) {
+            accountTypeFView.text = model.firstClass
+            accountTypeSView.text = model.secondClass
+            accountAmountView.text = model.amount.toString()
+//            accountCardView.setOnClickListener {
+//                context.startActivity(intent)
+//            }
+        }
+    }
+
+    public interface OnRecyclerViewItemClick<T> {
+        fun OnItemClick(view: View?, position: Int)
+    }
+
+    override fun getItemCount(): Int = values.size
 }
+
