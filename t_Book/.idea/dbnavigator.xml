@@ -26,15 +26,13 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT * FROM property_table]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f" />
+    <connection id="753a0646-ec71-4155-a05a-d58e7d8e991f" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -59,7 +57,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="b194c291-066e-43a7-9a7d-d82f3db2c28f" active="true">
+      <connection id="753a0646-ec71-4155-a05a-d58e7d8e991f" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -74,7 +72,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\tuohuang\Desktop\database\tBook.db" schema="main" />
+            <file path="C:\Users\Haolin\Desktop\tBook.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
