@@ -17,30 +17,27 @@
 
     <TextView
         android:id="@+id/property_type"
-        android:layout_width="108dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="32dp"
-        android:background="#FFA340"
+        android:layout_width="139dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="8dp"
+        android:background="#40C4FF"
         android:gravity="center"
         android:text="momo"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view2"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
         android:id="@+id/properth_amout"
-        android:layout_width="158dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="36dp"
-        android:background="#FFAB40"
+        android:layout_width="240dp"
+        android:layout_height="36dp"
+        android:background="#82B1FF"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="textStart"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/view2"
         app:layout_constraintVertical_bias="0.533" />
