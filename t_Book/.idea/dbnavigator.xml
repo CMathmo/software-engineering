@@ -74,7 +74,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\tuohuang\Desktop\database\tBook.db" schema="main" />
+            <file path="C:\Users\Haolin\Desktop\tBook.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

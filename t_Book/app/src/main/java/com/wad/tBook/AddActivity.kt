@@ -141,7 +141,7 @@ class AddActivity : AppCompatActivity() {
         find<EditText>(R.id.account_editText).setText(accounting.accountingAcconut.firstClass + "->" + accounting.accountingAcconut.secondClass)
         find<EditText>(R.id.date_editText).setText(accounting.accountingTime)
         find<EditText>(R.id.member_editText).setText(if(accounting.accountingMember == null)""
-            else accounting.accountingMember!!.firstClass + "->" + accounting.accountingMember!!.secondClass)
+        else accounting.accountingMember!!.firstClass + "->" + accounting.accountingMember!!.secondClass)
         find<EditText>(R.id.project_editText).setText(if(accounting.accountingProject == null)""
         else accounting.accountingProject!!.firstClass + "->" + accounting.accountingProject!!.secondClass)
         find<EditText>(R.id.merchant_editText).setText(if(accounting.accountingMerchant == null)""

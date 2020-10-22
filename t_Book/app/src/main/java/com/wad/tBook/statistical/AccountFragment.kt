@@ -200,6 +200,7 @@ class AccountFragment : Fragment() {
                 }
             }
         }
+        println(TypeAccountList)
     }
 
     private fun TAdataInfo(){
