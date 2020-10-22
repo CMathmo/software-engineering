@@ -1,15 +1,10 @@
 package com.wad.tBook.statistical
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.wad.tBook.MainActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.wad.tBook.R
@@ -52,9 +47,9 @@ class AccountAdapter(
             accountTypeFView.text = model.firstClass
             accountTypeSView.text = model.secondClass
             accountAmountView.text = model.amount.toString()
-            accountCardView.setOnClickListener {
-                context.startActivity(intent)
-            }
+//            accountCardView.setOnClickListener {
+//                context.startActivity(intent)
+//            }
         }
     }
 
