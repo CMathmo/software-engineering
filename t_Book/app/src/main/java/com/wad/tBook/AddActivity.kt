@@ -1,14 +1,14 @@
 package com.wad.tBook
 
-import android.app.Activity
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.*
+import androidx.annotation.RequiresApi
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
@@ -19,9 +19,9 @@ import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
 import com.wad.tBook.room.tBookDatabase
 import org.jetbrains.anko.find
-import org.jetbrains.anko.timePicker
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.N)
 class AddActivity : AppCompatActivity() {
 
     private val TAG = AddActivity::class.qualifiedName
@@ -29,30 +29,41 @@ class AddActivity : AppCompatActivity() {
     private var choose_tag :Int = 0
     private var OptionsItems_1: MutableList<String> = mutableListOf()
     private var OptionsItems_2: MutableList<MutableList<String>> = mutableListOf()
-    private var id: Int = 0
+    private var view_id: Int = 0
     private var type: String ="收入"
+    private val id by lazy {
+        intent.getIntExtra("id",-1)
+    }
     private val pvoptions:OptionsPickerView<String> by lazy{
         OptionsPickerBuilder(this, OnOptionsSelectListener{
                 options1, options2, options3, v ->
             val tx = OptionsItems_1.get(options1) + "->" + OptionsItems_2.get(options1).get(options2)
-            find<EditText>(id).setText(tx)
+            find<EditText>(view_id).setText(tx)
         }).build<String>()
     }
 
     private val pvTime: TimePickerView by lazy{
         TimePickerBuilder(this, OnTimeSelectListener{
                 date,v ->
-            find<EditText>(R.id.date_editText).setText(date.toString())
-        }).build()
+            find<EditText>(R.id.date_editText).setText(SimpleDateFormat("yyyy年MM月dd日").format(date))
+        })
+            .setCancelText("取消")//取消按钮文字
+            .setSubmitText("确定")//确认按钮文字
+            .setLabel("年","月","日","","","")
+            .build()
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
         val savebutton : Button = find(R.id.save_button)
         InitEditText()
         InitTypeButton()
-
+        if(id != -1){
+            InitView(id)
+        }
         savebutton.setOnClickListener {
 
             val amount = if(find<EditText>(R.id.amount_editText).text.toString()=="") 0.0
@@ -91,16 +102,15 @@ class AddActivity : AppCompatActivity() {
             val merchant = if(merchant_list.size == 1) null
             else  MultilevelClassification(firstClass = merchant_list[0],secondClass = merchant_list[1])
 
-            val remark = if(find<EditText>(R.id.remark_editText).text.toString()=="") null
-            else find<EditText>(R.id.remark_editText).text.toString()
+            val remark = find<EditText>(R.id.remark_editText).text.toString()
 
 
             val accounting = Accounting(
-                accountingId = 0,
+                accountingId = if (id != -1)id else 0,
                 accountingType = type,
                 accountingAmount = amount,
                 accountingClass = item_class,
-                accountingAccount = account,
+                accountingAcconut = account,
                 accountingTime = date,
                 accountingMember = member,
                 accountingProject = project,
@@ -109,10 +119,35 @@ class AddActivity : AppCompatActivity() {
             )
             val roomdb = tBookDatabase.getDBInstace(this.application)
             Thread{
+                if(id != -1){
+                    roomdb.actDao().deleteAccountingData(id)
+                }
                 roomdb.actDao().addAccountingData(accounting)
             }.start()
             finish()
         }
+    }
+
+    fun InitView(id:Int){
+        val accounting = tBookDatabase.getDBInstace(this.application).actDao().getAccountingData(id)[0]
+        type = accounting.accountingType
+        when(type){
+            "收入" -> find<RadioGroup>(R.id.type_group).check(R.id.income_radioButton)
+            "支出" -> find<RadioGroup>(R.id.type_group).check(R.id.expenditure_radioButton)
+            else -> find<RadioGroup>(R.id.type_group).check(R.id.transfer_radioButton)
+        }
+        find<EditText>(R.id.amount_editText).setText(accounting.accountingAmount.toString())
+        find<EditText>(R.id.class_editText).setText(accounting.accountingClass.firstClass + "->" + accounting.accountingClass.secondClass)
+        find<EditText>(R.id.account_editText).setText(accounting.accountingAcconut.firstClass + "->" + accounting.accountingAcconut.secondClass)
+        find<EditText>(R.id.date_editText).setText(accounting.accountingTime)
+        find<EditText>(R.id.member_editText).setText(if(accounting.accountingMember == null)""
+        else accounting.accountingMember!!.firstClass + "->" + accounting.accountingMember!!.secondClass)
+        find<EditText>(R.id.project_editText).setText(if(accounting.accountingProject == null)""
+        else accounting.accountingProject!!.firstClass + "->" + accounting.accountingProject!!.secondClass)
+        find<EditText>(R.id.merchant_editText).setText(if(accounting.accountingMerchant == null)""
+        else accounting.accountingMerchant!!.firstClass + "->" + accounting.accountingMerchant!!.secondClass)
+        find<EditText>(R.id.remark_editText).setText(accounting.accountingRemark)
+
     }
 
     fun InitDataList(pvoptions: OptionsPickerView<String>,item:String) {
@@ -136,8 +171,8 @@ class AddActivity : AppCompatActivity() {
         class_editText.inputType = InputType.TYPE_NULL
         class_editText.setFocusable(false)
         class_editText.setOnClickListener {
-            if(id != R.id.class_editText){
-                id = R.id.class_editText
+            if(view_id != R.id.class_editText){
+                view_id = R.id.class_editText
                 InitDataList(pvoptions,"类别")
             }
             pvoptions.show()
@@ -147,8 +182,8 @@ class AddActivity : AppCompatActivity() {
         account_editText.inputType = InputType.TYPE_NULL
         account_editText.setFocusable(false)
         account_editText.setOnClickListener {
-            if(id != R.id.account_editText){
-                id = R.id.account_editText
+            if(view_id != R.id.account_editText){
+                view_id = R.id.account_editText
                 InitDataList(pvoptions,"账户")
             }
             pvoptions.show()
@@ -165,8 +200,8 @@ class AddActivity : AppCompatActivity() {
         member_editText.inputType = InputType.TYPE_NULL
         member_editText.setFocusable(false)
         member_editText.setOnClickListener {
-            if(id != R.id.member_editText){
-                id = R.id.member_editText
+            if(view_id != R.id.member_editText){
+                view_id = R.id.member_editText
                 InitDataList(pvoptions,"成员")
             }
             pvoptions.show()
@@ -176,8 +211,8 @@ class AddActivity : AppCompatActivity() {
         project_editText.inputType = InputType.TYPE_NULL
         project_editText.setFocusable(false)
         project_editText.setOnClickListener {
-            if(id != R.id.project_editText){
-                id = R.id.project_editText
+            if(view_id != R.id.project_editText){
+                view_id = R.id.project_editText
                 InitDataList(pvoptions,"项目")
             }
             pvoptions.show()
@@ -187,8 +222,8 @@ class AddActivity : AppCompatActivity() {
         merchant_editText.inputType = InputType.TYPE_NULL
         merchant_editText.setFocusable(false)
         merchant_editText.setOnClickListener {
-            if(id != R.id.merchant_editText){
-                id = R.id.merchant_editText
+            if(view_id != R.id.merchant_editText){
+                view_id = R.id.merchant_editText
                 InitDataList(pvoptions,"商家")
             }
             pvoptions.show()
@@ -196,6 +231,7 @@ class AddActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("ResourceType")
     fun InitTypeButton(){
         find<RadioButton>(R.id.income_radioButton).setOnClickListener{
             type = "收入"
@@ -214,7 +250,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     fun clearALLEditText(){
-        id = 0
+        view_id = 0
         find<EditText>(R.id.class_editText).setText("")
         find<EditText>(R.id.account_editText).setText("")
         find<EditText>(R.id.date_editText).setText("")
@@ -224,9 +260,11 @@ class AddActivity : AppCompatActivity() {
         find<EditText>(R.id.remark_editText).setText("")
     }
 
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.N)
     fun getNow(): String {
         if (android.os.Build.VERSION.SDK_INT >= 24){
-            return SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Date())
+            return SimpleDateFormat("yyyy年MM月dd日").format(Date())
         }else{
             return ""
         }

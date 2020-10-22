@@ -63,4 +63,6 @@ dependencies {
     // 测试帮助
     testImplementation "androidx.room:room-testing:$room_version"
 
+    //绘图库的支持
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

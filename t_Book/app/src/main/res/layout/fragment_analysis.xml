@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-<<<<<<< Updated upstream
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-=======
 
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp" />-->
+
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--下拉框-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="24dp">
 
     </LinearLayout>
 
     <com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartView
         android:id="@+id/AAChartView"
         android:layout_width="match_parent"
-        android:layout_height="392dp" />
+        android:layout_height="500dp" />
+
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +43,8 @@
             android:textSize="20dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!--显示当前时间段-->
         <TextView
             android:id="@+id/time_period_text"
@@ -93,18 +88,14 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="饼状图"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="297dp"
-                tools:layout_editor_absoluteY="12dp" />
+                android:visibility="visible" />
             <!--选择柱状图-->
             <RadioButton
                 android:id="@+id/Bar_radioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="条形图"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="297dp"
-                tools:layout_editor_absoluteY="12dp" />
+                android:visibility="visible" />
 
 
         </RadioGroup>
@@ -123,6 +114,4 @@
 </LinearLayout>
 
 
-
->>>>>>> Stashed changes
 </FrameLayout>

@@ -5,4 +5,7 @@
     <string name="main_tab_analysis">分析</string>
     <string name="main_tab_setting">设置</string>
     <string name="main_tab_default">  </string>
+    <string name="title_activity_statistical">StatisticalActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

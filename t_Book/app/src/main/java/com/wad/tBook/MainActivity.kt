@@ -1,6 +1,7 @@
 package com.wad.tBook
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.LiveData
+import androidx.multidex.MultiDex
 import com.wad.tBook.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
@@ -38,35 +41,48 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MultiDex.install(this)
         setContentView(R.layout.activity_show)
         val add_button : Button = find(R.id.add_button)
         //val button = findViewById(R.id.button1) as Button
-        add_button.setOnClickListener{startActivityForResult(Intent(this, AddActivity::class.java),1)}
+        add_button.setOnClickListener{startActivity(Intent(this, AddActivity::class.java))}
         Log.d(TAG,"create_show")
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
-        Thread({
-            if(roomdb.proDao().getAllPropertyData().isEmpty()){
-                val typeList = mutableListOf<String>("收入","支出","转账")
-                val itemList = mutableListOf<String>("类别","账户","项目","商家","成员")
-                for(type in typeList){
-                    for(item in itemList){
-                        for(i in 1..3){
-                            for(j in 1..5){
-                                roomdb.proDao().addPropertyData(Property(0,type,item,type+item+i,type+item+i+j))
+        Thread {
+            roomdb.proDao().deleteAllPropertyData()
+            if (roomdb.proDao().getAllPropertyData().isEmpty()) {
+                val typeList = mutableListOf<String>("收入", "支出", "转账")
+                val itemList = mutableListOf<String>("类别", "账户", "项目", "商家", "成员")
+                val firstclasslist = mutableListOf<String>("信用卡", "电子钱包", "现金")
+                val secondclasslist = mutableListOf<String>("平安银行", "微信", "支付宝", "人民币", "校园卡")
+                for (type in typeList) {
+                    for (item in itemList) {
+                        for (i in 0..2) {
+                            for (j in 0..4) {
+                                roomdb.proDao().addPropertyData(
+                                    Property(
+                                        0,
+                                        type,
+                                        item,
+                                        firstclasslist[i],
+                                        secondclasslist[j]
+                                    )
+                                )
                             }
                         }
                     }
                 }
             }
-        }).start()
+        }.start()
+        val DBpath = applicationContext.getDatabasePath("tBook.db").path
+        println(DBpath)
+        //tBookDatabase.getDBInstace(this).actDao().deleteAll()
 
-        //清空原有数据
         tBookDatabase.getDBInstace(this).actDao().deleteAll()
-        //生成测试数据
-        val accountList = getTestData()
-        for (data in accountList){
-            tBookDatabase.getDBInstace(this).actDao().addAccountingData(data)
+        for (acc in getTestData()){
+            println("testdata: $acc")
+            tBookDatabase.getDBInstace(this).actDao().addAccountingData(acc)
         }
 
 
@@ -82,23 +98,7 @@ class MainActivity : FragmentActivity() {
         Log.d(TAG,"restart_show")
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
-            //toast(:Double.toString())
-            val amount = if (data?.getStringExtra("amount") == null || data?.getStringExtra("amount") == "") 0.00 else data?.getStringExtra("amount")!!
-                .toDouble()
-            val type = data?.getStringExtra("type") + ""
-            val date = data?.getStringExtra("date") + ""
-            val first_class = data?.getStringExtra("class") + ""
-            val member = if (data?.getStringExtra("member") == "") null else data?.getStringExtra("member")
-            val project = if (data?.getStringExtra("project") == "") null else data?.getStringExtra("project")
-            val account = data?.getStringExtra("account") + ""
-            val merchant = if (data?.getStringExtra("merchant") == "") null else data?.getStringExtra("merchant")
-            val remark = if (data?.getStringExtra("remark") == "") null else data?.getStringExtra("remark")
-            val roomdb = tBookDatabase.getDBInstace(this.application)
-        }
-    }
+
     /**
      * 初始化方法
      * 设置TabLayout
@@ -110,12 +110,12 @@ class MainActivity : FragmentActivity() {
     private fun initView(){
         //关联TabLayout和ViewPager
         tabLayout.setupWithViewPager(viewPager)
+        viewPager.offscreenPageLimit = 4
         //设置ViewPager
         mViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPager.adapter = mViewPagerAdapter
         //设置监听
         viewPager.addOnPageChangeListener(TabViewOnPageChangeListener())
-
         //设置TabLayout
         titleList.add(getString(R.string.main_tab_account))
         titleList.add(getString(R.string.main_tab_pipeline))
@@ -171,14 +171,14 @@ class MainActivity : FragmentActivity() {
 
     inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        var fm: FragmentManager? = null
+        private var fm: FragmentManager? = null
 
         init {
             this.fm = fm
         }
 
         override fun getItem(position: Int): Fragment {
-            return fragmentList.get(position) as Fragment
+            return fragmentList[position] as Fragment
         }
 
         override fun getCount(): Int {

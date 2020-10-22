@@ -2,15 +2,16 @@ package com.wad.tBook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.wad.tBook.statistical.AccountRepository
 
 @Dao
 interface AccountingDao {
 
+    @Delete()
+    fun delete(uaccounting: Accounting): Int
+
     @Query("delete from accounting_table")
     fun deleteAll():Int
-
-    @Delete
-    fun delete(uaccounting: Accounting): Int
 
     @Insert
     fun addAccountingData(vararg accounting: Accounting): List<Long>
@@ -19,15 +20,22 @@ interface AccountingDao {
     fun updateAccountingData(accounting: Accounting): Int
 
     @Query("DELETE FROM accounting_table where accounting_id = :accountingId")
-    fun deleteAccountingData(accountingId: String?): Int
+    fun deleteAccountingData(accountingId: Int?): Int
+
+    @Query("SELECT * FROM accounting_table where accounting_id = :accountingId")
+    fun getAccountingData(accountingId: Int?) : List<Accounting>
 
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
 
     @Query("SELECT * FROM accounting_table")
+    fun readAccountingDataWithoutLiveData() : List<Accounting>
+
+    @Query("SELECT * FROM accounting_table")
     fun getAllAccountingData() : List<Accounting>
 
-
+    @Query("select accounting_type,accounting_amount from accounting_table")
+    fun readAccountTypeData() : List<AccountRepository.TypeAmount>
 
 //    fun getMatchingAccountingData(type :String, firt_class :String, )
 
@@ -47,7 +55,7 @@ data class Accounting(
     @Embedded(prefix = "accounting_class")
     var accountingClass: MultilevelClassification,//分类
     @Embedded(prefix = "accounting_account")
-    var accountingAccount: MultilevelClassification,//账户
+    var accountingAcconut: MultilevelClassification,//账户
     @ColumnInfo(name = "accounting_Time")
     var accountingTime: String,//时间
     @Embedded(prefix = "accounting_member")
@@ -57,7 +65,7 @@ data class Accounting(
     @Embedded(prefix = "accounting_merchant")
     var accountingMerchant: MultilevelClassification? = null,//商家，选填
     @ColumnInfo(name = "accounting_remark")
-    var accountingRemark: String? = null,//备注，选填
+    var accountingRemark: String,//备注，选填
     @ColumnInfo(name = "accounting_imagine")
     var accountingImg: String? = null//图片
 )
