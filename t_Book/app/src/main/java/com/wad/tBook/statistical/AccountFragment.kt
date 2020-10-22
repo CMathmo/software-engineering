@@ -1,5 +1,6 @@
 package com.wad.tBook.statistical
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.ColumnInfo
 import com.wad.tBook.R
+import com.wad.tBook.getItemDecoration
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
 import kotlinx.android.synthetic.main.fragment_account.*
@@ -24,6 +27,8 @@ class AccountFragment : Fragment() {
 
     private val viewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
     private val accountList = ArrayList<Accounting>()
+    var recyclerview: RecyclerView? = null
+    var accountAdapter: AccountAdapter? = null
     private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +49,6 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onStart() {
@@ -60,7 +64,27 @@ class AccountFragment : Fragment() {
                 else -> GridLayoutManager(context, columnCount)
             }
             println(TypeAccountList)
-            adapter = AccountAdapter(TypeAccountList)
+            addItemDecoration(getItemDecoration())
+            //adapter = AccountAdapter(TypeAccountList)
+        }
+        recyclerview = view?.findViewById(R.id.recycle_account)
+        accountAdapter = AccountAdapter(TypeAccountList)
+        recyclerview?.adapter = accountAdapter
+        val intent = Intent(context, AccountDetailActivity::class.java)
+        accountAdapter?.mOnRecyclerViewItemClick = object :
+            AccountAdapter.OnRecyclerViewItemClick<String> {
+            override fun OnItemClick(view: View?, position: Int) {
+                val accountClass: TextView? = view?.findViewById(R.id.text_account_type2)
+                if (accountClass != null) {
+                    intent.putExtra("account_class",accountClass.text)
+                }
+                Toast.makeText(
+                    context,
+                    "点击的item位置是${position}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                context?.startActivity(intent)
+            }
         }
     }
 
@@ -164,7 +188,6 @@ class AccountFragment : Fragment() {
                 secondClassList[6] -> firstList[3].Amount += item.Amount
             }
         }
-        println(secondList)
         return secondList
     }
 

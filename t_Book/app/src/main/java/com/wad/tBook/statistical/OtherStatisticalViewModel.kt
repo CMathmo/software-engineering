@@ -1,4 +1,3 @@
-
 package com.wad.tBook.statistical
 
 import android.app.Application
@@ -7,13 +6,14 @@ import androidx.lifecycle.LiveData
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
 
-class PipelineViewModel(application: Application):AndroidViewModel(application) {
+class OtherStatisticalViewModel(application: Application): AndroidViewModel(application) {
     val readAllData : LiveData<List<Accounting>>
-    private val repo : PipelineRepository
+    private val repo : OtherStatisticalRepository
 
     init {
         val dao = tBookDatabase.getDBInstace(application).actDao()
-        repo = PipelineRepository(dao)
+        repo = OtherStatisticalRepository(dao)
         readAllData = repo.readAllData
     }
+
 }

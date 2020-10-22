@@ -37,7 +37,8 @@ interface AccountingDao {
     @Query("select accounting_type,accounting_amount from accounting_table")
     fun readAccountTypeData() : List<AccountRepository.TypeAmount>
 
-//    fun getMatchingAccountingData(type :String, firt_class :String, )
+    @Query("select accounting_type,accounting_amount from accounting_table where accounting_accountsecond_class = :accountingAccount")
+    fun readAccountDetailData(accountingAccount:String) : List<AccountRepository.TypeAmount>
 
 
 }
