@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".statistical.AccountDetailActivity"></activity>
+        <activity android:name=".statistical.OtherStatisticalActivity" />
+        <activity android:name=".statistical.AccountDetailActivity" />
         <activity
             android:name=".statistical.StatisticalActivity"
             android:label="@string/title_activity_statistical"

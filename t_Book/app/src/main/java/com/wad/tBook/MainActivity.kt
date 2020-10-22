@@ -23,10 +23,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wad.tBook.MyApplication.Companion.context
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.*
-import com.wad.tBook.statistical.AccountDetailActivity
-import com.wad.tBook.statistical.AccountFragment
-import com.wad.tBook.statistical.PipelineFragment
-import com.wad.tBook.statistical.StatisticalActivity
+import com.wad.tBook.statistical.*
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
 
@@ -99,6 +96,12 @@ class MainActivity : FragmentActivity() {
         val dataButton : FloatingActionButton = find(R.id.data_button)
         dataButton.setOnClickListener{
             val intent = Intent(applicationContext, StatisticalActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            applicationContext.startActivity(intent)
+        }
+        val otherButton : FloatingActionButton = find(R.id.other_button)
+        otherButton.setOnClickListener{
+            val intent = Intent(applicationContext, OtherStatisticalActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             applicationContext.startActivity(intent)
         }

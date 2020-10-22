@@ -48,9 +48,6 @@ class AccountAdapter(
             accountTypeFView.text = model.firstClass
             accountTypeSView.text = model.secondClass
             accountAmountView.text = model.amount.toString()
-//            accountCardView.setOnClickListener {
-//                context.startActivity(intent)
-//            }
         }
     }
 
