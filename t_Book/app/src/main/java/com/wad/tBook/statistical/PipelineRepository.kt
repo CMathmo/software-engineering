@@ -9,5 +9,4 @@ class PipelineRepository (private val actDao: AccountingDao) {
     //    val readData = actDao.readAccountingData()
 
     val readAllData = actDao.readAccountingData()
-
 }

@@ -1,3 +1,4 @@
+
 package com.wad.tBook.statistical
 
 import android.app.Application
@@ -15,5 +16,4 @@ class PipelineViewModel(application: Application):AndroidViewModel(application) 
         repo = PipelineRepository(dao)
         readAllData = repo.readAllData
     }
-
 }

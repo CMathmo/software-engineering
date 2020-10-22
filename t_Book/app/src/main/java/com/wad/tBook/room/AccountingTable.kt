@@ -77,4 +77,3 @@ data class MultilevelClassification(
     @ColumnInfo(name = "second_class")
     var secondClass: String
 )
-

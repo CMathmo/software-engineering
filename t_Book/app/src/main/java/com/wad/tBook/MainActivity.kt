@@ -79,6 +79,13 @@ class MainActivity : FragmentActivity() {
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)
         //tBookDatabase.getDBInstace(this).actDao().deleteAll()
+
+        tBookDatabase.getDBInstace(this).actDao().deleteAll()
+        for (acc in getTestData()){
+            println("testdata: $acc")
+            tBookDatabase.getDBInstace(this).actDao().addAccountingData(acc)
+        }
+
     }
 
     override fun onStart() {
@@ -106,7 +113,6 @@ class MainActivity : FragmentActivity() {
             applicationContext.startActivity(intent)
         }
     }
-
 
     /**
      * 初始化方法
