@@ -6,8 +6,8 @@
     <string name="main_tab_setting">设置</string>
     <string name="main_tab_default">  </string>
     <string name="title_activity_statistical">StatisticalActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="tab_text_4">Tab 4</string>
+    <string name="tab_text_1">日</string>
+    <string name="tab_text_2">周</string>
+    <string name="tab_text_3">月</string>
+    <string name="tab_text_4">年</string>
 </resources>
