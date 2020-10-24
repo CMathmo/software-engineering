@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.ColumnInfo
+import com.wad.tBook.MainActivity
 import com.wad.tBook.R
 import com.wad.tBook.getItemDecoration
 import com.wad.tBook.room.Accounting
@@ -27,6 +28,8 @@ import java.util.*
 
 class AccountFragment : Fragment() {
 
+    private val TAG = AccountFragment::class.qualifiedName
+
     private val viewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
     var recyclerview: RecyclerView? = null
     var accountAdapter: AccountAdapter? = null
@@ -37,6 +40,7 @@ class AccountFragment : Fragment() {
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
+        Log.d(TAG,"momo:AccountFragment-create")
     }
 
     //创建数据源
@@ -48,13 +52,6 @@ class AccountFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//    }
 
 
     private fun setUpRecyclerView() {

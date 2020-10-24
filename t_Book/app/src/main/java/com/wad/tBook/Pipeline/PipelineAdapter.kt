@@ -1,16 +1,14 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.Pipeline
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.wad.tBook.AddActivity
+import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
@@ -52,8 +50,13 @@ class PipelineAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder{
         return when(viewType){
-            0 -> PipelineViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recycle_pipeline_view,null))
-            else -> PipelineViewHolder_detail(LayoutInflater.from(parent.context).inflate(R.layout.recycle_pipeline_detail_view,null))
+            0 -> PipelineViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.recycle_pipeline_view, null)
+            )
+            else -> PipelineViewHolder_detail(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recycle_pipeline_detail_view, null)
+            )
         }
     }
 
@@ -102,7 +105,8 @@ class PipelineAdapter (
                     }.start()
                 }
                 viewHolder.editButton.setOnClickListener {
-                    val intent = Intent(context,AddActivity::class.java)
+                    val intent = Intent(context,
+                        AccountingActivity::class.java)
                     intent.putExtra("id",(viewHolder.textID.text as String).toInt())
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)

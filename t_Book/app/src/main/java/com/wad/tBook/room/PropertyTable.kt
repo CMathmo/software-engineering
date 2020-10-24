@@ -45,11 +45,11 @@ data class Property(
     @ColumnInfo(name = "property_id")
     var propertyId: Int = 0,//id，自动生成
     @ColumnInfo(name = "property_type")
-    var propertyType: String,//用户名
+    var propertyType: String,//类别（收支转账）
     @ColumnInfo(name = "property_item")
-    var propertyItem: String,//密码
+    var propertyItem: String,//项目
     @ColumnInfo(name = "property_first_class")
-    var propertyFirstClass: String,//密码
+    var propertyFirstClass: String,//一级分类
     @ColumnInfo(name = "property_second_class")
-    var propertySecondClass: String//密码
+    var propertySecondClass: String//二级分类
 )

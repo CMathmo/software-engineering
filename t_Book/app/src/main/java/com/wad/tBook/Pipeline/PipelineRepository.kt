@@ -1,7 +1,5 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.Pipeline
 
-import androidx.room.ColumnInfo
-import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.AccountingDao
 
 class PipelineRepository (private val actDao: AccountingDao) {

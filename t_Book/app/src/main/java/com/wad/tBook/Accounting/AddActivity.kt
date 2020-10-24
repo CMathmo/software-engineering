@@ -1,20 +1,23 @@
-package com.wad.tBook
+package com.wad.tBook.accounting
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bigkoo.pickerview.view.TimePickerView
+import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
 import com.wad.tBook.room.tBookDatabase
@@ -132,9 +135,15 @@ class AddActivity : AppCompatActivity() {
         val accounting = tBookDatabase.getDBInstace(this.application).actDao().getAccountingData(id)[0]
         type = accounting.accountingType
         when(type){
-            "收入" -> find<RadioGroup>(R.id.type_group).check(R.id.income_radioButton)
-            "支出" -> find<RadioGroup>(R.id.type_group).check(R.id.expenditure_radioButton)
-            else -> find<RadioGroup>(R.id.type_group).check(R.id.transfer_radioButton)
+            "收入" -> find<RadioGroup>(R.id.type_group).check(
+                R.id.income_radioButton
+            )
+            "支出" -> find<RadioGroup>(R.id.type_group).check(
+                R.id.expenditure_radioButton
+            )
+            else -> find<RadioGroup>(R.id.type_group).check(
+                R.id.transfer_radioButton
+            )
         }
         find<EditText>(R.id.amount_editText).setText(accounting.accountingAmount.toString())
         find<EditText>(R.id.class_editText).setText(accounting.accountingClass.firstClass + "->" + accounting.accountingClass.secondClass)
@@ -167,6 +176,29 @@ class AddActivity : AppCompatActivity() {
     }
 
     fun InitEditText(){
+
+        find<EditText>(R.id.amount_editText).setOnFocusChangeListener { view, b ->
+            if(!b){
+                val inputMethodManager: InputMethodManager = application.getSystemService(
+                    Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(
+                    find<EditText>(R.id.amount_editText).getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
+
+        find<EditText>(R.id.remark_editText).setOnFocusChangeListener { view, b ->
+            if(!b){
+                val inputMethodManager: InputMethodManager = application.getSystemService(
+                    Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(
+                    find<EditText>(R.id.remark_editText).getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
+
         val class_editText = find<EditText>(R.id.class_editText)
         class_editText.inputType = InputType.TYPE_NULL
         class_editText.setFocusable(false)
