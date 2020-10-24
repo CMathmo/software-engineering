@@ -3,6 +3,7 @@ package com.wad.tBook.statistical
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wad.tBook.AddActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_pipeline.*
 
 class PipelineFragment : Fragment(){
 
+    private val TAG = PipelineFragment::class.qualifiedName
     private val viewModel by lazy { ViewModelProvider(this).get(PipelineViewModel::class.java) }
     private val application : Application by lazy {
         activity?.application!!
@@ -41,6 +44,7 @@ class PipelineFragment : Fragment(){
         pipeline_recycle.adapter = pipeline_adapter
         viewModel.readAllData.observe(activity!!, Observer {
             accountingList: List<Accounting> ->
+            Log.d(TAG,"momo")
             pipeline_adapter.readData(accountingList)
         })
 
