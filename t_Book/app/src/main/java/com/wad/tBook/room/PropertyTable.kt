@@ -2,6 +2,7 @@ package com.wad.tBook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.wad.tBook.statistical.OtherStatisticalRepository
 
 @Dao
 interface PropertyDao {
@@ -26,6 +27,9 @@ interface PropertyDao {
 
     @Query("SELECT * FROM property_table")
     fun getAllPropertyData() : List<Property>
+
+    @Query("SELECT DISTINCT property_first_class,property_second_class FROM property_table WHERE property_item =:PropertyItem")
+    fun getClassFrom(PropertyItem:String): List<OtherStatisticalRepository.proType>
 
     @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
     fun getFirstClassFrom(PropertyType:String, PropertyItem:String): List<String>

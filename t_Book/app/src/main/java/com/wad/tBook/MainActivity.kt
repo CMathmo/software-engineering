@@ -1,7 +1,5 @@
 package com.wad.tBook
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,20 +11,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.LiveData
 import androidx.multidex.MultiDex
 import com.wad.tBook.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.wad.tBook.MyApplication.Companion.context
+import com.wad.tBook.Accounting.AccountingActivity
+import com.wad.tBook.Accounting.AddActivity
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.*
-import com.wad.tBook.statistical.AccountDetailActivity
-import com.wad.tBook.statistical.AccountFragment
-import com.wad.tBook.statistical.PipelineFragment
-import com.wad.tBook.statistical.StatisticalActivity
+import com.wad.tBook.statistical.*
+import com.wad.tBook.statistical.Pipeline.PipelineFragment
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
 
@@ -36,7 +32,8 @@ class MainActivity : FragmentActivity() {
 
     var titleList:MutableList<String> = arrayListOf()
     var accountFragment: AccountFragment = AccountFragment()
-    var pipelineFragment: PipelineFragment = PipelineFragment()
+    var pipelineFragment: PipelineFragment =
+        PipelineFragment()
     var analysisFragment: AnalysisFragment = AnalysisFragment()
     var settingFragment : SettingFragment = SettingFragment()
     var fragmentList: MutableList<KotlinAny> = mutableListOf(accountFragment,pipelineFragment,
@@ -49,7 +46,7 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_show)
         val add_button : Button = find(R.id.add_button)
         //val button = findViewById(R.id.button1) as Button
-        add_button.setOnClickListener{startActivity(Intent(this, AddActivity::class.java))}
+        add_button.setOnClickListener{startActivity(Intent(this, AccountingActivity::class.java))}
         Log.d(TAG,"create_show")
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
@@ -78,10 +75,23 @@ class MainActivity : FragmentActivity() {
                     }
                 }
             }
+            for(number:Double in roomdb.actDao().getAllExpenditureAccountingDataIn("平安银行")){
+                Log.d(TAG,"momo:"+number.toString())
+            }
         }.start()
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)
         //tBookDatabase.getDBInstace(this).actDao().deleteAll()
+
+        //tBookDatabase.getDBInstace(this).actDao().deleteAll()
+        if(roomdb.actDao().getAllAccountingData().isEmpty()){
+            for (acc in getTestData()){
+                println("testdata: $acc")
+                    roomdb.actDao().addAccountingData(acc)
+            }
+
+        }
+
     }
 
     override fun onStart() {
@@ -102,8 +112,13 @@ class MainActivity : FragmentActivity() {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             applicationContext.startActivity(intent)
         }
+        val otherButton : FloatingActionButton = find(R.id.other_button)
+        otherButton.setOnClickListener{
+            val intent = Intent(applicationContext, OtherStatisticalActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            applicationContext.startActivity(intent)
+        }
     }
-
 
     /**
      * 初始化方法
@@ -115,22 +130,22 @@ class MainActivity : FragmentActivity() {
      */
     private fun initView(){
         //关联TabLayout和ViewPager
-        tabLayout.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = 4
+        showTabLayout.setupWithViewPager(showViewPager)
+        showViewPager.offscreenPageLimit = 4
         //设置ViewPager
         mViewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        viewPager.adapter = mViewPagerAdapter
+        showViewPager.adapter = mViewPagerAdapter
         //设置监听
-        viewPager.addOnPageChangeListener(TabViewOnPageChangeListener())
+        showViewPager.addOnPageChangeListener(TabViewOnPageChangeListener())
         //设置TabLayout
         titleList.add(getString(R.string.main_tab_account))
         titleList.add(getString(R.string.main_tab_pipeline))
         titleList.add(getString(R.string.main_tab_analysis))
         titleList.add(getString(R.string.main_tab_setting))
-        tabLayout.tabMode = TabLayout.MODE_FIXED
+        showTabLayout.tabMode = TabLayout.MODE_FIXED
         var i = 0
         while (i < titleList.size) {
-            val tab: TabLayout.Tab? = tabLayout.getTabAt(i)
+            val tab: TabLayout.Tab? = showTabLayout.getTabAt(i)
             if (tab != null) {
                 val toggleBtn: ToggleButton = getTabView(i)
 
@@ -149,7 +164,7 @@ class MainActivity : FragmentActivity() {
     private inner class TabClickListener : View.OnClickListener {
         override fun onClick(p0: View?) {
             val viewId: Int = p0?.tag as Int
-            viewPager.currentItem = viewId
+            showViewPager.currentItem = viewId
         }
     }
 
@@ -169,7 +184,7 @@ class MainActivity : FragmentActivity() {
         val count = mViewPagerAdapter?.count as Int
         var i = 0
         while (i < count) {
-            val btn: ToggleButton = tabLayout.getTabAt(i)?.customView as ToggleButton
+            val btn: ToggleButton = showTabLayout.getTabAt(i)?.customView as ToggleButton
             btn.isChecked = (i == id)
             i++
         }

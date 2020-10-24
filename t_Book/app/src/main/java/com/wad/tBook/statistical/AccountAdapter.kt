@@ -1,12 +1,10 @@
 package com.wad.tBook.statistical
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.wad.tBook.R
@@ -34,6 +32,7 @@ class AccountAdapter(
             mOnRecyclerViewItemClick?.OnItemClick(holder.itemView, position)
         }
     }
+
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
