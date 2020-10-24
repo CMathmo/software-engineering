@@ -99,7 +99,6 @@ class OtherStatisticalActivity : AppCompatActivity() {
                 }
             }
         }
-        println(classList)
         return classList
     }
 

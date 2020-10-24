@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.wad.tBook.R
-
+import java.nio.file.Files.size
 
 
 class AccountAdapter(
-    private val values: List<AccountFragment.TA>
+    var accountList: MutableList<OtherStatisticalRepository.TA>
 ) : Adapter<AccountAdapter.MyViewHolder>() {
 
     var mOnRecyclerViewItemClick: OnRecyclerViewItemClick<String>? = null
@@ -25,7 +25,7 @@ class AccountAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(values[position])
+        holder.bind(accountList[position])
         var context = holder.itemView.context
         // item点击事件的处理
         holder.itemView.setOnClickListener {
@@ -33,6 +33,10 @@ class AccountAdapter(
         }
     }
 
+    fun readData(accountList: MutableList<OtherStatisticalRepository.TA>) {
+        this.accountList = accountList
+        notifyDataSetChanged()
+    }
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,7 +47,7 @@ class AccountAdapter(
 //        private val intent = Intent(itemView.context, StatisticalActivity::class.java)
 
         @SuppressLint("SetTextI18n")
-        fun bind(model: AccountFragment.TA) {
+        fun bind(model: OtherStatisticalRepository.TA) {
             accountTypeFView.text = model.firstClass
             accountTypeSView.text = model.secondClass
             accountAmountView.text = model.amount.toString()
@@ -57,6 +61,6 @@ class AccountAdapter(
         fun OnItemClick(view: View?, position: Int)
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = accountList.size
 }
 
