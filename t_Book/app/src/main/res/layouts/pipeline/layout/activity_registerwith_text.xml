@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:rotationX="0">
+
+
+    <LinearLayout
+        android:id="@+id/lin_password"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/loginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入原密码"
+            android:maxLength="11"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_password"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/newPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入新密码"
+            android:maxLength="11"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_password_again"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/newPasswordagain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请确认新密码"
+            android:maxLength="11"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:background="@color/black"
+        android:text="确定修改"
+        android:onClick="onClickctochange"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="240dp"
+        android:layout_marginBottom="35dp"
+        android:layout_weight="1"
+        android:gravity="bottom|center"
+        android:text="Copyright © WAD工作室"
+        android:textSize="14sp" />
+
+</LinearLayout>
