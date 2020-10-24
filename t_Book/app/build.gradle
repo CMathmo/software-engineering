@@ -31,6 +31,21 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    sourceSets {
+        main {
+
+            //资源文件
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/layouts',
+                    'src/main/res/layouts/accounting',
+                    'src/main/res/layouts/pipeline'
+
+            ]
+            //资源文件
+        }
+    }
 }
 
 dependencies {

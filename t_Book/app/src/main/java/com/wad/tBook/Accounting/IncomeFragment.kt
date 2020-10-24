@@ -1,4 +1,4 @@
-package com.wad.tBook.Accounting
+package com.wad.tBook.accounting
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -20,7 +20,6 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bigkoo.pickerview.view.TimePickerView
-import com.wad.tBook.MainActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification

@@ -17,12 +17,11 @@ import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.wad.tBook.Accounting.AccountingActivity
-import com.wad.tBook.Accounting.AddActivity
+import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.*
 import com.wad.tBook.statistical.*
-import com.wad.tBook.statistical.Pipeline.PipelineFragment
+import com.wad.tBook.Pipeline.PipelineFragment
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
 

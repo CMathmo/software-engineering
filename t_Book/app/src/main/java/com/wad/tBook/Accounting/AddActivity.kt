@@ -1,4 +1,4 @@
-package com.wad.tBook.Accounting
+package com.wad.tBook.accounting
 
 import android.annotation.SuppressLint
 import android.content.Context

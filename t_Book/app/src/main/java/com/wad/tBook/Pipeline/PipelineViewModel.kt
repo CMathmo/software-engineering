@@ -1,12 +1,11 @@
 
-package com.wad.tBook.statistical.Pipeline
+package com.wad.tBook.Pipeline
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
-import com.wad.tBook.statistical.Pipeline.PipelineRepository
 
 class PipelineViewModel(application: Application):AndroidViewModel(application) {
     val readAllData : LiveData<List<Accounting>>

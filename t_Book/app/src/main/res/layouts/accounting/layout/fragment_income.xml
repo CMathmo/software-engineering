@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wad.tBook.Accounting.IncomeFragment">
+    tools:context="com.wad.tBook.accounting.IncomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="0.00"
-            android:textColor="#00ff00"
-            android:textColorHint="#00ff00"
+            android:textColor="#ff0000"
+            android:textColorHint="#ff0000"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal" />
 

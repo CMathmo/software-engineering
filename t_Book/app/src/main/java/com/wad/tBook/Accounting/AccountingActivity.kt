@@ -1,22 +1,16 @@
-package com.wad.tBook.Accounting
+package com.wad.tBook.accounting
 
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.ToggleButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.wad.tBook.MainActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.tBookDatabase
 import kotlinx.android.synthetic.main.activity_accounting.*
-import kotlinx.android.synthetic.main.activity_show.*
 
 @RequiresApi(Build.VERSION_CODES.N)
 class AccountingActivity : AppCompatActivity() {

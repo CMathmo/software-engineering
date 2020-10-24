@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.Pipeline
+package com.wad.tBook.Pipeline
 
 import android.app.Application
 import android.content.Context

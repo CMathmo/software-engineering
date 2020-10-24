@@ -2,10 +2,8 @@ package com.wad.tBook.statistical
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.ColumnInfo
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
@@ -13,7 +11,6 @@ import com.wad.tBook.statistical.OtherStatisticalAdapter.ClassAdapter
 import com.wad.tBook.statistical.OtherStatisticalAdapter.MemberAdapter
 import com.wad.tBook.statistical.OtherStatisticalAdapter.MerchantAdapter
 import com.wad.tBook.statistical.OtherStatisticalAdapter.ProjectAdapter
-import kotlinx.android.synthetic.main.fragment_pipeline.*
 import kotlinx.android.synthetic.main.layout_class_card.*
 import kotlinx.android.synthetic.main.layout_member_card.*
 import kotlinx.android.synthetic.main.layout_merchant_card.*

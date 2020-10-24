@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.Pipeline
+package com.wad.tBook.Pipeline
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.wad.tBook.Accounting.AccountingActivity
-import com.wad.tBook.Accounting.AddActivity
+import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
