@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.wad.tBook.login.ControlActivity
 import com.wad.tBook.login.NineLockListener
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +23,7 @@ class NinelockFragment : Fragment(), NineLockListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var originalpassword = "54321"
 
 
     override fun onCreateView(
@@ -46,7 +46,7 @@ class NinelockFragment : Fragment(), NineLockListener {
 
     override fun onLockResult(result: IntArray?) {
         val stringBuffer=StringBuffer()
-        var originalpassword = "54321"
+
         for(i in 0  until result!!.size){
             stringBuffer.append(result[i])
         }
@@ -64,6 +64,7 @@ class NinelockFragment : Fragment(), NineLockListener {
 
     private  fun LoginFailure(){
         Toast.makeText(activity,"密码错误，请重新登录", Toast.LENGTH_LONG).show()
+        
     }
 
     override fun onError() {

@@ -10,8 +10,9 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
-import com.wad.tBook.login.ControlActivity
+import kotlinx.android.synthetic.main.fragment_text.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +29,7 @@ class TextFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    var originalpassword = "wadupupup"//到时候在注册那里修改originalpassword即可
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,23 +42,27 @@ class TextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.login_button).setOnClickListener(){
-            var password = view?.findViewById<EditText?>(R.id.loginPassword)
-            var newpassword = password?.text.toString()
-            var originalpassword = "wadupupup"//到时候在注册那里修改originalpassword即可
-            when(newpassword){
-                originalpassword -> loginSuccess()
-                else -> loginFailed()
-            }
+
+        //监听输入，观察什么时候输入回车
+        loginPassword.addTextChangedListener{
+            var password = loginPassword.text.toString()
+            afterTextChange(password,originalpassword)
         }
 
-        //var choosewaytologin = view.findViewById<CheckBox?>(R.id.choose_loginway)
-        //choosewaytologin!!.setOnCheckedChangeListener { buttonView, isChecked ->true
-            //gotodialog = ChangeDialog(this)
-            //gotodialog!!.checktext()
-            //gotodialog!!.show()
-        //}
 
+
+        login_button.setOnClickListener(){
+            var password = loginPassword.text.toString()
+            loginclock(password,originalpassword)
+        }
+    }
+
+    //登录的逻辑实现
+    private fun loginclock(password:String,originalpassword:String){
+        when(password){
+            originalpassword -> loginSuccess()
+            else -> loginFailed()
+        }
     }
 
     //登录成功的显示
@@ -69,7 +75,19 @@ class TextFragment : Fragment() {
     //登录失败的显示
     private fun loginFailed(){
         Toast.makeText(activity,"用户不存在，请重新登录", Toast.LENGTH_LONG).show()
+        loginPassword.setText("")
     }
+
+    private fun afterTextChange(password: String, originalpassword: String){
+        if (password.indexOf('\n') >= 0||password.indexOf('\r') >= 0){
+            loginPassword.setText(password.replace("\n","").replace("\r",""))
+            var newpassword = loginPassword.text.toString()
+            loginclock(newpassword,originalpassword)
+        }
+    }
+
+
+
 
 
 }

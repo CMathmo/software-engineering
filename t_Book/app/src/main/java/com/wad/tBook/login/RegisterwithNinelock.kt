@@ -2,11 +2,8 @@ package com.wad.tBook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.content.Context
 import android.content.Intent
 import android.widget.Toast
-import com.wad.tBook.login.ControlActivity
 import com.wad.tBook.login.NineLockListener
 
 class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
