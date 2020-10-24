@@ -47,7 +47,7 @@ interface AccountingDao {
 
     @Query("SELECT accounting_amount FROM accounting_table " +
             "WHERE (accounting_type = '支出' AND accounting_account_second_class = :accountingAccount)" +
-            "OR (accounting_type = '转账' AND accounting_account_2_second_class = :accountingAccount)  ")
+            "OR (accounting_type = '转账' AND accounting_account_second_class = :accountingAccount)  ")
     fun getAllExpenditureAccountingDataIn(accountingAccount:String) : List<Double>
 
 
