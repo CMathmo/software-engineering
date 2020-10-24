@@ -74,9 +74,6 @@ class MainActivity : FragmentActivity() {
                     }
                 }
             }
-            for(number:Double in roomdb.actDao().getAllExpenditureAccountingDataIn("平安银行")){
-                Log.d(TAG,"momo:"+number.toString())
-            }
         }.start()
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)

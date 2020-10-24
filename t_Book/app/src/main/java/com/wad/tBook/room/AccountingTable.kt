@@ -34,21 +34,21 @@ interface AccountingDao {
     @Query("SELECT * FROM accounting_table")
     fun getAllAccountingData() : List<Accounting>
 
-    @Query("SELECT accounting_amount FROM accounting_table WHERE accounting_type = '收入'  ")
-    fun getAllIncomeAccountingData() : List<Double>
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table WHERE accounting_type = '收入'  ")
+    fun getAllIncomeAccountingData() : Double
 
-    @Query("SELECT accounting_amount FROM accounting_table WHERE accounting_type = '支出'  ")
-    fun getAllExpenditureAccountingData() : List<Double>
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table WHERE accounting_type = '支出'  ")
+    fun getAllExpenditureAccountingData() : Double
 
-    @Query("SELECT accounting_amount FROM accounting_table " +
-            "WHERE (accounting_type = '收入' AND accounting_account_second_class = :accountingAccount) " +
-            "OR (accounting_type = '转账' AND accounting_account_2_second_class = :accountingAccount)  ")
-    fun getAllIncomeAccountingDataIn(accountingAccount:String) : List<Double>
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '收入' AND accounting_account_first_class = :accountingFAccount AND accounting_account_second_class = :accountingSAccount) " +
+            "OR (accounting_type = '转账' AND accounting_account_2_first_class = :accountingFAccount AND accounting_account_2_second_class = :accountingSAccount)  ")
+    fun getAllIncomeAccountingDataIn(accountingFAccount:String,accountingSAccount:String) : Double
 
-    @Query("SELECT accounting_amount FROM accounting_table " +
-            "WHERE (accounting_type = '支出' AND accounting_account_second_class = :accountingAccount)" +
-            "OR (accounting_type = '转账' AND accounting_account_second_class = :accountingAccount)  ")
-    fun getAllExpenditureAccountingDataIn(accountingAccount:String) : List<Double>
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '支出' AND accounting_account_first_class = :accountingFAccount AND accounting_account_second_class = :accountingSAccount)" +
+            "OR (accounting_type = '转账' AND accounting_account_first_class = :accountingFAccount AND accounting_account_second_class = :accountingSAccount)  ")
+    fun getAllExpenditureAccountingDataIn(accountingFAccount:String,accountingSAccount:String) : Double
 
 
     @Query("SELECT accounting_type,accounting_amount FROM accounting_table")

@@ -33,6 +33,7 @@ class AccountFragment : Fragment() {
     private val viewModel by lazy { ViewModelProvider(this).get(AccountViewModel::class.java) }
     var recyclerview: RecyclerView? = null
     var accountAdapter: AccountAdapter? = null
+
     private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,7 +133,7 @@ class AccountFragment : Fragment() {
 
     private fun AccountDataInfo(): MutableList<OtherStatisticalRepository.TA> {
         val readAccountData : List<OtherStatisticalRepository.proType> = tBookDatabase.getDBInstace(
-            activity!!.applicationContext
+            requireActivity().applicationContext
         ).proDao().getClassFrom("账户")
         val accountList = mutableListOf(
             OtherStatisticalRepository.TA(
@@ -152,16 +153,21 @@ class AccountFragment : Fragment() {
         accountingList:List<Accounting>,
         accountList:MutableList<OtherStatisticalRepository.TA>):
             MutableList<OtherStatisticalRepository.TA>{
-        val n = accountingList.size
-        for (value in accountingList){
-            for (item in accountList){
-                if (item.firstClass == value.accountingMerchant?.firstClass  && item.secondClass == value.accountingMerchant?.secondClass){
-                    when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        "支出" -> item.amount -= value.accountingAmount
-                    }
-                }
-            }
+//        val n = accountingList.size
+//        for (value in accountingList){
+//            for (item in accountList){
+//                if (item.firstClass == value.accountingMerchant?.firstClass  && item.secondClass == value.accountingMerchant?.secondClass){
+//                    when(value.accountingType){
+//                        "收入" -> item.amount += value.accountingAmount
+//                        "支出" -> item.amount -= value.accountingAmount
+//                    }
+//                }
+//            }
+//        }
+        for (item in accountList){
+            val income = tBookDatabase.getDBInstace(requireContext()).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
+            val outcome = tBookDatabase.getDBInstace(requireContext()).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            item.amount = income - outcome
         }
         println("debug 1026")
         println(accountList)
