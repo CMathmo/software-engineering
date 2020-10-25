@@ -50,7 +50,8 @@ class AccountAdapter(
         fun bind(model: OtherStatisticalRepository.TA) {
             accountTypeFView.text = model.firstClass
             accountTypeSView.text = model.secondClass
-            accountAmountView.text = model.amount.toString()
+            accountAmountView.text = "流入：" + model.inflowAmount.toString() + " " +
+                    "流出：" + model.outflowAmount.toString()
 //            accountCardView.setOnClickListener {
 //                context.startActivity(intent)
 //            }

@@ -138,13 +138,14 @@ class AccountFragment : Fragment() {
         val accountList = mutableListOf(
             OtherStatisticalRepository.TA(
                 0.0,
+                0.0,
                 readAccountData[0].firstClass,
                 readAccountData[0].secondClass
             )
         )
         val n = readAccountData.size
         for (index in 1 until n) {
-            accountList.add(OtherStatisticalRepository.TA(0.0,readAccountData[index].firstClass,readAccountData[index].secondClass))
+            accountList.add(OtherStatisticalRepository.TA(0.0,0.0,readAccountData[index].firstClass,readAccountData[index].secondClass))
         }
         println(accountList)
         return accountList
@@ -167,7 +168,8 @@ class AccountFragment : Fragment() {
         for (item in accountList){
             val income = tBookDatabase.getDBInstace(requireContext()).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
             val outcome = tBookDatabase.getDBInstace(requireContext()).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
-            item.amount = income - outcome
+            item.inflowAmount = income
+            item.outflowAmount = outcome
         }
         println("debug 1026")
         println(accountList)

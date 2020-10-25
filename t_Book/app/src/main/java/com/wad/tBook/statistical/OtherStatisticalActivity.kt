@@ -73,31 +73,26 @@ class OtherStatisticalActivity : AppCompatActivity() {
         val classList = mutableListOf(
             OtherStatisticalRepository.TA(
                 0.0,
+                0.0,
                 readClassData[0].firstClass,
                 readClassData[0].secondClass
             )
         )
         val n = readClassData.size
         for (index in 1 until n) {
-            classList.add(OtherStatisticalRepository.TA(0.0,readClassData[index].firstClass,readClassData[index].secondClass))
+            classList.add(OtherStatisticalRepository.TA(0.0,0.0,readClassData[index].firstClass,readClassData[index].secondClass))
         }
         println(classList)
         return classList
     }
     private fun classStatistical(
         accountingList:List<Accounting>,
-        classList:MutableList<OtherStatisticalRepository.TA>):
-            MutableList<OtherStatisticalRepository.TA>{
-        val n = accountingList.size
-        for (value in accountingList){
-            for (item in classList){
-                if (item.firstClass == value.accountingClass.firstClass && item.secondClass == value.accountingClass.secondClass){
-                    when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        else -> item.amount -= value.accountingAmount
-                    }
-                }
-            }
+        classList:MutableList<OtherStatisticalRepository.TA>): MutableList<OtherStatisticalRepository.TA>{
+        for (item in classList){
+            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
+            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            item.inflowAmount = income
+            item.outflowAmount = outcome
         }
         return classList
     }
@@ -107,13 +102,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         val memberList = mutableListOf(
             OtherStatisticalRepository.TA(
                 0.0,
+                0.0,
                 readMemberData[0].firstClass,
                 readMemberData[0].secondClass
             )
         )
         val n = readMemberData.size
         for (index in 1 until n) {
-            memberList.add(OtherStatisticalRepository.TA(0.0,readMemberData[index].firstClass,readMemberData[index].secondClass))
+            memberList.add(OtherStatisticalRepository.TA(0.0,0.0,readMemberData[index].firstClass,readMemberData[index].secondClass))
         }
         println(memberList)
         return memberList
@@ -122,16 +118,11 @@ class OtherStatisticalActivity : AppCompatActivity() {
         accountingList:List<Accounting>,
         memberList:MutableList<OtherStatisticalRepository.TA>):
             MutableList<OtherStatisticalRepository.TA>{
-        val n = accountingList.size
-        for (value in accountingList){
-            for (item in memberList){
-                if (item.firstClass == value.accountingMember?.firstClass  && item.secondClass == value.accountingMember?.secondClass){
-                    when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        else -> item.amount -= value.accountingAmount
-                    }
-                }
-            }
+        for (item in memberList){
+            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
+            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            item.inflowAmount = income
+            item.outflowAmount = outcome
         }
         println(memberList)
         return memberList
@@ -142,13 +133,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         val merchantList = mutableListOf(
             OtherStatisticalRepository.TA(
                 0.0,
+                0.0,
                 readMerchantData[0].firstClass,
                 readMerchantData[0].secondClass
             )
         )
         val n = readMerchantData.size
         for (index in 1 until n) {
-            merchantList.add(OtherStatisticalRepository.TA(0.0,readMerchantData[index].firstClass,readMerchantData[index].secondClass))
+            merchantList.add(OtherStatisticalRepository.TA(0.0,0.0,readMerchantData[index].firstClass,readMerchantData[index].secondClass))
         }
         println(merchantList)
         return merchantList
@@ -157,16 +149,11 @@ class OtherStatisticalActivity : AppCompatActivity() {
         accountingList:List<Accounting>,
         merchantList:MutableList<OtherStatisticalRepository.TA>):
             MutableList<OtherStatisticalRepository.TA>{
-        val n = accountingList.size
-        for (value in accountingList){
-            for (item in merchantList){
-                if (item.firstClass == value.accountingMerchant?.firstClass  && item.secondClass == value.accountingMerchant?.secondClass){
-                    when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        else -> item.amount -= value.accountingAmount
-                    }
-                }
-            }
+        for (item in merchantList){
+            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
+            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            item.inflowAmount = income
+            item.outflowAmount = outcome
         }
         println(merchantList)
         return merchantList
@@ -177,13 +164,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         val projectList = mutableListOf(
             OtherStatisticalRepository.TA(
                 0.0,
+                0.0,
                 readProjectData[0].firstClass,
                 readProjectData[0].secondClass
             )
         )
         val n = readProjectData.size
         for (index in 1 until n) {
-            projectList.add(OtherStatisticalRepository.TA(0.0,readProjectData[index].firstClass,readProjectData[index].secondClass))
+            projectList.add(OtherStatisticalRepository.TA(0.0,0.0,readProjectData[index].firstClass,readProjectData[index].secondClass))
         }
         println(projectList)
         return projectList
@@ -192,16 +180,11 @@ class OtherStatisticalActivity : AppCompatActivity() {
         accountingList:List<Accounting>,
         projectList:MutableList<OtherStatisticalRepository.TA>):
             MutableList<OtherStatisticalRepository.TA>{
-        val n = accountingList.size
-        for (value in accountingList){
-            for (item in projectList){
-                if (item.firstClass == value.accountingMerchant?.firstClass  && item.secondClass == value.accountingMerchant?.secondClass){
-                    when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        else -> item.amount -= value.accountingAmount
-                    }
-                }
-            }
+        for (item in projectList){
+            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
+            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            item.inflowAmount = income
+            item.outflowAmount = outcome
         }
         println(projectList)
         return projectList

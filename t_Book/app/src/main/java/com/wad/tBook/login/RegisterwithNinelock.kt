@@ -23,7 +23,7 @@ class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
         }
         val password = stringBuffer.toString()
         Toast.makeText(this,"修改密码成功！", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, ControlActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

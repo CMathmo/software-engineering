@@ -11,7 +11,8 @@ class OtherStatisticalRepository(private val actDao: AccountingDao) {
         @ColumnInfo(name = "property_second_class") var secondClass:String
     )
     data class TA(
-        var amount: Double,
+        var inflowAmount: Double,
+        var outflowAmount: Double,
         @ColumnInfo(name = "first_class") val firstClass: String,
         @ColumnInfo(name = "second_class") val secondClass: String
     )
@@ -21,8 +22,8 @@ class OtherStatisticalRepository(private val actDao: AccountingDao) {
             for (item in classList){
                 if (item.firstClass == value.accountingClass.firstClass && item.secondClass == value.accountingClass.secondClass){
                     when(value.accountingType){
-                        "收入" -> item.amount += value.accountingAmount
-                        else -> item.amount -= value.accountingAmount
+                        "收入" -> item.inflowAmount += value.accountingAmount
+                        else -> item.outflowAmount -= value.accountingAmount
                     }
                 }
             }

@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.wad.tBook.MainActivity;
 import com.wad.tBook.R;
 
 import java.security.KeyStore;
@@ -100,7 +101,7 @@ public class LoginwithFingerprint extends AppCompatActivity {
     }
 
     public void onAuthenticated() {
-        Intent intent = new Intent(this, ControlActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
