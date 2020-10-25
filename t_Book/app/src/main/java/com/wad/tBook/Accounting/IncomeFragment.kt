@@ -20,6 +20,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bigkoo.pickerview.view.TimePickerView
+import com.melnykov.fab.FloatingActionButton
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
@@ -46,6 +47,9 @@ class IncomeFragment : Fragment() {
     private var type: String ="收入"
     private val application by lazy {
         activity?.application
+    }
+    private val fab by lazy {
+        requireView().find<FloatingActionButton>(R.id.fab)
     }
     private val pvoptions: OptionsPickerView<String> by lazy{
         OptionsPickerBuilder(activity, OnOptionsSelectListener{
@@ -82,7 +86,11 @@ class IncomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val savebutton : Button = requireView().find(R.id.save_button)
+        fab.hide()
+        fab.setOnClickListener {
+            Toast.makeText(activity,"edit",Toast.LENGTH_SHORT).show()
+        }
+        val savebutton : Button = requireView().find(R.id.saveButton)
         val accounting_id = (activity as AccountingActivity).id
         InitEditText()
         if(accounting_id != -1){
@@ -189,7 +197,6 @@ class IncomeFragment : Fragment() {
     }
 
     fun InitEditText(){
-
         requireView().find<EditText>(R.id.amount_editText).setOnFocusChangeListener { view, b ->
             if(!b){
                 val inputMethodManager: InputMethodManager = application?.getSystemService(
@@ -221,6 +228,8 @@ class IncomeFragment : Fragment() {
                 InitDataList(pvoptions,"类别")
             }
             pvoptions.show()
+            requireView().find<FloatingActionButton>(R.id.fab).visibility = View.VISIBLE
+            requireView().find<FloatingActionButton>(R.id.fab).show()
         }
 
         val account_editText = requireView().find<EditText>(R.id.account_editText)

@@ -80,9 +80,8 @@ class ExpenditureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val savebutton : Button = requireView().find(R.id.save_button)
+        val savebutton : Button = requireView().find(R.id.saveButton)
         InitEditText()
-
         val accounting_id = (activity as AccountingActivity).id
         InitEditText()
         if(accounting_id != -1){

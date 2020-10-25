@@ -170,9 +170,10 @@
 
         <Button
             android:background="@drawable/text_shape"
-            android:id="@+id/save_button"
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:text="保存" />
 
     </LinearLayout>
