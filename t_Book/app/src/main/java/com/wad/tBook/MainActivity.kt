@@ -1,29 +1,36 @@
 package com.wad.tBook
 
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ToggleButton
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.multidex.MultiDex
-import com.wad.tBook.setting.SettingFragment
-import kotlinx.android.synthetic.main.activity_show.*
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import com.wad.tBook.Pipeline.PipelineFragment
 import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.analysis.AnalysisFragment
-import com.wad.tBook.room.*
-import com.wad.tBook.statistical.*
-import com.wad.tBook.Pipeline.PipelineFragment
+import com.wad.tBook.room.Property
+import com.wad.tBook.room.getTestData
+import com.wad.tBook.room.tBookDatabase
+import com.wad.tBook.setting.SettingFragment
+import com.wad.tBook.statistical.AccountFragment
+import com.wad.tBook.statistical.OtherStatisticalActivity
+import com.wad.tBook.statistical.StatisticalActivity
+import kotlinx.android.synthetic.main.activity_show.*
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
+
 
 class MainActivity : FragmentActivity() {
 
@@ -35,18 +42,20 @@ class MainActivity : FragmentActivity() {
         PipelineFragment()
     var analysisFragment: AnalysisFragment = AnalysisFragment()
     var settingFragment : SettingFragment = SettingFragment()
-    var fragmentList: MutableList<KotlinAny> = mutableListOf(accountFragment,pipelineFragment,
-        analysisFragment,settingFragment)
+    var fragmentList: MutableList<KotlinAny> = mutableListOf(
+        accountFragment, pipelineFragment,
+        analysisFragment, settingFragment
+    )
     var mViewPagerAdapter: ViewPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MultiDex.install(this)
         setContentView(R.layout.activity_show)
+        verifyStoragePermissions(this)
         val add_button : Button = find(R.id.add_button)
         //val button = findViewById(R.id.button1) as Button
         add_button.setOnClickListener{startActivity(Intent(this, AccountingActivity::class.java))}
-        Log.d(TAG,"create_show")
+        Log.d(TAG, "create_show")
         initView()
         val roomdb = tBookDatabase.getDBInstace(this.application)
         initPropertyRoom(roomdb)
@@ -65,12 +74,12 @@ class MainActivity : FragmentActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG,"start_show")
+        Log.d(TAG, "start_show")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG,"restart_show")
+        Log.d(TAG, "restart_show")
     }
 
     override fun onResume() {
@@ -211,81 +220,314 @@ class MainActivity : FragmentActivity() {
         mToggleButton.text = txt
     }
 
-    fun initPropertyRoom(roomdb:tBookDatabase){
+    //先定义
+    private val REQUEST_EXTERNAL_STORAGE = 1
+
+    private val PERMISSIONS_STORAGE = arrayOf(
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+    )
+
+    //通过一个函数来申请权限
+    fun verifyStoragePermissions(activity: Activity?) {
+        try {
+            //检测是否有写的权限
+            val permission = ActivityCompat.checkSelfPermission(
+                activity!!,
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+            )
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun initPropertyRoom(roomdb: tBookDatabase){
         Thread{
             roomdb.proDao().deleteAllPropertyData()
             if (roomdb.proDao().getAllPropertyData().isEmpty()){
-                val typeList = arrayListOf<String>("收入","支出","转账")
+                val typeList = arrayListOf<String>("收入", "支出", "转账")
                 val memberList = "本人、家庭公用、老婆、老公、子女、父母".split("、")
                 val merchantList = "餐厅、银行、商场、超市、其他".split("、")
                 val projectList = "过年、报销、出差、装修".split("、")
                 for(type:String in typeList){
                     for(sclass:String in memberList){
-                        roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "成员",propertyFirstClass = "所有",propertySecondClass = sclass))
+                        roomdb.proDao().addPropertyData(
+                            Property(
+                                propertyType = type,
+                                propertyItem = "成员",
+                                propertyFirstClass = "所有",
+                                propertySecondClass = sclass
+                            )
+                        )
                     }
                     for(sclass:String in merchantList){
-                        roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "商家",propertyFirstClass = "所有",propertySecondClass = sclass))
+                        roomdb.proDao().addPropertyData(
+                            Property(
+                                propertyType = type,
+                                propertyItem = "商家",
+                                propertyFirstClass = "所有",
+                                propertySecondClass = sclass
+                            )
+                        )
                     }
                     for(sclass:String in projectList){
-                        roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "项目",propertyFirstClass = "所有",propertySecondClass = sclass))
+                        roomdb.proDao().addPropertyData(
+                            Property(
+                                propertyType = type,
+                                propertyItem = "项目",
+                                propertyFirstClass = "所有",
+                                propertySecondClass = sclass
+                            )
+                        )
                     }
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "现金",propertySecondClass = "现金"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "信用卡",propertySecondClass = "信用卡"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "金融账户",propertySecondClass = "银行卡"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "金融账户",propertySecondClass = "股票"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "金融账户",propertySecondClass = "基金"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "虚拟账户",propertySecondClass = "支付宝"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "虚拟账户",propertySecondClass = "公交卡"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "虚拟账户",propertySecondClass = "饭卡"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "虚拟账户",propertySecondClass = "微信"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "虚拟账户",propertySecondClass = "白条"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "负债",propertySecondClass = "应付款项"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "债权",propertySecondClass = "公司报销"))
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = "账户",propertyFirstClass = "债权",propertySecondClass = "应收款项"))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "现金",
+                            propertySecondClass = "现金"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "信用卡",
+                            propertySecondClass = "信用卡"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "金融账户",
+                            propertySecondClass = "银行卡"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "金融账户",
+                            propertySecondClass = "股票"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "金融账户",
+                            propertySecondClass = "基金"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "虚拟账户",
+                            propertySecondClass = "支付宝"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "虚拟账户",
+                            propertySecondClass = "公交卡"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "虚拟账户",
+                            propertySecondClass = "饭卡"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "虚拟账户",
+                            propertySecondClass = "微信"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "虚拟账户",
+                            propertySecondClass = "白条"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "负债",
+                            propertySecondClass = "应付款项"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "债权",
+                            propertySecondClass = "公司报销"
+                        )
+                    )
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = "账户",
+                            propertyFirstClass = "债权",
+                            propertySecondClass = "应收款项"
+                        )
+                    )
 
                 }
                 var type = "收入"
                 var item = "类别"
                 for(sclass:String in "三餐、早餐、中餐、晚餐、买菜、水果、零食、加餐、下午茶、烟酒饮品、粮油调料".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "餐饮",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "餐饮",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "公交地铁、打车、私家车、飞机火车、共享单车".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "交通",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "交通",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "日用品、衣帽鞋包、护肤美妆、饰品、数码、电器、家装".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "购物",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "购物",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "水电煤、话费、网费、房租、物业、维修".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "居家",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "居家",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "送礼、请客、孝心、亲密付、发红包、借出、还钱".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "购物",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "购物",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "药品、保健、治疗、美容".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "医疗",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "医疗",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "休闲、约会、聚会、游戏、健身".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "娱乐",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "娱乐",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "书籍、培训、网课".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "学习",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "学习",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "房贷、车贷、购物分期、手续费、保险、养卡".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "金融",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "金融",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "旅游、装修、宝宝、生意、宠物、坏账、丢失".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "其他",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "其他",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 type = "支出"
                 for(sclass:String in "工资、经营、利息、兼职、投资、奖金、加班".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "职业收入",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "职业收入",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 for(sclass:String in "礼金、抢红包、意外来钱、家里给钱、中奖、退税".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "其他收入",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "其他收入",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
                 type = "转账"
                 for(sclass:String in "充值、提现、转账".split("、")){
-                    roomdb.proDao().addPropertyData(Property(propertyType = type,propertyItem = item,propertyFirstClass = "所有",propertySecondClass = sclass))
+                    roomdb.proDao().addPropertyData(
+                        Property(
+                            propertyType = type,
+                            propertyItem = item,
+                            propertyFirstClass = "所有",
+                            propertySecondClass = sclass
+                        )
+                    )
                 }
 
             }

@@ -1,10 +1,8 @@
 package com.wad.tBook.room
 
-import android.app.Application
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.wad.tBook.room.*
+
 
 @Database(entities = [Accounting::class, User::class,Property::class], version = 1)
 abstract class tBookDatabase : RoomDatabase() {

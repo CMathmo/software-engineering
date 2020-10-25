@@ -147,46 +147,21 @@ class AccountFragment : Fragment() {
         for (index in 1 until n) {
             accountList.add(OtherStatisticalRepository.TA(0.0,0.0,readAccountData[index].firstClass,readAccountData[index].secondClass))
         }
-        println(accountList)
         return accountList
     }
     private fun accountStatistical(
         accountingList:List<Accounting>,
         accountList:MutableList<OtherStatisticalRepository.TA>):
             MutableList<OtherStatisticalRepository.TA>{
-//        val n = accountingList.size
-//        for (value in accountingList){
-//            for (item in accountList){
-//                if (item.firstClass == value.accountingMerchant?.firstClass  && item.secondClass == value.accountingMerchant?.secondClass){
-//                    when(value.accountingType){
-//                        "收入" -> item.amount += value.accountingAmount
-//                        "支出" -> item.amount -= value.accountingAmount
-//                    }
-//                }
-//            }
-//        }
         for (item in accountList){
             val income = tBookDatabase.getDBInstace(requireContext()).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
             val outcome = tBookDatabase.getDBInstace(requireContext()).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
             item.inflowAmount = income
             item.outflowAmount = outcome
         }
-        println("debug 1026")
-        println(accountList)
         return accountList
     }
 
-//    private fun setUpAccountCardView(view: View, secondClass: List<AccountRepository.AccountClass>){
-//        //val accountAmountView : TextView = view.findViewById(R.id.text_amount)
-//        for (item in TypeAccountList) {
-//            for (value in secondClass){
-//                if (item.secondClass == value.Class) {
-//                    item.amount = value.Amount
-//                }
-//            }
-//        }
-//        println(TypeAccountList)
-//    }
 
     data class TA(
         var amount: Double,
