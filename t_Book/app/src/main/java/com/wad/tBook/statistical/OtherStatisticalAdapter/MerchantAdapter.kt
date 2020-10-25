@@ -37,7 +37,8 @@ class MerchantAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(model: OtherStatisticalRepository.TA) {
             textType.text = model.firstClass + "-" + model.secondClass
-            textAmount.text = model.amount.toString()
+            textAmount.text = "流入：" + model.inflowAmount.toString() + "  " +
+                    "流出：" + model.outflowAmount.toString()
         }
     }
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/Theme.MaterialComponents"
-    app:cardBackgroundColor="#F4FF81">
+    app:cardBackgroundColor="#F4FF81"
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +38,6 @@
             android:id="@+id/recycle_project"
             android:layout_width="396dp"
             android:layout_height="198dp"
-            android:background="#B9F6CA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

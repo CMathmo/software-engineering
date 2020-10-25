@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.wad.tBook.MainActivity;
 import com.wad.tBook.R;
 
 import java.security.KeyStore;
