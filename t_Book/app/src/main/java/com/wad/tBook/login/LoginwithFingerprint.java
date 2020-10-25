@@ -100,7 +100,7 @@ public class LoginwithFingerprint extends AppCompatActivity {
     }
 
     public void onAuthenticated() {
-        Intent intent = new Intent(this, ControlActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

@@ -72,16 +72,16 @@
 
             <Button
                 android:id="@+id/change_button"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="0"
                 android:text="&lt;-&gt;"></Button>
 
             <TextView
                 android:id="@+id/textView6_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:text="转入账户*" />
 
             <EditText
