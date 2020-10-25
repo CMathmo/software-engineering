@@ -35,7 +35,7 @@ import java.util.*
  * create an instance of this fragment.
  */
 @RequiresApi(Build.VERSION_CODES.N)
-@SuppressLint("ResourceType")
+@SuppressLint("ResourceType", "SimpleDateFormat")
 class IncomeFragment : Fragment() {
 
     private val TAG = IncomeFragment::class.qualifiedName

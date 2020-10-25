@@ -1,6 +1,7 @@
 package com.wad.tBook.analysis
 
 import android.accounts.Account
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -90,6 +91,7 @@ class AnalysisFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
