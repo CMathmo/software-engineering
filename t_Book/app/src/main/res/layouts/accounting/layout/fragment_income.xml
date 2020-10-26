@@ -179,17 +179,5 @@
             android:text="保存" />
 
     </LinearLayout>
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_action_content_new"
-        android:background="@android:color/transparent"
-        android:visibility="invisible"
-        fab:fab_colorNormal="#ff8844"
-        fab:fab_colorPressed="#ff8800"
-        fab:fab_colorRipple="#ff4444"/>
 
 </FrameLayout>

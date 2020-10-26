@@ -25,6 +25,7 @@ import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
 import com.wad.tBook.room.tBookDatabase
+import com.zyyoona7.wheel.WheelView
 import org.jetbrains.anko.find
 import java.util.*
 
@@ -86,10 +87,6 @@ class IncomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fab.hide()
-        fab.setOnClickListener {
-            Toast.makeText(activity,"edit",Toast.LENGTH_SHORT).show()
-        }
         val savebutton : Button = requireView().find(R.id.saveButton)
         val accounting_id = (activity as AccountingActivity).id
         InitEditText()
@@ -228,8 +225,6 @@ class IncomeFragment : Fragment() {
                 InitDataList(pvoptions,"类别")
             }
             pvoptions.show()
-            requireView().find<FloatingActionButton>(R.id.fab).visibility = View.VISIBLE
-            requireView().find<FloatingActionButton>(R.id.fab).show()
         }
 
         val account_editText = requireView().find<EditText>(R.id.account_editText)

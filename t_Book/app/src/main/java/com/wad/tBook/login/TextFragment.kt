@@ -6,12 +6,8 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentActivity
 import kotlinx.android.synthetic.main.fragment_text.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class TextFragment : Fragment() {
+    private val TAG = TextFragment::class.qualifiedName
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -52,20 +49,18 @@ class TextFragment : Fragment() {
 
 
         login_button.setOnClickListener(){
-            var password = loginPassword.text.toString()
-            loginclock(password,originalpassword)
+            loginSuccess()
+            //var password = loginPassword.text.toString()
+            //loginclock(password,originalpassword)
         }
     }
 
     //登录的逻辑实现
     private fun loginclock(password:String,originalpassword:String){
-        loginSuccess()
-        /**
         when(password){
             originalpassword -> loginSuccess()
             else -> loginFailed()
         }
-        **/
     }
 
     //登录成功的显示

@@ -46,14 +46,16 @@ class NinelockFragment : Fragment(), NineLockListener {
 
     override fun onLockResult(result: IntArray?) {
         val stringBuffer=StringBuffer()
-
+        val intent = Intent(activity, TestActivity::class.java)
+        startActivity(intent)
+        /*
         for(i in 0  until result!!.size){
             stringBuffer.append(result[i])
         }
         when(stringBuffer.toString()){
             originalpassword -> LoginSucess()
             else -> LoginFailure()
-        }
+        }*/
     }
 
     private fun LoginSucess(){
