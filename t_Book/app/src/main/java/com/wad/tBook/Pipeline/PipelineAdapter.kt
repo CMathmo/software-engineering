@@ -77,6 +77,7 @@ class PipelineAdapter (
                     viewTypeList[position] = 1
                     notifyItemChanged(position)
                 }
+                println(currentItem)
             }
             else ->{
                 val currentItem = itemList.get(position)

@@ -34,6 +34,9 @@ interface PropertyDao {
     @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
     fun getFirstClassFrom(PropertyType:String, PropertyItem:String): List<String>
 
+    @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_item =:PropertyItem")
+    fun getFirstClassType(PropertyItem:String): List<String>
+
     @Query("SELECT DISTINCT property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:PropertyFirstClass")
     fun getSecondClassFrom(PropertyType:String, PropertyItem:String, PropertyFirstClass:String): List<String>
 }

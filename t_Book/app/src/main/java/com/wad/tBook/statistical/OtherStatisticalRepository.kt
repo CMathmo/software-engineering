@@ -16,6 +16,11 @@ class OtherStatisticalRepository(private val actDao: AccountingDao) {
         @ColumnInfo(name = "first_class") val firstClass: String,
         @ColumnInfo(name = "second_class") val secondClass: String
     )
+    data class TA_fc(
+        var inflowAmount: Double,
+        var outflowAmount: Double,
+        @ColumnInfo(name = "first_class") val firstClass: String
+    )
     fun classStatistical(accountingList:List<Accounting>,classList:MutableList<TA>){
         val n = accountingList.size
         for (value in accountingList){
