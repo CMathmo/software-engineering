@@ -1,18 +1,18 @@
 package com.wad.tBook
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentActivity
+import com.wad.tBook.login.Register
+import android.content.SharedPreferences
 import kotlinx.android.synthetic.main.fragment_text.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +29,8 @@ class TextFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var originalpassword = "wadupupup"//到时候在注册那里修改originalpassword即可
+    val CUSTOM_PREF_NAME = "User_data"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,30 +43,38 @@ class TextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+        var originalpassword = sharedPreferences.getString("textpassword","")
         //监听输入，观察什么时候输入回车
         loginPassword.addTextChangedListener{
             var password = loginPassword.text.toString()
-            afterTextChange(password,originalpassword)
+            afterTextChange(password,originalpassword!!)
         }
-
 
 
         login_button.setOnClickListener(){
             var password = loginPassword.text.toString()
-            loginclock(password,originalpassword)
+            loginclock(password,originalpassword!!)
+        }
+
+        register_entrance.setOnClickListener {
+            val intent = Intent(activity, Register::class.java)
+            startActivity(intent)
         }
     }
 
     //登录的逻辑实现
     private fun loginclock(password:String,originalpassword:String){
-        loginSuccess()
-        /**
-        when(password){
-            originalpassword -> loginSuccess()
-            else -> loginFailed()
+        if (originalpassword == null){
+            Toast.makeText(activity,"没有设置密码，请先注册！", Toast.LENGTH_LONG).show()
+            loginPassword.setText("")
         }
-        **/
+        else{
+            when(password){
+                originalpassword -> loginSuccess()
+                else -> loginFailed()
+            }
+        }
     }
 
     //登录成功的显示

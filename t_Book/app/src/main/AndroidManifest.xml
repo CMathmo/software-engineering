@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".login.Register"></activity>
         <activity
             android:name=".accounting.AccountingActivity"
             android:label="@string/title_activity_accounting"
@@ -33,8 +34,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".accounting.AddActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".setting.PersonMsgActivity"/>
-        <activity android:name=".login.MainActivity">
+        <activity android:name=".setting.PersonMsgActivity" />
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
