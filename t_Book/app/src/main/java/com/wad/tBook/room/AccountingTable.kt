@@ -51,14 +51,36 @@ interface AccountingDao {
     fun getAllExpenditureAccountingDataIn(accountingFAccount:String,accountingSAccount:String) : Double
 
     @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
-            "WHERE (accounting_type = '收入' AND accounting_account_first_class = :accountingFAccount) " +
-            "OR (accounting_type = '转账' AND accounting_account_2_first_class = :accountingFAccount)  ")
-    fun getFirstClassIncomeAccountingDataIn(accountingFAccount:String) : Double
+            "WHERE (accounting_type = '收入' AND accounting_class_first_class = :accountingFAccount) ")
+    fun getFirstClassIncomeClassDataIn(accountingFAccount:String) : Double
 
     @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
-            "WHERE (accounting_type = '支出' AND accounting_account_first_class = :accountingFAccount)" +
-            "OR (accounting_type = '转账' AND accounting_account_first_class = :accountingFAccount)  ")
-    fun getFirstClassExpenditureAccountingDataIn(accountingFAccount:String) : Double
+            "WHERE (accounting_type = '支出' AND accounting_class_first_class = :accountingFAccount)" )
+    fun getFirstClassExpenditureClassDataIn(accountingFAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '收入' AND accounting_member_first_class = :accountingFAccount AND accounting_member_second_class = :accountingSAccount) ")
+    fun getAllIncomeMemberDataIn(accountingFAccount:String,accountingSAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '支出' AND accounting_member_first_class = :accountingFAccount AND accounting_member_second_class = :accountingSAccount)" )
+    fun getAllExpenditureMemberDataIn(accountingFAccount:String,accountingSAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '收入' AND accounting_merchant_first_class = :accountingFAccount AND accounting_merchant_second_class = :accountingSAccount) ")
+    fun getAllIncomeMerchantDataIn(accountingFAccount:String,accountingSAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '支出' AND accounting_merchant_first_class = :accountingFAccount AND accounting_merchant_second_class = :accountingSAccount)" )
+    fun getAllExpenditureMerchantDataIn(accountingFAccount:String,accountingSAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '收入' AND accounting_project_first_class = :accountingFAccount AND accounting_project_second_class = :accountingSAccount) ")
+    fun getAllIncomeProjectDataIn(accountingFAccount:String,accountingSAccount:String) : Double
+
+    @Query("SELECT SUM(accounting_amount) FROM accounting_table " +
+            "WHERE (accounting_type = '支出' AND accounting_project_first_class = :accountingFAccount AND accounting_project_second_class = :accountingSAccount)" )
+    fun getAllExpenditureProjectDataIn(accountingFAccount:String,accountingSAccount:String) : Double
 
     @Query("SELECT accounting_type,accounting_amount FROM accounting_table")
     fun readAccountTypeData() : List<AccountRepository.TypeAmount>

@@ -1,15 +1,14 @@
 package com.wad.tBook.setting
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.wad.tBook.BackupTask
 import com.wad.tBook.R
-import com.wad.tBook.accounting.AccountingActivity
 import org.jetbrains.anko.find
 
 
@@ -48,11 +47,21 @@ class SettingFragment : Fragment(){
     private fun dataRecover() {
         // TODO Auto-generated method stub
         BackupTask(requireContext()).execute("restoreDatabase")
+        Toast.makeText(
+            requireContext(),
+            "还原成功",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun dataBackup() {
         // TODO Auto-generated method stub
         BackupTask(requireContext()).execute("backupDatabase")
+        Toast.makeText(
+            requireContext(),
+            "备份成功",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     companion object {
