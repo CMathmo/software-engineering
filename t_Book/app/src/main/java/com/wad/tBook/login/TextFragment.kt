@@ -59,13 +59,10 @@ class TextFragment : Fragment() {
 
     //登录的逻辑实现
     private fun loginclock(password:String,originalpassword:String){
-        loginSuccess()
-        /**
         when(password){
             originalpassword -> loginSuccess()
             else -> loginFailed()
         }
-        **/
     }
 
     //登录成功的显示

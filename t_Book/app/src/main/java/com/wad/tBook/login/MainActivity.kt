@@ -14,8 +14,6 @@ import com.wad.tBook.NinelockFragment
 import com.wad.tBook.R
 import com.wad.tBook.R.id.loginway_list
 import com.wad.tBook.TextFragment
-import com.wad.tBook.login.FingerprintDialogFragment
-
 
 
 class MainActivity : AppCompatActivity() {
