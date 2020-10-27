@@ -175,50 +175,7 @@ class AccountFragment : Fragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
-        var TypeAccountList = listOf(
-            TA(
-                amount = 0.00,
-                firstClass = "信用卡",
-                secondClass = "平安银行"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "信用卡",
-                secondClass = "浦发银行"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "电子钱包",
-                secondClass = "微信"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "电子钱包",
-                secondClass = "支付宝"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "现金",
-                secondClass = "人民币"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "充值卡",
-                secondClass = "校园卡"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "充值卡",
-                secondClass = "沃尔玛购物卡"
-            ),
-            TA(
-                amount = 0.00,
-                firstClass = "债券",
-                secondClass = "国债"
-            )
-        )
     }
-
 }
 
 

@@ -51,11 +51,11 @@ class PipelineAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder{
         return when(viewType){
             0 -> PipelineViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.recycle_pipeline_view, null)
+                LayoutInflater.from(parent.context).inflate(R.layout.recycle_pipeline_view, parent,false)
             )
             else -> PipelineViewHolder_detail(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recycle_pipeline_detail_view, null)
+                    .inflate(R.layout.recycle_pipeline_detail_view,  parent,false)
             )
         }
     }

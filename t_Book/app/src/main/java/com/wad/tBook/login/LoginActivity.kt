@@ -18,7 +18,7 @@ import com.wad.tBook.login.FingerprintDialogFragment
 
 
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     val mViewPagerAdapter: FragmentPagerAdapter by lazy {
         ViewPagerAdapter(supportFragmentManager)
