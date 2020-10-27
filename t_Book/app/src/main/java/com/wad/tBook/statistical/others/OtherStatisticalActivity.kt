@@ -1,18 +1,13 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.statistical.others
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
-import com.wad.tBook.statistical.OtherStatisticalAdapter.ClassAdapter
-import com.wad.tBook.statistical.OtherStatisticalAdapter.MemberAdapter
-import com.wad.tBook.statistical.OtherStatisticalAdapter.MerchantAdapter
-import com.wad.tBook.statistical.OtherStatisticalAdapter.ProjectAdapter
 import kotlinx.android.synthetic.main.layout_class_card.*
 import kotlinx.android.synthetic.main.layout_member_card.*
 import kotlinx.android.synthetic.main.layout_merchant_card.*
@@ -86,7 +81,7 @@ class OtherStatisticalActivity : AppCompatActivity() {
         )
         val n = readClassData.size
         for (index in 1 until n) {
-            classList.add(OtherStatisticalRepository.TA_fc(0.0,0.0,readClassData[index]))
+            classList.add(OtherStatisticalRepository.TA_fc(0.0, 0.0, readClassData[index]))
         }
         return classList
     }
@@ -114,7 +109,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         )
         val n = readMemberData.size
         for (index in 1 until n) {
-            memberList.add(OtherStatisticalRepository.TA(0.0,0.0,readMemberData[index].firstClass,readMemberData[index].secondClass))
+            memberList.add(
+                OtherStatisticalRepository.TA(
+                    0.0,
+                    0.0,
+                    readMemberData[index].firstClass,
+                    readMemberData[index].secondClass
+                )
+            )
         }
         println(memberList)
         return memberList
@@ -145,7 +147,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         )
         val n = readMerchantData.size
         for (index in 1 until n) {
-            merchantList.add(OtherStatisticalRepository.TA(0.0,0.0,readMerchantData[index].firstClass,readMerchantData[index].secondClass))
+            merchantList.add(
+                OtherStatisticalRepository.TA(
+                    0.0,
+                    0.0,
+                    readMerchantData[index].firstClass,
+                    readMerchantData[index].secondClass
+                )
+            )
         }
         println(merchantList)
         return merchantList
@@ -176,7 +185,14 @@ class OtherStatisticalActivity : AppCompatActivity() {
         )
         val n = readProjectData.size
         for (index in 1 until n) {
-            projectList.add(OtherStatisticalRepository.TA(0.0,0.0,readProjectData[index].firstClass,readProjectData[index].secondClass))
+            projectList.add(
+                OtherStatisticalRepository.TA(
+                    0.0,
+                    0.0,
+                    readProjectData[index].firstClass,
+                    readProjectData[index].secondClass
+                )
+            )
         }
         println(projectList)
         return projectList

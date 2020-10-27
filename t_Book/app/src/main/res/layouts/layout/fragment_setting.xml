@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="220dp"
         android:layout_marginTop="16dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FDD835">
+            android:background="@color/light_blue_400">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -26,10 +27,10 @@
                 android:layout_height="134dp"
                 android:layout_marginStart="16dp"
                 android:background="#FFFFFF"
+                android:src="@drawable/dog"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/dog" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:layout_width="219dp"
@@ -96,6 +97,8 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button_shape"
         android:text="修改个人信息"
+        android:textColor="@color/background"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +111,8 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/button_shape"
         android:text="修改密码"
+        android:textColor="@color/background"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +125,8 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/button_shape"
         android:text="数据还原"
+        android:textColor="@color/background"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,18 +139,22 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/button_shape"
         android:text="数据备份"
+        android:textColor="@color/background"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/dev_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="@drawable/button_shape"
         android:text="开发者信息"
+        android:textColor="@color/background"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

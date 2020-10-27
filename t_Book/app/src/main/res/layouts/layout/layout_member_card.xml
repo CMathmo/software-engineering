@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/Theme.MaterialComponents"
-    app:cardBackgroundColor="#A5D6A7"
+    app:cardBackgroundColor="#40C4FF"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             android:text="成员统计"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="#1E88E5"
+            android:textColor="#D0303F9F"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"

@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.OtherStatisticalAdapter
+package com.wad.tBook.statistical.others
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,29 +9,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
-import com.wad.tBook.statistical.OtherStatisticalRepository
 
-class MerchantAdapter(
+class ProjectAdapter(
     context: Context,
-    var merchantList: MutableList<OtherStatisticalRepository.TA>
-): RecyclerView.Adapter<MerchantAdapter.MerchantViewHolder>(){
+    var projectList: MutableList<OtherStatisticalRepository.TA>
+): RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>(){
 
     var accountingList : List<Accounting> = emptyList<Accounting>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MerchantViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycle_other_view,parent,false)
-        return MerchantViewHolder(view)
+        return ProjectViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MerchantViewHolder, position: Int) {
-        holder.bind(merchantList[position])
+    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
+        holder.bind(projectList[position])
     }
 
     override fun getItemCount(): Int {
-        return merchantList.size
+        return projectList.size
     }
 
-    class MerchantViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class ProjectViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val textType : TextView = view.findViewById(R.id.property_type)
         private val textAmount : TextView = view.findViewById(R.id.properth_amout)
         @SuppressLint("SetTextI18n")
@@ -43,7 +42,7 @@ class MerchantAdapter(
     }
 
     fun readData(merchantList: MutableList<OtherStatisticalRepository.TA>) {
-        this.merchantList = merchantList
+        this.projectList = merchantList
         notifyDataSetChanged()
     }
 

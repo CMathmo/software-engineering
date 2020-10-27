@@ -24,9 +24,9 @@ import com.wad.tBook.room.Property
 import com.wad.tBook.room.getTestData
 import com.wad.tBook.room.tBookDatabase
 import com.wad.tBook.setting.SettingFragment
-import com.wad.tBook.statistical.AccountFragment
-import com.wad.tBook.statistical.OtherStatisticalActivity
-import com.wad.tBook.statistical.StatisticalActivity
+import com.wad.tBook.account.AccountFragment
+import com.wad.tBook.statistical.others.OtherStatisticalActivity
+import com.wad.tBook.statistical.others.StatisticalActivity
 import kotlinx.android.synthetic.main.activity_show.*
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny

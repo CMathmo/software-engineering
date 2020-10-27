@@ -51,6 +51,11 @@ class SettingFragment : Fragment(){
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             requireContext().startActivity(intent)
         }
+        view?.find<Button>(R.id.dev_button)?.setOnClickListener {
+            val intent = Intent(requireContext(), DevMsgActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            requireContext().startActivity(intent)
+        }
     }
 
     @SuppressLint("CommitPrefEdits")

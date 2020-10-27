@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.OtherStatisticalAdapter
+package com.wad.tBook.statistical.others
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,29 +9,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
-import com.wad.tBook.statistical.OtherStatisticalRepository
 
-class ProjectAdapter(
+class MemberAdapter(
     context: Context,
-    var projectList: MutableList<OtherStatisticalRepository.TA>
-): RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>(){
+    var memberList: MutableList<OtherStatisticalRepository.TA>
+): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>(){
 
     var accountingList : List<Accounting> = emptyList<Accounting>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycle_other_view,parent,false)
-        return ProjectViewHolder(view)
+        return MemberViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-        holder.bind(projectList[position])
+    override fun onBindViewHolder(holder: MemberViewHolder, position: Int) {
+        holder.bind(memberList[position])
     }
 
     override fun getItemCount(): Int {
-        return projectList.size
+        return memberList.size
     }
 
-    class ProjectViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class MemberViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val textType : TextView = view.findViewById(R.id.property_type)
         private val textAmount : TextView = view.findViewById(R.id.properth_amout)
         @SuppressLint("SetTextI18n")
@@ -42,8 +41,8 @@ class ProjectAdapter(
         }
     }
 
-    fun readData(merchantList: MutableList<OtherStatisticalRepository.TA>) {
-        this.projectList = merchantList
+    fun readData(memberList: MutableList<OtherStatisticalRepository.TA>) {
+        this.memberList = memberList
         notifyDataSetChanged()
     }
 

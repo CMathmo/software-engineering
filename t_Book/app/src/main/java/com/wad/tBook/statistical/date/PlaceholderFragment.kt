@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.ui.main
+package com.wad.tBook.statistical.date
 
 import android.os.Bundle
 import android.view.LayoutInflater

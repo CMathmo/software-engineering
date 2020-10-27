@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.OtherStatisticalAdapter
+package com.wad.tBook.statistical.others
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,29 +9,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
-import com.wad.tBook.statistical.OtherStatisticalRepository
 
-class MemberAdapter(
+class MerchantAdapter(
     context: Context,
-    var memberList: MutableList<OtherStatisticalRepository.TA>
-): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>(){
+    var merchantList: MutableList<OtherStatisticalRepository.TA>
+): RecyclerView.Adapter<MerchantAdapter.MerchantViewHolder>(){
 
     var accountingList : List<Accounting> = emptyList<Accounting>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MerchantViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycle_other_view,parent,false)
-        return MemberViewHolder(view)
+        return MerchantViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MemberViewHolder, position: Int) {
-        holder.bind(memberList[position])
+    override fun onBindViewHolder(holder: MerchantViewHolder, position: Int) {
+        holder.bind(merchantList[position])
     }
 
     override fun getItemCount(): Int {
-        return memberList.size
+        return merchantList.size
     }
 
-    class MemberViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class MerchantViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val textType : TextView = view.findViewById(R.id.property_type)
         private val textAmount : TextView = view.findViewById(R.id.properth_amout)
         @SuppressLint("SetTextI18n")
@@ -42,8 +41,8 @@ class MemberAdapter(
         }
     }
 
-    fun readData(memberList: MutableList<OtherStatisticalRepository.TA>) {
-        this.memberList = memberList
+    fun readData(merchantList: MutableList<OtherStatisticalRepository.TA>) {
+        this.merchantList = merchantList
         notifyDataSetChanged()
     }
 
