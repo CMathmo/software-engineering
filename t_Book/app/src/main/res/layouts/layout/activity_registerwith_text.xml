@@ -10,25 +10,7 @@
     android:rotationX="0">
 
 
-    <LinearLayout
-        android:id="@+id/lin_password"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
 
-
-        <EditText
-            android:id="@+id/loginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="请输入原密码"
-            android:maxLength="11"
-            android:textSize="16sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/new_password"
@@ -41,7 +23,7 @@
 
 
         <EditText
-            android:id="@+id/newPassword"
+            android:id="@+id/Passwordone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -61,7 +43,7 @@
 
 
         <EditText
-            android:id="@+id/newPasswordagain"
+            android:id="@+id/Passwordtwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -71,14 +53,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/makesurtochange"
         android:layout_width="300dp"
         android:layout_height="44dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
         android:background="@color/black"
         android:text="确定修改"
-        android:onClick="onClickctochange"
         android:textColor="@color/white"
         android:textSize="18sp" />
 

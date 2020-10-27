@@ -32,8 +32,7 @@ class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
         editor.putString("ninelockpassword",password)
         editor.apply()
         Toast.makeText(this,"修改密码成功！", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        finish()
     }
 
     override fun onError() {

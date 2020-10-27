@@ -11,7 +11,10 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.wad.tBook.login.Register
 import android.content.SharedPreferences
+import android.widget.CheckBox
 import kotlinx.android.synthetic.main.fragment_text.*
+import org.jetbrains.anko.find
+import java.nio.file.Files.find
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +35,9 @@ class TextFragment : Fragment() {
 
     private val CUSTOM_PREF_NAME = "User_data"
     private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    private val editor:SharedPreferences.Editor = sharedPreferences.edit()
+    var originalpassword = sharedPreferences.getString("textpassword","0")
+    var ischeckremeber = sharedPreferences.getInt("remeberpassword",0)//来确定是否记住密码
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +51,7 @@ class TextFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        var originalpassword = sharedPreferences.getString("textpassword","")
+
         //监听输入，观察什么时候输入回车
         loginPassword.addTextChangedListener{
             var password = loginPassword.text.toString()
@@ -63,12 +69,18 @@ class TextFragment : Fragment() {
             val intent = Intent(activity, Register::class.java)
             startActivity(intent)
         }
+
+        if (ischeckremeber == 1){
+            loginPassword.setText(originalpassword)
+            remeber_Password.isChecked
+        }
+
     }
 
     //登录的逻辑实现
     private fun loginclock(password:String,originalpassword:String){
 
-        if (originalpassword.equals("")){
+        if (originalpassword.equals("0")){
             Toast.makeText(activity,"没有设置密码，请先注册！", Toast.LENGTH_LONG).show()
             loginPassword.setText("")
         }
@@ -83,6 +95,14 @@ class TextFragment : Fragment() {
     //登录成功的显示
     private fun loginSuccess(){
         Toast.makeText(activity,"登录成功！", Toast.LENGTH_LONG).show()
+        if (remeber_Password.isChecked == true){
+            editor.putInt("remeberpassword",1)
+            editor.apply()
+        }
+        else{
+            editor.putInt("remeberpassword",0)
+            editor.apply()
+        }
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
     }
@@ -91,6 +111,8 @@ class TextFragment : Fragment() {
     private fun loginFailed(){
         Toast.makeText(activity,"用户不存在，请重新登录", Toast.LENGTH_LONG).show()
         loginPassword.setText("")
+        editor.putInt("remeberpassword",0)
+        editor.apply()
     }
 
     private fun afterTextChange(password: String, originalpassword: String){

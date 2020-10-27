@@ -21,10 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".edit.EditActivity"></activity>
-        <activity android:name=".TestActivity">
-        </activity>
-        <activity android:name=".login.Register"></activity>
+        <activity android:name=".setting.SettingPassword" />
+        <activity android:name=".edit.EditActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".login.Register" />
+        <activity android:name=".RegisterwithText"/>
+        <activity android:name=".RegisterwithNinelock"/>
+
         <activity
             android:name=".accounting.AccountingActivity"
             android:label="@string/title_activity_accounting"
@@ -43,7 +46,8 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
