@@ -28,14 +28,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/account_background">
+                android:background="@drawable/blue_girl">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView4"
                     android:layout_width="218dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="16dp"
-                    app:cardBackgroundColor="@color/material_on_primary_disabled"
+                    app:cardBackgroundColor="#2CFFFFFF"
                     app:cardCornerRadius="25dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_liability">
@@ -90,7 +90,7 @@
                     android:layout_marginTop="52dp"
                     android:gravity="center"
                     android:text="总资产："
-                    android:textColor="@color/pickerview_wheelview_textcolor_out"
+                    android:textColor="@color/pickerview_bg_topbar"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"

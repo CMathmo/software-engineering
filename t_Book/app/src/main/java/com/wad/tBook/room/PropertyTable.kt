@@ -2,7 +2,7 @@ package com.wad.tBook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.wad.tBook.statistical.OtherStatisticalRepository
+import com.wad.tBook.statistical.others.OtherStatisticalRepository
 
 @Dao
 interface PropertyDao {

@@ -2,7 +2,7 @@ package com.wad.tBook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.wad.tBook.statistical.AccountRepository
+import com.wad.tBook.account.AccountRepository
 
 @Dao
 interface AccountingDao {

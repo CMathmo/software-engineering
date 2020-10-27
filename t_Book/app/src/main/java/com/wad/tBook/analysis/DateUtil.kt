@@ -53,8 +53,22 @@ object DateUtil{
         return dayNumber + day
     }
 
+    //检查日期是否含有非法字符（如“XX年XX月XX日”中的"XX"为非法字符）
+    fun containInvalidToken(date: String) :Boolean{
+        val x:String = date.replace("年","").replace("月","").replace("日","")
+        for (i in x){
+            if (i.isLetter()) {
+                return true
+            }
+        }
+        return false
+    }
     //返回日期A是否比日期B早（或者是同一天）
     fun AearlierThanB(dateA:String, dateB: String) :Boolean{
+        if (containInvalidToken(dateA) || containInvalidToken(dateB)) {
+            println("invalid token!")
+            return false
+        }
         if (DateUtil.getYear(dateA) < DateUtil.getYear(dateB)) return true
         else if (DateUtil.getYear(dateA) > DateUtil.getYear(dateB)) return false
         else if (DateUtil.getMonth(dateA) < DateUtil.getMonth(dateB)) return true

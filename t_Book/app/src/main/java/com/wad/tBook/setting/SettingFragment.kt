@@ -13,9 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.wad.tBook.BackupTask
-import com.wad.tBook.MyApplication
-import com.wad.tBook.R
+import com.wad.tBook.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 import org.jetbrains.anko.find
 
@@ -48,6 +46,19 @@ class SettingFragment : Fragment(){
         }
         view?.find<Button>(R.id.person_button)?.setOnClickListener {
             val intent = Intent(requireContext(), PersonMsgActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            requireContext().startActivity(intent)
+        }
+
+
+        view?.find<Button>(R.id.password_button)?.setOnClickListener {
+            val intent = Intent(requireContext(), SettingPassword::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            requireContext().startActivity(intent)
+        }
+        view?.find<Button>(R.id.dev_button)?.setOnClickListener {
+            val intent = Intent(requireContext(), DevMsgActivity::class.java)
+
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             requireContext().startActivity(intent)
         }
