@@ -1,6 +1,8 @@
 package com.wad.tBook
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +25,9 @@ class NinelockFragment : Fragment(), NineLockListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var originalpassword = "54321"
+    private val CUSTOM_PREF_NAME = "User_data"
+    private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    var originalpassword = sharedPreferences.getString("ninelockpassword","")
 
 
     override fun onCreateView(
@@ -46,11 +50,13 @@ class NinelockFragment : Fragment(), NineLockListener {
 
     override fun onLockResult(result: IntArray?) {
         val stringBuffer=StringBuffer()
+        val intent = Intent(activity, TestActivity::class.java)
+        startActivity(intent)
 
         for(i in 0  until result!!.size){
             stringBuffer.append(result[i])
         }
-        when(stringBuffer.toString()){
+        when(stringBuffer.toString()) {
             originalpassword -> LoginSucess()
             else -> LoginFailure()
         }
@@ -64,7 +70,7 @@ class NinelockFragment : Fragment(), NineLockListener {
 
     private  fun LoginFailure(){
         Toast.makeText(activity,"密码错误，请重新登录", Toast.LENGTH_LONG).show()
-        
+
     }
 
     override fun onError() {

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/pipeline_card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +30,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
                 android:text="ID"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/textAmount"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,13 +81,14 @@
                 android:id="@+id/moreButton"
                 android:layout_width="30dp"
                 android:layout_height="26dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/arrow_down_float"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.64"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textClass"
-                app:srcCompat="@android:drawable/ic_menu_more" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

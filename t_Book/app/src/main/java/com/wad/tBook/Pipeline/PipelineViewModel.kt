@@ -1,5 +1,5 @@
 
-package com.wad.tBook.Pipeline
+package com.wad.tBook.pipeline
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

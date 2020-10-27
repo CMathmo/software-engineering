@@ -2,6 +2,7 @@ package com.wad.tBook.accounting
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
@@ -20,10 +21,14 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bigkoo.pickerview.view.TimePickerView
+import com.melnykov.fab.FloatingActionButton
 import com.wad.tBook.R
+import com.wad.tBook.edit.EditActivity
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
 import com.wad.tBook.room.tBookDatabase
+import com.zyyoona7.wheel.WheelView
+import kotlinx.android.synthetic.main.fragment_income.*
 import org.jetbrains.anko.find
 import java.util.*
 
@@ -46,6 +51,9 @@ class IncomeFragment : Fragment() {
     private var type: String ="收入"
     private val application by lazy {
         activity?.application
+    }
+    private val fab by lazy {
+        requireView().find<FloatingActionButton>(R.id.fab)
     }
     private val pvoptions: OptionsPickerView<String> by lazy{
         OptionsPickerBuilder(activity, OnOptionsSelectListener{
@@ -82,11 +90,23 @@ class IncomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val savebutton : Button = requireView().find(R.id.save_button)
+        val savebutton : Button = requireView().find(R.id.saveButton)
         val accounting_id = (activity as AccountingActivity).id
         InitEditText()
         if(accounting_id != -1){
             InitView(accounting_id)
+        }
+        class_fab.setOnClickListener {
+            jumpEditActivity("类别")
+        }
+        member_fab.setOnClickListener {
+            jumpEditActivity("成员")
+        }
+        project_fab.setOnClickListener {
+            jumpEditActivity("项目")
+        }
+        merchant_fab.setOnClickListener {
+            jumpEditActivity("商家")
         }
         savebutton.setOnClickListener {
 
@@ -189,7 +209,6 @@ class IncomeFragment : Fragment() {
     }
 
     fun InitEditText(){
-
         requireView().find<EditText>(R.id.amount_editText).setOnFocusChangeListener { view, b ->
             if(!b){
                 val inputMethodManager: InputMethodManager = application?.getSystemService(
@@ -298,7 +317,13 @@ class IncomeFragment : Fragment() {
         }
     }
 
-
+    fun jumpEditActivity(item:String){
+        val intent = Intent(context,
+            EditActivity::class.java)
+        intent.putExtra("type",type)
+        intent.putExtra("item",item)
+        startActivity(intent)
+    }
 
 
 

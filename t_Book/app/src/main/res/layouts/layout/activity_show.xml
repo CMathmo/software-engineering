@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDEDF883"
+    android:background="@color/common_white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFF9C4">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/showTabLayout"
@@ -26,10 +27,13 @@
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_background_add"
+            android:background="@drawable/button_shape"
             android:text="记一下吧"
-            android:textColor="#FFFF8D"
-            android:textStyle="bold|italic"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="	#FFD700"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +45,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
+            android:background="#4B80D8FF"
             app:layout_constraintBottom_toTopOf="@+id/showTabLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,20 +58,22 @@
             android:layout_width="55dp"
             android:layout_height="49dp"
             android:layout_marginStart="60dp"
+            android:backgroundTint="@color/light_blue_400"
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/button_background_add" />
+            app:srcCompat="@drawable/button_shape2" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/other_button"
             android:layout_width="55dp"
             android:layout_height="49dp"
             android:layout_marginEnd="60dp"
+            android:backgroundTint="@color/light_blue_400"
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/button_background_add" />
+            app:srcCompat="@drawable/button_shape2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

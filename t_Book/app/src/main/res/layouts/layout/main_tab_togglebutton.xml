@@ -2,7 +2,7 @@
 <ToggleButton xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tab_btn"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:background="@null"
     android:gravity="center"
     android:padding="4dp"

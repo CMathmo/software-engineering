@@ -61,7 +61,7 @@ class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
-        val savebutton : Button = find(R.id.save_button)
+        val savebutton : Button = find(R.id.saveButton)
         InitEditText()
         InitTypeButton()
         if(id != -1){

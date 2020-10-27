@@ -17,16 +17,16 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.wad.tBook.Pipeline.PipelineFragment
+import com.wad.tBook.pipeline.PipelineFragment
 import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.analysis.AnalysisFragment
 import com.wad.tBook.room.Property
 import com.wad.tBook.room.getTestData
 import com.wad.tBook.room.tBookDatabase
 import com.wad.tBook.setting.SettingFragment
-import com.wad.tBook.statistical.AccountFragment
-import com.wad.tBook.statistical.OtherStatisticalActivity
-import com.wad.tBook.statistical.StatisticalActivity
+import com.wad.tBook.account.AccountFragment
+import com.wad.tBook.statistical.others.OtherStatisticalActivity
+import com.wad.tBook.statistical.others.StatisticalActivity
 import kotlinx.android.synthetic.main.activity_show.*
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
@@ -61,7 +61,7 @@ class MainActivity : FragmentActivity() {
         initPropertyRoom(roomdb)
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)
-        tBookDatabase.getDBInstace(this).actDao().deleteAll()
+        //tBookDatabase.getDBInstace(this).actDao().deleteAll()
         if(roomdb.actDao().getAllAccountingData().isEmpty()){
             for (acc in getTestData()){
                 println("testdata: $acc")
@@ -395,7 +395,7 @@ class MainActivity : FragmentActivity() {
                     )
 
                 }
-                var type = "收入"
+                var type = "支出"
                 var item = "类别"
                 for(sclass:String in "三餐、早餐、中餐、晚餐、买菜、水果、零食、加餐、下午茶、烟酒饮品、粮油调料".split("、")){
                     roomdb.proDao().addPropertyData(
@@ -497,7 +497,7 @@ class MainActivity : FragmentActivity() {
                         )
                     )
                 }
-                type = "支出"
+                type = "收入"
                 for(sclass:String in "工资、经营、利息、兼职、投资、奖金、加班".split("、")){
                     roomdb.proDao().addPropertyData(
                         Property(
