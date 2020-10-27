@@ -5,31 +5,40 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.widget.EditText
 import android.widget.Toast
 import com.wad.tBook.MainActivity
+import com.wad.tBook.MyApplication
 import com.wad.tBook.R
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.find
 
 class Register : AppCompatActivity() {
 
-    val CUSTOM_PREF_NAME = "User_data"
+    private val CUSTOM_PREF_NAME = "User_data"
+    private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    private val editor:SharedPreferences.Editor = sharedPreferences.edit()
+    private var originalpassword = sharedPreferences.getString("textpassword","")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        var password1 = aPassword.text.toString()
-        var password2 = bPassword.text.toString()
-
         register.setOnClickListener {
-            if (password1 == null||password2 == null){
-                registerFailure()
+            if (originalpassword.equals("")){
+                if (TextUtils.isEmpty(find<EditText>(R.id.aPassword).text.toString()) ||TextUtils.isEmpty(find<EditText>(R.id.bPassword).text.toString())){
+                    registerFailure()
+                }
+                else{
+                    when(find<EditText>(R.id.aPassword).text.toString()){
+                        find<EditText>(R.id.bPassword).text.toString() -> registerSucess(find<EditText>(R.id.aPassword).text.toString())
+                        else -> registerFailure()
+                    }
+                }
             }
             else{
-                when(password1){
-                    password2 -> registerSucess(password1)
-                    else -> registerFailure()
-                }
+                registerNotnew()
             }
         }
 
@@ -38,18 +47,23 @@ class Register : AppCompatActivity() {
     }
 
     private fun registerSucess(password:String){
-        val sharedPreferences: SharedPreferences = this.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
-        val editor:SharedPreferences.Editor = sharedPreferences.edit()
+
         editor.putString("textpassword",password)
         editor.apply()
-        editor.commit()
         Toast.makeText(this,"注册成功！", Toast.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun registerFailure(){
         Toast.makeText(this,"两次密码不一致，请重新输入！", Toast.LENGTH_LONG).show()
+        aPassword.setText("")
+        bPassword.setText("")
+    }
+
+    private fun registerNotnew(){
+        Toast.makeText(this,"您已经注册过密码，请回想一下！", Toast.LENGTH_LONG).show()
         aPassword.setText("")
         bPassword.setText("")
     }

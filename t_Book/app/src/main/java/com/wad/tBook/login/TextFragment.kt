@@ -29,8 +29,8 @@ class TextFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val CUSTOM_PREF_NAME = "User_data"
-
+    private val CUSTOM_PREF_NAME = "User_data"
+    private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,7 @@ class TextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+
         var originalpassword = sharedPreferences.getString("textpassword","")
         //监听输入，观察什么时候输入回车
         loginPassword.addTextChangedListener{
@@ -65,7 +65,7 @@ class TextFragment : Fragment() {
 
     //登录的逻辑实现
     private fun loginclock(password:String,originalpassword:String){
-        if (originalpassword == null){
+        if (originalpassword.equals("")){
             Toast.makeText(activity,"没有设置密码，请先注册！", Toast.LENGTH_LONG).show()
             loginPassword.setText("")
         }
