@@ -50,8 +50,13 @@ class SettingFragment : Fragment(){
             requireContext().startActivity(intent)
         }
 
+
         view?.find<Button>(R.id.password_button)?.setOnClickListener {
             val intent = Intent(requireContext(), SettingPassword::class.java)
+
+        view?.find<Button>(R.id.dev_button)?.setOnClickListener {
+            val intent = Intent(requireContext(), DevMsgActivity::class.java)
+
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             requireContext().startActivity(intent)
         }

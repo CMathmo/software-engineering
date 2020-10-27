@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.statistical.others
 
 import androidx.room.ColumnInfo
 import com.wad.tBook.room.Accounting

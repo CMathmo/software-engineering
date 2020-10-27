@@ -11,7 +11,7 @@
         android:id="@+id/pipeline_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F4FF81"
+        android:background="@drawable/button_shape"
         android:foregroundGravity="center_vertical|center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

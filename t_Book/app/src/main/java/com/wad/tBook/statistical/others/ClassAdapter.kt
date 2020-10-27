@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.OtherStatisticalAdapter
+package com.wad.tBook.statistical.others
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
-import com.wad.tBook.statistical.OtherStatisticalRepository
 import com.wad.tBook.toMoneyFormatted
 
 class ClassAdapter (

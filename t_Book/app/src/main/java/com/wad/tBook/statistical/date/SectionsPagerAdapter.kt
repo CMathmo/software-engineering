@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.ui.main
+package com.wad.tBook.statistical.date
 
 import android.content.Context
 import androidx.fragment.app.Fragment

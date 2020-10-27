@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical.ui.main
+package com.wad.tBook.statistical.date
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

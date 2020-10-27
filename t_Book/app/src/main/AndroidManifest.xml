@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".setting.SettingPassword" />
         <activity android:name=".edit.EditActivity" />
         <activity android:name=".TestActivity" />
@@ -28,14 +29,15 @@
         <activity android:name=".RegisterwithText"/>
         <activity android:name=".RegisterwithNinelock"/>
 
+
         <activity
             android:name=".accounting.AccountingActivity"
             android:label="@string/title_activity_accounting"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".statistical.OtherStatisticalActivity" />
-        <activity android:name=".statistical.AccountDetailActivity" />
+        <activity android:name=".statistical.others.OtherStatisticalActivity" />
+        <activity android:name=".account.AccountDetailActivity" />
         <activity
-            android:name=".statistical.StatisticalActivity"
+            android:name=".statistical.others.StatisticalActivity"
             android:label="@string/title_activity_statistical"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".accounting.AddActivity" />

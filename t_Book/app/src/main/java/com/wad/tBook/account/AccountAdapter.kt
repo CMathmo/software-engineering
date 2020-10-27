@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.account
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.wad.tBook.R
-import java.nio.file.Files.size
+import com.wad.tBook.statistical.others.OtherStatisticalRepository
 
 
 class AccountAdapter(

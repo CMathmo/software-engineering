@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFF9C4">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/showTabLayout"
@@ -30,7 +31,7 @@
             android:text="记一下吧"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/common_white"
+            android:textColor="	#FFD700"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +45,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
+            android:background="#4B80D8FF"
             app:layout_constraintBottom_toTopOf="@+id/showTabLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +62,7 @@
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/button_background_add" />
+            app:srcCompat="@drawable/button_shape2" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/other_button"
@@ -71,7 +73,7 @@
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/button_background_add" />
+            app:srcCompat="@drawable/button_shape2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

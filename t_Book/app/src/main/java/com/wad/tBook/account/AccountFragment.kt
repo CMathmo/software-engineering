@@ -1,4 +1,4 @@
-package com.wad.tBook.statistical
+package com.wad.tBook.account
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,25 +7,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.ColumnInfo
-import com.wad.tBook.MainActivity
 import com.wad.tBook.R
 import com.wad.tBook.getItemDecoration
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
-import com.wad.tBook.statistical.OtherStatisticalAdapter.ClassAdapter
+import com.wad.tBook.statistical.others.OtherStatisticalRepository
 import com.wad.tBook.toMoneyFormatted
 import kotlinx.android.synthetic.main.fragment_account.*
-import kotlinx.android.synthetic.main.layout_class_card.*
-import java.util.*
 
 
 class AccountFragment : Fragment() {
@@ -71,6 +66,7 @@ class AccountFragment : Fragment() {
             account_adapter?.readData(accountList)
         }
         recyclerview = view?.findViewById(R.id.recycle_account)
+        recyclerview?.getItemDecoration()
         val intent = Intent(context, AccountDetailActivity::class.java)
         account_adapter?.mOnRecyclerViewItemClick = object :
             AccountAdapter.OnRecyclerViewItemClick<String> {
@@ -143,7 +139,14 @@ class AccountFragment : Fragment() {
         )
         val n = readAccountData.size
         for (index in 1 until n) {
-            accountList.add(OtherStatisticalRepository.TA(0.0,0.0,readAccountData[index].firstClass,readAccountData[index].secondClass))
+            accountList.add(
+                OtherStatisticalRepository.TA(
+                    0.0,
+                    0.0,
+                    readAccountData[index].firstClass,
+                    readAccountData[index].secondClass
+                )
+            )
         }
         return accountList
     }
