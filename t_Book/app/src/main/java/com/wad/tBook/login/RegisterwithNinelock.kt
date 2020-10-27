@@ -1,12 +1,19 @@
 package com.wad.tBook
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.content.SharedPreferences
 import android.widget.Toast
 import com.wad.tBook.login.NineLockListener
 
 class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
+
+    private val CUSTOM_PREF_NAME = "User_data"
+    private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    private val editor:SharedPreferences.Editor = sharedPreferences.edit()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registerwith_ninelock)
@@ -22,6 +29,8 @@ class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
             stringBuffer.append(result[i])
         }
         val password = stringBuffer.toString()
+        editor.putString("textpassword",password)
+        editor.apply()
         Toast.makeText(this,"修改密码成功！", Toast.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
