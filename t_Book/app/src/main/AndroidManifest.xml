@@ -32,7 +32,7 @@
         <activity android:name=".statistical.OtherStatisticalActivity" />
         <activity android:name=".statistical.AccountDetailActivity" />
         <activity
-            android:name=".statistical.StatisticalActivity"
+            android:name=".datepipeline.DatePipilineActivity"
             android:label="@string/title_activity_statistical"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".accounting.AddActivity" />

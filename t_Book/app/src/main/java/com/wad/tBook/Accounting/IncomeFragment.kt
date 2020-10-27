@@ -52,9 +52,6 @@ class IncomeFragment : Fragment() {
     private val application by lazy {
         activity?.application
     }
-    private val fab by lazy {
-        requireView().find<FloatingActionButton>(R.id.fab)
-    }
     private val pvoptions: OptionsPickerView<String> by lazy{
         OptionsPickerBuilder(activity, OnOptionsSelectListener{
                 options1, options2, options3, v ->

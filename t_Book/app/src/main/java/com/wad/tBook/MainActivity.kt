@@ -26,7 +26,7 @@ import com.wad.tBook.room.tBookDatabase
 import com.wad.tBook.setting.SettingFragment
 import com.wad.tBook.statistical.AccountFragment
 import com.wad.tBook.statistical.OtherStatisticalActivity
-import com.wad.tBook.statistical.StatisticalActivity
+import com.wad.tBook.datepipeline.DatePipilineActivity
 import kotlinx.android.synthetic.main.activity_show.*
 import org.jetbrains.anko.find
 import kotlin.Any as KotlinAny
@@ -86,7 +86,7 @@ class MainActivity : FragmentActivity() {
         super.onResume()
         val dataButton : FloatingActionButton = find(R.id.data_button)
         dataButton.setOnClickListener{
-            val intent = Intent(applicationContext, StatisticalActivity::class.java)
+            val intent = Intent(applicationContext, DatePipilineActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             applicationContext.startActivity(intent)
         }

@@ -88,6 +88,11 @@ interface AccountingDao {
     @Query("SELECT accounting_type,accounting_amount FROM accounting_table WHERE accounting_account_second_class = :accountingAccount")
     fun readAccountDetailData(accountingAccount:String) : List<AccountRepository.TypeAmount>
 
+    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate")
+    fun readAllDateFromAndTo(startDate:String,endDate:String) : List<Accounting>
+
+    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate")
+    fun readAllLiveDateFromAndTo(startDate:String,endDate:String) : LiveData<List<Accounting>>
 
 }
 
