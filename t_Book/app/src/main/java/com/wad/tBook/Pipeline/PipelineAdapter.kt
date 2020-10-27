@@ -1,4 +1,4 @@
-package com.wad.tBook.Pipeline
+package com.wad.tBook.pipeline
 
 import android.content.Context
 import android.content.Intent
@@ -77,6 +77,7 @@ class PipelineAdapter (
                     viewTypeList[position] = 1
                     notifyItemChanged(position)
                 }
+                println(currentItem)
             }
             else ->{
                 val currentItem = itemList.get(position)
@@ -115,17 +116,6 @@ class PipelineAdapter (
             }
         }
 
-        //holder.cardEdit.setOnClickListener {
-        /*    val intent = Intent(context,AddActivity::class.java)
-            intent.putExtra("id",currentItem.accountingId)
-            intent.putExtra("account_type",currentItem.accountingType)
-            intent.putExtra("amount",currentItem.accountingAmount)
-            intent.putExtra("time",currentItem.accountingTime)
-            intent.putExtra("merchant",currentItem.accountingMerchant.toString())
-            intent.putExtra("class",currentItem.accountingClass.toString())
-
-            context?.startActivity(intent)
-        }*/
     }
 
     override fun getItemCount(): Int {

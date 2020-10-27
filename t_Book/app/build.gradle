@@ -25,12 +25,14 @@ android {
                     'src/main/res',
                     'src/main/res/layouts',
                     'src/main/res/layouts/accounting',
-                    'src/main/res/layouts/pipeline'
+                    'src/main/res/layouts/pipeline',
+                    'src/main/res/layouts/edit',
 
             ]
             //资源文件
         }
     }
+
 
     buildTypes {
         release {
@@ -53,6 +55,7 @@ android {
             res.srcDirs = [
                     'src/main/res',
                     'src/main/res/layouts',
+                    'src/main/res/layouts/edit',
                     'src/main/res/layouts/accounting',
                     'src/main/res/layouts/pipeline'
 

@@ -1,4 +1,4 @@
-package com.wad.tBook.Pipeline
+package com.wad.tBook.pipeline
 
 import android.app.Application
 import android.content.Context
@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wad.tBook.R
-import com.wad.tBook.accounting.AddActivity
 import com.wad.tBook.room.Accounting
 import kotlinx.android.synthetic.main.fragment_pipeline.*
 

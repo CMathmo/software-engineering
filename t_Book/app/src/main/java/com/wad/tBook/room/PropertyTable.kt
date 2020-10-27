@@ -22,6 +22,12 @@ interface PropertyDao {
     @Query("DELETE FROM property_table")
     fun deleteAllPropertyData(): Int
 
+    @Query("DELETE FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:FirstClass")
+    fun deleteAllPropertyFirstClassIs(PropertyType:String, PropertyItem:String,FirstClass:String): Int
+
+    @Query("DELETE FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:FirstClass AND property_second_class =:SecondClass")
+    fun deleteAllPropertyClassIs(PropertyType:String, PropertyItem:String,FirstClass:String,SecondClass:String): Int
+
     @Query("SELECT * FROM property_table")
     fun readPropertyData() : LiveData<List<Property>>
 
@@ -34,8 +40,20 @@ interface PropertyDao {
     @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
     fun getFirstClassFrom(PropertyType:String, PropertyItem:String): List<String>
 
+    @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
+    fun getLiveFirstClassFrom(PropertyType:String, PropertyItem:String): LiveData<List<String>>
+
+    @Query("SELECT DISTINCT property_first_class FROM property_table WHERE property_item =:PropertyItem")
+    fun getFirstClassType(PropertyItem:String): List<String>
+
     @Query("SELECT DISTINCT property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:PropertyFirstClass")
     fun getSecondClassFrom(PropertyType:String, PropertyItem:String, PropertyFirstClass:String): List<String>
+
+    @Query("SELECT DISTINCT property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:PropertyFirstClass")
+    fun getLiveSecondClassFrom(PropertyType:String, PropertyItem:String, PropertyFirstClass:String): LiveData<List<String>>
+
+    @Query("SELECT DISTINCT property_first_class,property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
+    fun getLiveClassFrom(PropertyType:String, PropertyItem:String): LiveData<OtherStatisticalRepository.proType>
 }
 
 

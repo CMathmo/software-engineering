@@ -1,5 +1,6 @@
 package com.wad.tBook.statistical
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.wad.tBook.getItemDecoration
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
 import com.wad.tBook.statistical.OtherStatisticalAdapter.ClassAdapter
+import com.wad.tBook.toMoneyFormatted
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.layout_class_card.*
 import java.util.*
@@ -100,33 +102,29 @@ class AccountFragment : Fragment() {
             activity?.application?.let { tBookDatabase.getDBInstace(it).actDao().readAccountTypeData() }
         val income = "收入"
         val outcome = "支出"
-        val transfer = "转账"
         val typeList = listOf(
             AccountRepository.TypeAmount(income, 0.0),
-            AccountRepository.TypeAmount(outcome, 0.0),
-            AccountRepository.TypeAmount(transfer, 0.0)
+            AccountRepository.TypeAmount(outcome, 0.0)
         )
         if (readATAData != null) {
             for (item in readATAData){
                 when(item.Type){
                     income -> typeList[0].Amount += item.Amount
                     outcome -> typeList[1].Amount += item.Amount
-                    transfer -> typeList[2].Amount += item.Amount
                 }
             }
         }
         return typeList
     }
 
+    @SuppressLint("SetTextI18n")
     private fun dataDisplay(view: View, typeList: List<AccountRepository.TypeAmount>): CharSequence? {
         val incomeView : TextView = view.findViewById(R.id.text_income)
         val outcomeView : TextView = view.findViewById(R.id.text_outcome)
-        val transferView : TextView = view.findViewById(R.id.text_transaction)
         val liabilityView : TextView = view.findViewById(R.id.text_liability)
-        liabilityView.text = (typeList[0].Amount - typeList[1].Amount - typeList[2].Amount).toString()
-        incomeView.text = typeList[0].Amount.toString()
-        outcomeView.text = typeList[1].Amount.toString()
-        transferView.text = typeList[2].Amount.toString()
+        liabilityView.text = (typeList[0].Amount - typeList[1].Amount).toMoneyFormatted()
+        incomeView.text = "流入：" + typeList[0].Amount.toMoneyFormatted()
+        outcomeView.text = "流出：" + typeList[1].Amount.toMoneyFormatted()
         return liabilityView.text
     }
 

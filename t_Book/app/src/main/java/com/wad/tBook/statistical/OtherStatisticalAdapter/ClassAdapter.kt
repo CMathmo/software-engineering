@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.statistical.OtherStatisticalRepository
+import com.wad.tBook.toMoneyFormatted
 
 class ClassAdapter (
     context: Context,
-    var classList: MutableList<OtherStatisticalRepository.TA>
+    var classList: MutableList<OtherStatisticalRepository.TA_fc>
 ): RecyclerView.Adapter<ClassAdapter.ClassViewHolder>(){
 
     var accountingList : List<Accounting> = emptyList<Accounting>()
@@ -35,14 +36,13 @@ class ClassAdapter (
         private val textType : TextView = view.findViewById(R.id.property_type)
         private val textAmount : TextView = view.findViewById(R.id.properth_amout)
         @SuppressLint("SetTextI18n")
-        fun bind(model: OtherStatisticalRepository.TA) {
-            textType.text = model.firstClass + "-" + model.secondClass
-            textAmount.text = "流入：" + model.inflowAmount.toString() + "  " +
-                    "流出：" + model.outflowAmount.toString()
+        fun bind(model: OtherStatisticalRepository.TA_fc) {
+            textType.text = model.firstClass
+            textAmount.text = "金额：" + (model.inflowAmount - model.outflowAmount).toMoneyFormatted()
         }
     }
 
-    fun readData(classList: MutableList<OtherStatisticalRepository.TA>) {
+    fun readData(classList: MutableList<OtherStatisticalRepository.TA_fc>) {
         this.classList = classList
         notifyDataSetChanged()
     }

@@ -2,7 +2,9 @@ package com.wad.tBook.statistical
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
@@ -23,15 +25,19 @@ class OtherStatisticalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_statistical)
+    }
 
-        val InfoClassData : MutableList<OtherStatisticalRepository.TA> = classDataInfo()
+    override fun onStart() {
+        super.onStart()
+        val InfoClassData : MutableList<OtherStatisticalRepository.TA_fc> = classDataInfo()
         recycle_class.layoutManager = LinearLayoutManager(applicationContext)
         val class_adapter = ClassAdapter(application,InfoClassData)
         recycle_class.adapter = class_adapter
         viewModel.readAllData.observe(this) {
                 accountingList: List<Accounting> ->
-            var classList : MutableList<OtherStatisticalRepository.TA> = classDataInfo()
+            var classList : MutableList<OtherStatisticalRepository.TA_fc> = classDataInfo()
             classList = classStatistical(accountingList,classList)
+            println(classList)
             class_adapter.readData(classList)
         }
 
@@ -68,29 +74,28 @@ class OtherStatisticalActivity : AppCompatActivity() {
             project_adapter.readData(projectList)
         }
     }
-    private fun classDataInfo(): MutableList<OtherStatisticalRepository.TA> {
-        val readClassData : List<OtherStatisticalRepository.proType> = tBookDatabase.getDBInstace(applicationContext).proDao().getClassFrom("类别")
+
+    private fun classDataInfo(): MutableList<OtherStatisticalRepository.TA_fc> {
+        val readClassData : List<String> = tBookDatabase.getDBInstace(applicationContext).proDao().getFirstClassType("类别")
         val classList = mutableListOf(
-            OtherStatisticalRepository.TA(
+            OtherStatisticalRepository.TA_fc(
                 0.0,
                 0.0,
-                readClassData[0].firstClass,
-                readClassData[0].secondClass
+                readClassData[0]
             )
         )
         val n = readClassData.size
         for (index in 1 until n) {
-            classList.add(OtherStatisticalRepository.TA(0.0,0.0,readClassData[index].firstClass,readClassData[index].secondClass))
+            classList.add(OtherStatisticalRepository.TA_fc(0.0,0.0,readClassData[index]))
         }
-        println(classList)
         return classList
     }
     private fun classStatistical(
         accountingList:List<Accounting>,
-        classList:MutableList<OtherStatisticalRepository.TA>): MutableList<OtherStatisticalRepository.TA>{
+        classList:MutableList<OtherStatisticalRepository.TA_fc>): MutableList<OtherStatisticalRepository.TA_fc>{
         for (item in classList){
-            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getAllIncomeAccountingDataIn(item.firstClass,item.secondClass)
-            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getAllExpenditureAccountingDataIn(item.firstClass,item.secondClass)
+            val income = tBookDatabase.getDBInstace(applicationContext).actDao().getFirstClassIncomeAccountingDataIn(item.firstClass)
+            val outcome = tBookDatabase.getDBInstace(applicationContext).actDao().getFirstClassExpenditureAccountingDataIn(item.firstClass)
             item.inflowAmount = income
             item.outflowAmount = outcome
         }

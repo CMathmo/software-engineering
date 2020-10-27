@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
