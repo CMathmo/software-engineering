@@ -28,8 +28,6 @@ class PersonMsgActivity : AppCompatActivity(){
         super.onStart()
         if (pref.contains("email")){
             find<EditText>(R.id.text_email).setText(pref.getString("email",""))
-            println(2333333333333333)
-            println(pref.getString("email",""))
         }
         if (pref.contains("phone")){
             find<EditText>(R.id.text_phone).setText(pref.getString("phone",""))
@@ -55,7 +53,6 @@ class PersonMsgActivity : AppCompatActivity(){
                 editor.putString("phone", find<EditText>(R.id.text_phone).text.toString())
                 editor.putString("address", find<EditText>(R.id.text_address).text.toString())
                 editor.apply()
-                println(find<EditText>(R.id.text_email).text.toString() + find<EditText>(R.id.text_phone).text.toString() + find<EditText>(R.id.text_address).text.toString())
                 Toast.makeText(applicationContext,"信息保存！",Toast.LENGTH_SHORT).show()
             }
         }
