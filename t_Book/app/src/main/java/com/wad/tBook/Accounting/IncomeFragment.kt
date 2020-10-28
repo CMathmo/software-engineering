@@ -96,6 +96,9 @@ class IncomeFragment : Fragment() {
         class_fab.setOnClickListener {
             jumpEditActivity("类别")
         }
+        account_fab.setOnClickListener {
+            jumpEditActivity("账户")
+        }
         member_fab.setOnClickListener {
             jumpEditActivity("成员")
         }

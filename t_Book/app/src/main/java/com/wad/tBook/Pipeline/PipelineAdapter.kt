@@ -72,7 +72,7 @@ class PipelineAdapter (
                 viewHolder.textType.text = currentItem.accountingType
                 viewHolder.textAmount.text = currentItem.accountingAmount.toString()
                 viewHolder.textTime.text = currentItem.accountingTime
-                viewHolder.textClass.text = currentItem.accountingClass.firstClass + currentItem.accountingClass.secondClass
+                viewHolder.textClass.text = currentItem.accountingClass.firstClass + " : " + currentItem.accountingClass.secondClass
                 viewHolder.moreButton.setOnClickListener {
                     viewTypeList[position] = 1
                     notifyItemChanged(position)
@@ -86,14 +86,14 @@ class PipelineAdapter (
                 viewHolder.textType.text = currentItem.accountingType
                 viewHolder.textAmount.text = currentItem.accountingAmount.toString()
                 viewHolder.textTime.text = currentItem.accountingTime
-                viewHolder.textClass.text = currentItem.accountingClass.firstClass + currentItem.accountingClass.secondClass
-                viewHolder.textAccount.text = "账户：" + currentItem.accountingAcconut.firstClass + currentItem.accountingAcconut.secondClass
+                viewHolder.textClass.text = currentItem.accountingClass.firstClass + " : " + currentItem.accountingClass.secondClass
+                viewHolder.textAccount.text = "账户：" + currentItem.accountingAcconut.firstClass + " : " + currentItem.accountingAcconut.secondClass
                 viewHolder.textMember.text = "成员：" + if (currentItem.accountingMember == null) ""
-                else currentItem.accountingMember!!.firstClass + currentItem.accountingMember!!.secondClass
+                else currentItem.accountingMember!!.firstClass + " : " + currentItem.accountingMember!!.secondClass
                 viewHolder.textProject.text = "项目：" + if (currentItem.accountingProject == null) ""
-                else currentItem.accountingProject!!.firstClass + currentItem.accountingProject!!.secondClass
+                else currentItem.accountingProject!!.firstClass + " : " + currentItem.accountingProject!!.secondClass
                 viewHolder.textMerchant.text = "商家：" + if (currentItem.accountingMerchant == null) ""
-                    else currentItem.accountingMerchant!!.firstClass + currentItem.accountingMerchant!!.secondClass
+                    else currentItem.accountingMerchant!!.firstClass + " : " + currentItem.accountingMerchant!!.secondClass
                 viewHolder.textRemark.text = "备注：" + currentItem.accountingRemark
                 viewHolder.upButton.setOnClickListener {
                     viewTypeList[position] = 0

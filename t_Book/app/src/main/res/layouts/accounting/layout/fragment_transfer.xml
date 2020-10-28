@@ -235,6 +235,14 @@
             app:fab_colorPressed="@color/white_pressed"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/account_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/white_t"
+            app:fab_title="编辑账户"
+            app:fab_colorPressed="@color/white_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/member_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

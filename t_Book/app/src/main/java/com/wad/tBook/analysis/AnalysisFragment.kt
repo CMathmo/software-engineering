@@ -17,6 +17,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.room.Update
 import com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartModel
 import com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartType
 import com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartView
@@ -25,7 +26,9 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.TimePickerView
 import com.wad.tBook.R
+import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.room.Accounting
+import com.wad.tBook.room.AccountingDao
 import com.wad.tBook.room.tBookDatabase
 import kotlinx.android.synthetic.main.fragment_timeperiod_popupwindow.*
 import org.jetbrains.anko.find
@@ -63,7 +66,7 @@ enum class TimeButtonType {
 }
 //图表类型
 enum class ChartList{
-    PIE, BAR
+    PIE, BAR, Line
 }
 class AnalysisFragment : Fragment() {
 
@@ -135,14 +138,17 @@ class AnalysisFragment : Fragment() {
         //时间段选择，初始化为本周
         val TimePeriodText = view.findViewById<TextView>(R.id.time_period_text)
 
-        val weekList = DateUtil.getWeekRange(DateUtil.getLocalTimeNow())
+
+
+
+        val weekList = DateUtil.getWeekRange_00(DateUtil.getLocalTimeNow_00())
         val weekStartDate = weekList[0]
         val weekEndDate = weekList[1]
         StartDate = weekStartDate
         EndDate = weekEndDate
-        CurDate = DateUtil.getLocalTimeNow()
+        CurDate = DateUtil.getLocalTimeNow_00()
         TimePeriodText.setText(thisWeekTag + StartDate.split("年")[1] + " ~ " + EndDate.split("年")[1])
-        loadPeriodPopMenu(TimePeriodText)
+        loadPeriodPopMenu(TimePeriodText, ChartRadioGroup)
 
 
 
@@ -187,6 +193,11 @@ class AnalysisFragment : Fragment() {
                     this.ChartType = ChartList.BAR
                     this.UpdateChart()
                     //Toast.makeText(context, "柱状图", Toast.LENGTH_SHORT).show()
+                }
+
+                R.id.Line_radioButton ->{
+                    this.ChartType = ChartList.Line
+                    this.UpdateChart()
                 }
             }
         }
@@ -275,12 +286,13 @@ class AnalysisFragment : Fragment() {
     }
 
     //弹出时间段选择菜单
-    private fun loadPeriodPopMenu(TimePeriodText:TextView){
+    private fun loadPeriodPopMenu(TimePeriodText:TextView, ChartRadioGroup:RadioGroup){
 
         val window = PopupWindow(context)
         window.setOutsideTouchable(true)
         window.setFocusable(false)
         window.contentView = timePeriodView
+
 
         var oldTimeRange: TimeRangeType = TimeRange
 
@@ -351,6 +363,8 @@ class AnalysisFragment : Fragment() {
             )
 
             dayView.setOnClickListener {
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Pie_radioButton).setChecked(true)
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Line_radioButton).setVisibility(View.GONE)
                 TimeRange = TimeRangeType.DAY
                 for (t in marks.keys) {
                     if (t == "daySelSgn") {
@@ -364,6 +378,8 @@ class AnalysisFragment : Fragment() {
             }
 
             monthView.setOnClickListener {
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Pie_radioButton).setChecked(true)
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Line_radioButton).setVisibility(View.VISIBLE)
                 TimeRange = TimeRangeType.MONTH
                 for (t in marks.keys) {
                     if (t == "monthSelSgn") {
@@ -377,6 +393,8 @@ class AnalysisFragment : Fragment() {
             }
 
             weekView.setOnClickListener {
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Pie_radioButton).setChecked(true)
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Line_radioButton).setVisibility(View.VISIBLE)
                 TimeRange = TimeRangeType.WEEK
                 for (t in marks.keys) {
                     if (t == "weekSelSgn") {
@@ -390,6 +408,8 @@ class AnalysisFragment : Fragment() {
             }
 
             yearView.setOnClickListener {
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Pie_radioButton).setChecked(true)
+                ChartRadioGroup.findViewById<RadioButton>(R.id.Line_radioButton).setVisibility(View.VISIBLE)
                 TimeRange = TimeRangeType.YEAR
                 for (t in marks.keys) {
                     if (t == "yearSelSgn") {
@@ -447,8 +467,9 @@ class AnalysisFragment : Fragment() {
             }
 
             usrCfrmBtn.setOnClickListener {
-
                 if (DateUtil.AearlierThanB(usrStartDate.text.toString(), usrEndDate.text.toString())){
+                    ChartRadioGroup.findViewById<RadioButton>(R.id.Line_radioButton).setVisibility(View.GONE)
+                    ChartRadioGroup.findViewById<RadioButton>(R.id.Pie_radioButton).setChecked(true)
                     //window.setOutsideTouchable(true)
                     StartDate = usrStartDate.text.toString()
                     EndDate = usrEndDate.text.toString()
@@ -474,11 +495,19 @@ class AnalysisFragment : Fragment() {
 
 
 
-
     //更新图表
     private fun UpdateChart(){
+        if (ChartType == ChartList.Line){
+            UpdateLineChart()
+        }
+        else{
+            UpdatePieBarChart()
+        }
+    }
+
+    private fun UpdatePieBarChart(){
         //Toast.makeText(context, "new chart", Toast.LENGTH_SHORT).show()
-        val Accountings = getAccountingsWithinSelectedPeriod()
+        val Accountings = getAccountingsWithinSelectedPeriod(StartDate, EndDate)
         println("update getAccountings: $Accountings")
         //一级类型
         var MainCateMap :MutableMap<String, Double> = mutableMapOf()
@@ -487,11 +516,13 @@ class AnalysisFragment : Fragment() {
         //账户类型
         var AccountMap :MutableMap<String, Double> = mutableMapOf()
 
+        val typeName: String
+
         //统计数据
         println("type: ${this.TypeSelected}")
         when(this.TypeSelected){
             InExType.INCOME -> {
-                Log.i(TAG, "Hey")
+                typeName = "收入"
                 if (Accountings != null) {
                     for (account in Accountings ){
                         if (account.accountingType == "收入"){
@@ -509,7 +540,7 @@ class AnalysisFragment : Fragment() {
                 }
             }
             InExType.EXPENSE -> {
-                println("支出类型")
+                typeName = "支出"
                 if (Accountings != null) {
                     for (account in Accountings ){
                         if (account.accountingType == "支出"){
@@ -543,19 +574,82 @@ class AnalysisFragment : Fragment() {
         println("AccountMap: $AccountMap" )
 
         //生成图表
-        generateChartwithData(aaChartView,dataMap)
+        generateChartwithData(aaChartView,dataMap, typeName)
+    }
+
+    private fun UpdateLineChart(){
+        var timeNameList :MutableList<String> = mutableListOf()
+        var timeRangeList :MutableList<MutableList<String>> = mutableListOf()
+        val sumList :MutableList<Double> = mutableListOf()
+        //依据当前时间段，确认时间单位（年对应月，月或者周对应日）
+        when(TimeRange){
+            TimeRangeType.YEAR ->{
+                val curYearNum = DateUtil.getYear(StartDate)
+                val curYear = if(curYearNum < 10) "0"+curYearNum.toString() else curYearNum.toString()
+                timeNameList = mutableListOf("01月", "02月", "03月","04月", "05月", "06月","07月", "08月", "09月","10月", "11月", "12月", )
+                for (month in timeNameList){
+                    timeRangeList.add(mutableListOf(curYear+"年"+month+"01日",curYear+"年"+month+"31日" ))
+                }
+            }
+            TimeRangeType.MONTH, TimeRangeType.WEEK ->{
+                var tmpDate = StartDate
+                while(DateUtil.AearlierThanB(tmpDate, EndDate)){
+                    timeNameList.add(tmpDate)
+                    tmpDate = DateUtil.OneDayAfter_00(tmpDate)
+                }
+                for (i in 0..timeNameList.lastIndex){
+                    timeRangeList.add(mutableListOf(timeNameList[i], timeNameList[i]))
+                    timeNameList[i] = timeNameList[i].split("年")[1].replace("月",".").replace("日","")
+                }
+            }
+        }
+
+        when(TypeSelected){
+            InExType.INCOME ->{
+                for (timeRange in timeRangeList){
+                    println("timeRange, $timeRange")
+                    activity?.let {
+                        tBookDatabase.getDBInstace(it).actDao().readAllDateFromToAndAbout(timeRange[0], timeRange[1], "收入")
+                            .let { sumList.add(it) }
+                }
+            }
+        }
+            InExType.EXPENSE ->{
+                for (timeRange in timeRangeList){
+                    activity?.let {
+                        tBookDatabase.getDBInstace(it).actDao().readAllDateFromToAndAbout(timeRange[0], timeRange[1], "支出")
+                            .let { sumList.add(it) }
+                    }
+                }
+            }
+        }
+
+        val typeName = if(TypeSelected == InExType.INCOME)"收入" else "支出"
+
+        //折线图模型
+        val aaLineModel : AAChartModel = AAChartModel()
+            .chartType(AAChartType.Line)
+            .title("总"+typeName+": "+ sumList.sum()+"元")
+            .dataLabelsEnabled(true)
+            .legendEnabled(false)
+            .yAxisTitle("花费")
+            .categories(timeNameList.toTypedArray())
+            .backgroundColor("#FFF9C4")
+            .series(arrayOf(
+                AASeriesElement()
+                    .data(sumList.toTypedArray())
+            ))
+
+        aaChartView.aa_drawChartWithChartModel(aaLineModel)
     }
 
     //获取满足时间段要求的数据
-    private fun getAccountingsWithinSelectedPeriod() : List<Accounting>? {
-
-        return context?.let { tBookDatabase.getDBInstace(it).actDao().getAllAccountingData() }
-            ?.filter { DateUtil.AearlierThanB(StartDate, it.accountingTime) && DateUtil.AearlierThanB(it.accountingTime, EndDate) }
-
+    private fun getAccountingsWithinSelectedPeriod(start:String, end: String) : List<Accounting>? {
+                return context?.let { tBookDatabase.getDBInstace(it).actDao().readAllDateFromAndTo(start, end) }
     }
 
         //依据传入的数据表和用户选定的类型生成相应的图表
-    private fun generateChartwithData(aaChartView :AAChartView, dataMap :Map<String, Double>) {
+    private fun generateChartwithData(aaChartView :AAChartView, dataMap :Map<String, Double>, typeName: String) {
             val categories = dataMap.keys.toTypedArray()
             val values :Array<Any> = dataMap.values.toTypedArray()
             //存储 <类型，数值>对 的数组
@@ -564,12 +658,18 @@ class AnalysisFragment : Fragment() {
                 pairs.add(setOf(categories[i], values[i]))
             }
 
+            var sum: Double = 0.0
+            for(value in dataMap.values){
+                sum += value
+            }
+
             //饼图模型
             val aaPieModel : AAChartModel = AAChartModel()
                 .chartType(AAChartType.Pie)
-//            .title("title")
+                .title("总"+typeName+": "+sum.toString()+"元")
                 .dataLabelsEnabled(true)
                 .legendEnabled(false)
+                .backgroundColor("#FFF9C4")
                 .series(arrayOf(
                     AASeriesElement()
                         .data(pairs.toTypedArray())
@@ -578,9 +678,11 @@ class AnalysisFragment : Fragment() {
             //柱状图模型
             val aaBarModel : AAChartModel = AAChartModel()
                 .chartType(AAChartType.Bar)
-//            .title("title")
+                .title("总"+typeName+": "+sum.toString()+"元")
+                .yAxisTitle("花费")
                 .dataLabelsEnabled(true)
                 .legendEnabled(false)
+                .backgroundColor("#FFF9C4")
                 .categories(categories)
                 .series(arrayOf(
                     AASeriesElement()
@@ -606,7 +708,7 @@ class AnalysisFragment : Fragment() {
                 TimePeriodText.setText(thisDayTag+ StartDate)
             }
             TimeRangeType.WEEK -> {
-                val weekList = DateUtil.getWeekRange(CurDate)
+                val weekList = DateUtil.getWeekRange_00(CurDate)
                 StartDate = weekList[0]
                 EndDate = weekList[1]
                 TimePeriodText.setText(thisWeekTag+ StartDate.split("年")[1] + " ~ " + EndDate.split("年")[1])
@@ -615,13 +717,13 @@ class AnalysisFragment : Fragment() {
                 val curmonth = DateUtil.getMonth(CurDate)
                 val curyear = DateUtil.getYear(CurDate)
                 val lastDayOfMonth = if (DateUtil.isLeapYear(curyear)) DateUtil.LeapYearMap[curmonth] else DateUtil.NormalYearMap[curmonth]
-                StartDate = DateUtil.date(curyear, curmonth, 1)
-                EndDate = DateUtil.date(curyear, curmonth, lastDayOfMonth!!)
+                StartDate = DateUtil.date_00(curyear, curmonth, 1)
+                EndDate = DateUtil.date_00(curyear, curmonth, lastDayOfMonth!!)
                 TimePeriodText.setText(thisMonthTag+ curmonth.toString() + "月1日" + " ~ " + curmonth.toString() + "月" + lastDayOfMonth.toString() + "日")}
             TimeRangeType.YEAR -> {
                 val curyear = DateUtil.getYear(CurDate)
-                StartDate = DateUtil.date(curyear,1,1)
-                EndDate = DateUtil.date(curyear,12,31)
+                StartDate = DateUtil.date_00(curyear,1,1)
+                EndDate = DateUtil.date_00(curyear,12,31)
                 TimePeriodText.setText(thisYearTag+ curyear.toString() + "年1月1日" + " ~ " + "12月31日")
             }
             TimeRangeType.USER_DEFINED -> {
@@ -637,20 +739,20 @@ class AnalysisFragment : Fragment() {
     private fun BackForthTimeButtonAction(buttonType: TimeButtonType, TimePeriodText :TextView) {
         when (TimeRange) {
             TimeRangeType.DAY -> {
-                StartDate = if(buttonType == TimeButtonType.BACK) DateUtil.OneDayEarlier(StartDate) else DateUtil.OneDayAfter(EndDate)
+                StartDate = if(buttonType == TimeButtonType.BACK) DateUtil.OneDayEarlier_00(StartDate) else DateUtil.OneDayAfter_00(EndDate)
                 EndDate = StartDate
                 val tag = if (CurDate == StartDate) thisDayTag else ""
                 TimePeriodText.setText(tag + StartDate)
             }
             TimeRangeType.WEEK -> {
-                val weeklst = if(buttonType == TimeButtonType.BACK) DateUtil.getWeekRange(DateUtil.OneDayEarlier(StartDate)) else DateUtil.getWeekRange(DateUtil.OneDayAfter(EndDate))
+                val weeklst = if(buttonType == TimeButtonType.BACK) DateUtil.getWeekRange_00(DateUtil.OneDayEarlier_00(StartDate)) else DateUtil.getWeekRange_00(DateUtil.OneDayAfter_00(EndDate))
                 StartDate = weeklst[0]
                 EndDate = weeklst[1]
                 val tag = if (DateUtil.AearlierThanB(StartDate, CurDate) && DateUtil.AearlierThanB(CurDate, EndDate)) thisWeekTag else ""
                 TimePeriodText.setText(tag + StartDate.split("年")[1] + " ~ " + EndDate.split("年")[1])
             }
             TimeRangeType.MONTH -> {
-                val monthlst = if(buttonType == TimeButtonType.BACK) DateUtil.OneMonthEarlier(StartDate) else DateUtil.OneMonthAfter(EndDate)
+                val monthlst = if(buttonType == TimeButtonType.BACK) DateUtil.OneMonthEarlier_00(StartDate) else DateUtil.OneMonthAfter_00(EndDate)
                 StartDate = monthlst[0]
                 EndDate = monthlst[1]
                 val tag = if (DateUtil.getMonth(CurDate) == DateUtil.getMonth(StartDate) && DateUtil.getYear(StartDate) == DateUtil.getYear(CurDate)) thisMonthTag else ""
@@ -658,8 +760,8 @@ class AnalysisFragment : Fragment() {
             }
             TimeRangeType.YEAR -> {
                 val year = DateUtil.getYear(StartDate)
-                StartDate = if (buttonType == TimeButtonType.BACK) DateUtil.date(year-1, 1, 1) else DateUtil.date(year+1, 1, 1)
-                EndDate = if (buttonType == TimeButtonType.BACK) DateUtil.date(year-1, 12, 31) else DateUtil.date(year+1, 12, 31)
+                StartDate = if (buttonType == TimeButtonType.BACK) DateUtil.date_00(year-1, 1, 1) else DateUtil.date_00(year+1, 1, 1)
+                EndDate = if (buttonType == TimeButtonType.BACK) DateUtil.date_00(year-1, 12, 31) else DateUtil.date_00(year+1, 12, 31)
                 val tag = if (DateUtil.getYear(CurDate) == DateUtil.getYear(StartDate)) thisYearTag else ""
                 TimePeriodText.setText(tag+ StartDate + " ~ " + EndDate.split("年")[1])
             }
