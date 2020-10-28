@@ -68,7 +68,7 @@ class MainActivity : FragmentActivity() {
             }
 
         }
-        initTesttData()
+        initTestData()
     }
 
     override fun onStart() {
@@ -568,7 +568,7 @@ class MainActivity : FragmentActivity() {
         }.start()
     }
 
-    fun initTesttData(){
+    fun initTestData(){
         val roomdb = tBookDatabase.getDBInstace(this)
         roomdb.actDao().deleteAll()
         for(i in 1..3000){
