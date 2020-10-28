@@ -20,12 +20,11 @@ import com.google.android.material.tabs.TabLayout
 import com.wad.tBook.pipeline.PipelineFragment
 import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.analysis.AnalysisFragment
-import com.wad.tBook.room.Property
-import com.wad.tBook.room.getTestData
-import com.wad.tBook.room.tBookDatabase
 import com.wad.tBook.setting.SettingFragment
 import com.wad.tBook.statistical.datepipeline.DatePipilineActivity
 import com.wad.tBook.account.AccountFragment
+import com.wad.tBook.analysis.DateUtil
+import com.wad.tBook.room.*
 import com.wad.tBook.statistical.others.OtherStatisticalActivity
 import kotlinx.android.synthetic.main.activity_show.*
 import org.jetbrains.anko.find
@@ -69,7 +68,7 @@ class MainActivity : FragmentActivity() {
             }
 
         }
-
+        initTesttData()
     }
 
     override fun onStart() {
@@ -532,6 +531,41 @@ class MainActivity : FragmentActivity() {
 
             }
         }.start()
+    }
+
+    fun initTesttData(){
+        val roomdb = tBookDatabase.getDBInstace(this)
+        roomdb.actDao().deleteAll()
+        for(i in 1..3000){
+            val type = mutableListOf<String>("收入","支出","转账").random()
+            val items = mutableListOf<String>("类别","账户","账户","商家","项目","成员")
+            val results = mutableListOf<MultilevelClassification>()
+            val date = DateUtil.getRandomDateFromTo(2018,2020)
+            for(item in items){
+                val fclass = roomdb.proDao().getFirstClassFrom(type,item).random()
+                val sclass = roomdb.proDao().getSecondClassFrom(type,item,fclass).random()
+                results.add(MultilevelClassification(fclass,sclass))
+            }
+            val accounting = Accounting(
+                accountingType = type,
+                accountingAmount = (1..5000).random().toDouble(),
+                accountingClass = results[0],
+                accountingAcconut = results[1],
+                accountingAcconut_2 = if (type == "转账"){
+                    results[2]
+                }else{
+                    null
+                },
+                accountingMerchant = results[3],
+                accountingProject = results[4],
+                accountingMember = results[5],
+                accountingTime = date,
+                accountingRemark = ""
+            )
+            Thread{
+                roomdb.actDao().addAccountingData(accounting)
+            }.start()
+        }
     }
 }
 

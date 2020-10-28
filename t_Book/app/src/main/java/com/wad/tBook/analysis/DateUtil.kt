@@ -14,6 +14,16 @@ object DateUtil{
     //月份对应的天数
     val NormalYearMap :Map<Int, Int> = mapOf(1 to 31, 2 to 28, 3 to 31, 4 to 30, 5 to 31, 6 to 30, 7 to 31, 8 to 31, 9 to 30, 10 to 31, 11 to 30, 12 to 31)
     val LeapYearMap :Map<Int, Int> = mapOf(1 to 31, 2 to 29, 3 to 31, 4 to 30, 5 to 31, 6 to 30, 7 to 31, 8 to 31, 9 to 30, 10 to 31, 11 to 30, 12 to 31)
+
+    //获取指定年指定月的最后一天
+    fun getEndOfMonth(year:Int,month:Int) :Int?{
+        return if(isLeapYear(year)){
+            NormalYearMap[month]
+        }else{
+            LeapYearMap[month]
+        }
+    }
+
     //获取年份
     fun getYear(date :String) :Int{
         return date.split("年")[0].toInt()
@@ -28,9 +38,9 @@ object DateUtil{
     }
 
     //输入年，月，日，形成规定格式的字符串
-    fun date(year: Int, month: Int, day: Int) :String{
-        return year.toString() + "年" + month.toString() + "月" + day.toString() + "日"
-    }
+//    fun date(year: Int, month: Int, day: Int) :String{
+//        return year.toString() + "年" + month.toString() + "月" + day.toString() + "日"
+//    }
 
     //输入年，月，日，形成规定格式的字符串
     fun date_00(year: Int, month: Int, day: Int) :String{
@@ -109,74 +119,74 @@ object DateUtil{
     }
 
     //获取前一天的日期
-    fun OneDayEarlier(date: String) :String {
-        val year = getYear(date)
-        val month = getMonth(date)
-        val day = getDay(date)
-        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
-
-        //不是1号
-        if (day > 1) {return year.toString() + "年" + month.toString() + "月" + (day-1).toString() + "日"}
-        //不是1月
-        else if (day == 1 && month > 1) {return year.toString() + "年" + (month-1).toString() + "月" + YearMap[month-1].toString() + "日"}
-        //1月1日
-        else {return (year-1).toString() + "年12月31日"}
-    }
+//    fun OneDayEarlier(date: String) :String {
+//        val year = getYear(date)
+//        val month = getMonth(date)
+//        val day = getDay(date)
+//        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
+//
+//        //不是1号
+//        if (day > 1) {return year.toString() + "年" + month.toString() + "月" + (day-1).toString() + "日"}
+//        //不是1月
+//        else if (day == 1 && month > 1) {return year.toString() + "年" + (month-1).toString() + "月" + YearMap[month-1].toString() + "日"}
+//        //1月1日
+//        else {return (year-1).toString() + "年12月31日"}
+//    }
     //获取后一天的日期
-    fun OneDayAfter(date: String) :String {
-        val year = getYear(date)
-        val month = getMonth(date)
-        val day = getDay(date)
-        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
-        val lastDayOfMonth = YearMap[month]
-
-        //不是最后一天
-        if (day < lastDayOfMonth?:31) {return year.toString() + "年" + month.toString() + "月" + (day+1).toString() + "日"}
-        //不是12月
-        else if (day == lastDayOfMonth && month < 12) {return year.toString() + "年" + (month+1).toString() + "月1日" }
-        //12月31日
-        else {return (year+1).toString() + "年1月1日"}
-    }
+//    fun OneDayAfter(date: String) :String {
+//        val year = getYear(date)
+//        val month = getMonth(date)
+//        val day = getDay(date)
+//        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
+//        val lastDayOfMonth = YearMap[month]
+//
+//        //不是最后一天
+//        if (day < lastDayOfMonth?:31) {return year.toString() + "年" + month.toString() + "月" + (day+1).toString() + "日"}
+//        //不是12月
+//        else if (day == lastDayOfMonth && month < 12) {return year.toString() + "年" + (month+1).toString() + "月1日" }
+//        //12月31日
+//        else {return (year+1).toString() + "年1月1日"}
+//    }
 
     //获取前一个月的起止日期
-    fun OneMonthEarlier(date: String) :List<String> {
-        val year = getYear(date)
-        val month = getMonth(date)
-        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
-        //不是一月
-        if (month > 1) {
-            val lastDayOfMonth = YearMap[month-1]
-            val start = DateUtil.date(year, month-1, 1)
-            val end = DateUtil.date(year, month-1, lastDayOfMonth?:31)
-            return listOf(start, end)
-        }
-        //一月
-        else {
-            val start = DateUtil.date(year-1, 12,1)
-            val end = DateUtil.date(year-1, 12, 31)
-            return listOf(start, end)
-        }
-    }
+//    fun OneMonthEarlier(date: String) :List<String> {
+//        val year = getYear(date)
+//        val month = getMonth(date)
+//        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
+//        //不是一月
+//        if (month > 1) {
+//            val lastDayOfMonth = YearMap[month-1]
+//            val start = DateUtil.date(year, month-1, 1)
+//            val end = DateUtil.date(year, month-1, lastDayOfMonth?:31)
+//            return listOf(start, end)
+//        }
+//        //一月
+//        else {
+//            val start = DateUtil.date(year-1, 12,1)
+//            val end = DateUtil.date(year-1, 12, 31)
+//            return listOf(start, end)
+//        }
+//    }
 
     //获取后一个月的起止日期
-    fun OneMonthAfter(date: String) :List<String> {
-        val year = getYear(date)
-        val month = getMonth(date)
-        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
-        //不是12月
-        if (month < 12) {
-            val lastDayOfMonth = YearMap[month+1]
-            val start = DateUtil.date(year, month+1, 1)
-            val end = DateUtil.date(year, month+1, lastDayOfMonth?:31)
-            return listOf(start, end)
-        }
-        //12月
-        else {
-            val start = DateUtil.date(year+1, 1,1)
-            val end = DateUtil.date(year+1, 1, 31)
-            return listOf(start, end)
-        }
-    }
+//    fun OneMonthAfter(date: String) :List<String> {
+//        val year = getYear(date)
+//        val month = getMonth(date)
+//        val YearMap = if (isLeapYear(year)) LeapYearMap else NormalYearMap
+//        //不是12月
+//        if (month < 12) {
+//            val lastDayOfMonth = YearMap[month+1]
+//            val start = DateUtil.date(year, month+1, 1)
+//            val end = DateUtil.date(year, month+1, lastDayOfMonth?:31)
+//            return listOf(start, end)
+//        }
+//        //12月
+//        else {
+//            val start = DateUtil.date(year+1, 1,1)
+//            val end = DateUtil.date(year+1, 1, 31)
+//            return listOf(start, end)
+//        }
+//    }
 
     //获取前一天的日期
     fun OneDayEarlier_00(date: String) :String {
@@ -277,48 +287,48 @@ object DateUtil{
     }
 
     //获取这天所在周的起始日和截止日日期
-    fun getWeekRange(date :String) :List<String> {
-        //val thisyear = getYear(date)
-        val thisday = getWhichDay(date) //这一天是星期几
-        //val dayNum = getDayOfYear(date)  //今年的第几天
-        //val StartOfYear = 1
-        //val EndOfYear = if (isLeapYear(getYear(date))) 366 else 365
-        val fromEndOfWeek = 7 - thisday
-        val fromStartOfWeek = thisday - 1
-        //val fromEndOfYear = EndOfYear - dayNum
-        //val fromStartOfYear = dayNum - StartOfYear
-
-//        //如果这一周都在同一年
-//        if (fromEndOfWeek <= fromEndOfYear && fromStartOfWeek <= fromStartOfYear) {
-//            val MonDate = getDatefromDayNumber(thisyear, dayNum - fromStartOfWeek)
-//            val SunDate = getDatefromDayNumber(thisyear, dayNum + fromEndOfWeek)
-//            return listOf(MonDate, SunDate)
-//        }
+//    fun getWeekRange(date :String) :List<String> {
+//        //val thisyear = getYear(date)
+//        val thisday = getWhichDay(date) //这一天是星期几
+//        //val dayNum = getDayOfYear(date)  //今年的第几天
+//        //val StartOfYear = 1
+//        //val EndOfYear = if (isLeapYear(getYear(date))) 366 else 365
+//        val fromEndOfWeek = 7 - thisday
+//        val fromStartOfWeek = thisday - 1
+//        //val fromEndOfYear = EndOfYear - dayNum
+//        //val fromStartOfYear = dayNum - StartOfYear
 //
-//        //如果处于年底，出现跨年
-//        else if (fromEndOfWeek > fromEndOfYear) {
-//            val MonDate = getDatefromDayNumber(thisyear, dayNum - fromStartOfWeek)
-//            val SunDate = (thisyear+1).toString() + "年1月" + (fromEndOfWeek-fromEndOfYear).toString() + "日"
-//            return listOf(MonDate, SunDate)
-//        }
-//        //如果处于年初，出现跨年
-//        else if (fromStartOfWeek > fromStartOfYear) {
-//            val MonDate = (thisyear-1).toString() + "年12月" + (31-(fromStartOfWeek-fromStartOfYear)) + "日"
-//            val SunDate = getDatefromDayNumber(thisyear, dayNum + fromEndOfWeek)
-//            return listOf(MonDate, SunDate)
-//        }
+////        //如果这一周都在同一年
+////        if (fromEndOfWeek <= fromEndOfYear && fromStartOfWeek <= fromStartOfYear) {
+////            val MonDate = getDatefromDayNumber(thisyear, dayNum - fromStartOfWeek)
+////            val SunDate = getDatefromDayNumber(thisyear, dayNum + fromEndOfWeek)
+////            return listOf(MonDate, SunDate)
+////        }
+////
+////        //如果处于年底，出现跨年
+////        else if (fromEndOfWeek > fromEndOfYear) {
+////            val MonDate = getDatefromDayNumber(thisyear, dayNum - fromStartOfWeek)
+////            val SunDate = (thisyear+1).toString() + "年1月" + (fromEndOfWeek-fromEndOfYear).toString() + "日"
+////            return listOf(MonDate, SunDate)
+////        }
+////        //如果处于年初，出现跨年
+////        else if (fromStartOfWeek > fromStartOfYear) {
+////            val MonDate = (thisyear-1).toString() + "年12月" + (31-(fromStartOfWeek-fromStartOfYear)) + "日"
+////            val SunDate = getDatefromDayNumber(thisyear, dayNum + fromEndOfWeek)
+////            return listOf(MonDate, SunDate)
+////        }
+////
+////        //debug
+////        return listOf("unexpected error")
 //
-//        //debug
-//        return listOf("unexpected error")
-
-        var MonDate :String = date
-        var SunDate :String = date
-        for (i in 1..fromStartOfWeek) MonDate = DateUtil.OneDayEarlier(MonDate)
-        for (i in 1..fromEndOfWeek) SunDate = DateUtil.OneDayAfter(SunDate)
-
-        return listOf(MonDate, SunDate)
-
-    }
+//        var MonDate :String = date
+//        var SunDate :String = date
+//        for (i in 1..fromStartOfWeek) MonDate = DateUtil.OneDayEarlier(MonDate)
+//        for (i in 1..fromEndOfWeek) SunDate = DateUtil.OneDayAfter(SunDate)
+//
+//        return listOf(MonDate, SunDate)
+//
+//    }
 
     fun getWeekRange_00(date :String) :List<String> {
         //val thisyear = getYear(date)
@@ -404,6 +414,20 @@ object DateUtil{
         Log.d(TAG,"momo:"+ year + "年" + month + "月" + day + "日")
         return year + "年" + month + "月" + day + "日"
     }
+
+    fun getRandomDate(year:Int):String{
+        val month = (1..12).random()
+        val day = (1..getEndOfMonth(year,month)!!).random()
+        return String.format("%04d",year) + "年" + String.format("%02d",month) + "月" + String.format("%02d",day) + "日"
+    }
+
+    fun getRandomDateFromTo(startYear:Int,endYear:Int):String{
+        val year =(startYear..endYear).random()
+        val month = (1..12).random()
+        val day = (1..getEndOfMonth(year,month)!!).random()
+        return String.format("%04d",year) + "年" + String.format("%02d",month) + "月" + String.format("%02d",day) + "日"
+    }
+
 }
 
 
