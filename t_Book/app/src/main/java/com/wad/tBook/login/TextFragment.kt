@@ -36,7 +36,7 @@ class TextFragment : Fragment() {
     private val CUSTOM_PREF_NAME = "User_data"
     private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
     private val editor:SharedPreferences.Editor = sharedPreferences.edit()
-    var originalpassword = sharedPreferences.getString("textpassword","0")
+    var originalpassword = sharedPreferences.getString("textpassword","there is no password")
     var ischeckremeber = sharedPreferences.getInt("remeberpassword",0)//来确定是否记住密码
 
     override fun onCreateView(
@@ -72,7 +72,7 @@ class TextFragment : Fragment() {
 
         if (ischeckremeber == 1){
             loginPassword.setText(originalpassword)
-            remeber_Password.isChecked
+            remeber_Password.isChecked = true
         }
 
     }

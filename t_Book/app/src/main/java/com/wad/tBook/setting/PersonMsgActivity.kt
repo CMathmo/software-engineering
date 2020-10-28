@@ -6,8 +6,10 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.wad.tBook.MainActivity
 import com.wad.tBook.MyApplication
@@ -22,6 +24,22 @@ class PersonMsgActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_msg)
+        val actionBar: ActionBar? = supportActionBar
+
+        if(actionBar != null){
+            actionBar.setHomeButtonEnabled(true)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                this.finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {
