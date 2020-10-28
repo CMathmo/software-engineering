@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wad.tBook.statistical.AccountDetailActivity">
+    tools:context="com.wad.tBook.account.AccountDetailActivity">
 
     <View
         android:id="@+id/view"
         android:layout_width="375dp"
         android:layout_height="112dp"
         android:layout_marginTop="40dp"
-        android:background="#FFE082"
+        android:background="#D7FFE57F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,8 @@
         android:layout_width="253dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/button_shape3"
+        android:divider="@android:drawable/divider_horizontal_textfield"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -32,7 +33,6 @@
             android:id="@+id/account_income_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#42A5F5"
             android:text="IncomeDetail"
             android:textColor="@color/common_main_gray"
             android:textSize="18sp" />
@@ -41,7 +41,6 @@
             android:id="@+id/account_outcome_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#64B5F6"
             android:text="OutcomeDetail"
             android:textAlignment="viewStart"
             android:textColor="@color/common_main_gray"
@@ -51,7 +50,6 @@
             android:id="@+id/account_transfer_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#90CAF9"
             android:shadowColor="@color/common_white"
             android:text="TransferDetail"
             android:textColor="@color/common_main_gray"
@@ -64,7 +62,7 @@
         android:layout_width="78dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/button_shape3"
         android:gravity="center"
         android:text="Class"
         android:textSize="18sp"
@@ -79,7 +77,7 @@
         android:layout_width="364dp"
         android:layout_height="397dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/button_shape2"
+        android:background="#D2FFE57F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,11 +88,10 @@
         android:id="@+id/AccDetailedChartView"
         android:layout_width="335dp"
         android:layout_height="315dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/account_analysis_view"
         app:layout_constraintEnd_toEndOf="@+id/account_analysis_view"
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="@+id/account_analysis_view"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintTop_toTopOf="@+id/account_analysis_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
