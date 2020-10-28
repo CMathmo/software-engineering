@@ -11,7 +11,7 @@
         android:layout_width="375dp"
         android:layout_height="112dp"
         android:layout_marginTop="40dp"
-        android:background="@color/common_main_pink"
+        android:background="#FFE082"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,9 +19,9 @@
 
     <LinearLayout
         android:layout_width="253dp"
-        android:layout_height="76dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="#FFEB3B"
+        android:background="@drawable/button_shape"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -32,29 +32,29 @@
             android:id="@+id/account_income_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="#42A5F5"
             android:text="IncomeDetail"
-            android:textColor="#3F51B5"
+            android:textColor="@color/common_main_gray"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/account_outcome_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="#64B5F6"
             android:text="OutcomeDetail"
             android:textAlignment="viewStart"
-            android:textColor="#3F51B5"
+            android:textColor="@color/common_main_gray"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/account_transfer_detail"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:background="@color/colorAccent"
+            android:layout_height="wrap_content"
+            android:background="#90CAF9"
             android:shadowColor="@color/common_white"
             android:text="TransferDetail"
-            android:textColor="#3F51B5"
+            android:textColor="@color/common_main_gray"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -64,7 +64,7 @@
         android:layout_width="78dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_shape"
         android:gravity="center"
         android:text="Class"
         android:textSize="18sp"
@@ -79,7 +79,7 @@
         android:layout_width="364dp"
         android:layout_height="397dp"
         android:layout_marginTop="32dp"
-        android:background="@color/common_main_pink"
+        android:background="@drawable/button_shape2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"

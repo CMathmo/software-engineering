@@ -47,11 +47,13 @@ class SettingPassword : AppCompatActivity() {
 
         fingerprint_button.setOnClickListener {
             if(stateNumber == 1){
+                fingerprint_button.isChecked == false
                 editor.putInt("fingerprintpassword",0)
                 editor.apply()
             }
             else
             {
+                fingerprint_button.isChecked == true
                 editor.putInt("fingerprintpassword",1)
                 editor.apply()
             }
