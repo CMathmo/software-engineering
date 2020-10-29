@@ -31,11 +31,11 @@ class RegisterwithNinelock : AppCompatActivity(), NineLockListener {
         val password = stringBuffer.toString()
         editor.putString("ninelockpassword",password)
         editor.apply()
-        Toast.makeText(this,"修改密码成功！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"修改密码成功！", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun onError() {
-        Toast.makeText(this,"出现问题，请重新绘制图案", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"出现问题，请重新绘制图案", Toast.LENGTH_SHORT).show()
     }
 }

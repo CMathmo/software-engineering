@@ -10,18 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pipeline_recycle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:foregroundGravity="center_vertical|center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -29,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
@@ -48,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
+                android:background="#FFFFFF"
                 android:text="XX.XX ~ XX.XX"
                 android:textAlignment="center"
                 android:textSize="18sp"
@@ -56,8 +46,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/forth_time_button"
                 app:layout_constraintStart_toEndOf="@+id/back_time_button"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SmallSp"
-                android:background="#FFFFFF"/>
+                tools:ignore="SmallSp" />
 
             <Button
                 android:id="@+id/forth_time_button"
@@ -72,6 +61,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pipeline_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:foregroundGravity="center_vertical|center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
