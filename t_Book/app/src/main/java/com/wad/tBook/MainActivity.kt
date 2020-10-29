@@ -68,7 +68,7 @@ class MainActivity : FragmentActivity() {
             }
 
         }
-        initTestData()
+        //initTestData()
     }
 
     override fun onStart() {
@@ -531,42 +531,6 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    fun initTestData(){
-        Thread{
-            val roomdb = tBookDatabase.getDBInstace(this.application)
-            if(roomdb.actDao().getAllAccountingData().size > 1000) return@Thread
-            roomdb.actDao().deleteAll()
-            for(i in 1..3000){
-                val type = mutableListOf<String>("收入","支出","转账").random()
-                val items = mutableListOf<String>("类别","账户","账户","商家","项目","成员")
-                val results = mutableListOf<MultilevelClassification>()
-                val date = DateUtil.getRandomDateFromTo(2018,2020)
-                for(item in items){
-                    //Log.d(TAG,"momo-test:"+type+item+roomdb.proDao().getFirstClassFrom("收入","类别"))
-                    val fclass = roomdb.proDao().getFirstClassFrom(type,item).random()
-                    val sclass = roomdb.proDao().getSecondClassFrom(type,item,fclass).random()
-                    results.add(MultilevelClassification(fclass,sclass))
-                }
-                val accounting = Accounting(
-                    accountingType = type,
-                    accountingAmount = (1..5000).random().toDouble(),
-                    accountingClass = results[0],
-                    accountingAcconut = results[1],
-                    accountingAcconut_2 = if (type == "转账"){
-                        results[2]
-                    }else{
-                        null
-                    },
-                    accountingMerchant = results[3],
-                    accountingProject = results[4],
-                    accountingMember = results[5],
-                    accountingTime = date,
-                    accountingRemark = ""
-                )
-                    roomdb.actDao().addAccountingData(accounting)
-            }
-        }.start()
-    }
 
 }
 
