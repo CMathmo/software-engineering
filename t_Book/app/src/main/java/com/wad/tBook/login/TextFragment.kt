@@ -81,7 +81,7 @@ class TextFragment : Fragment() {
     private fun loginclock(password:String,originalpassword:String){
 
         if (originalpassword.equals("0")){
-            Toast.makeText(activity,"没有设置密码，请先注册！", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity,"没有设置密码，请先注册！", Toast.LENGTH_SHORT).show()
             loginPassword.setText("")
         }
         else{
@@ -94,7 +94,7 @@ class TextFragment : Fragment() {
 
     //登录成功的显示
     private fun loginSuccess(){
-        Toast.makeText(activity,"登录成功！", Toast.LENGTH_LONG).show()
+        Toast.makeText(activity,"登录成功！", Toast.LENGTH_SHORT).show()
         if (remeber_Password.isChecked == true){
             editor.putInt("remeberpassword",1)
             editor.apply()
@@ -109,7 +109,7 @@ class TextFragment : Fragment() {
 
     //登录失败的显示
     private fun loginFailed(){
-        Toast.makeText(activity,"用户不存在，请重新登录", Toast.LENGTH_LONG).show()
+        Toast.makeText(activity,"用户不存在，请重新登录", Toast.LENGTH_SHORT).show()
         loginPassword.setText("")
         editor.putInt("remeberpassword",0)
         editor.apply()

@@ -6,41 +6,103 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#FFF9C4">-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF9C4">
+        android:layout_marginBottom="16dp"
+        android:background="#FFF9C4"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
+
+        <Button
+            android:id="@+id/type_select_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:minHeight="20dp"
+            android:text="..."
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
+        <com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartView
+            android:id="@+id/AAChartView"
+            android:layout_width="match_parent"
+            android:layout_height="450dp" />
 
-            <Button
-                android:id="@+id/type_select_button"
-                android:layout_width="match_parent"
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:background="#FFF9C4">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/chart_radiogroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                android:text="..."
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartView
-                android:id="@+id/AAChartView"
-                android:layout_width="match_parent"
-                android:layout_height="450dp" />
+                <!--选择饼状图-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                <RadioButton
+                    android:id="@+id/Pie_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="饼状图"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+                <!--选择柱状图-->
+                <RadioButton
+                    android:id="@+id/Bar_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="条形图"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+                <!--选择折线图-->
+                <RadioButton
+                    android:id="@+id/Line_radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="折线图"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="#FFF9C4">
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <!--            回退按钮-->
                 <Button
@@ -60,7 +122,6 @@
                 <TextView
                     android:id="@+id/time_period_text"
                     android:layout_width="wrap_content"
-                    android:maxWidth="120dp"
                     android:layout_height="wrap_content"
                     android:text="XX.XX ~ XX.XX"
                     android:textAlignment="center"
@@ -82,53 +143,16 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/time_period_text"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioGroup
-                    android:id="@+id/chart_radiogroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/forth_time_button"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <!--选择饼状图-->
-
-                    <RadioButton
-                        android:id="@+id/Pie_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="饼状图"
-                        android:textSize="12sp"
-                        android:visibility="visible" />
-                    <!--选择柱状图-->
-                    <RadioButton
-                        android:id="@+id/Bar_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="条形图"
-                        android:textSize="12sp"
-                        android:visibility="visible" />
-
-                    <!--选择折线图-->
-                    <RadioButton
-                        android:id="@+id/Line_radioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="折线图"
-                        android:textSize="12sp"
-                        android:visibility="visible" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </RadioGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </FrameLayout>

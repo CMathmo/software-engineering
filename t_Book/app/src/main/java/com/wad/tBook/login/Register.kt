@@ -50,20 +50,20 @@ class Register : AppCompatActivity() {
 
         editor.putString("textpassword",password)
         editor.apply()
-        Toast.makeText(this,"注册成功！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"注册成功！", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun registerFailure(){
-        Toast.makeText(this,"两次密码不一致，请重新输入！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"两次密码不一致，请重新输入！", Toast.LENGTH_SHORT).show()
         aPassword.setText("")
         bPassword.setText("")
     }
 
     private fun registerNotnew(){
-        Toast.makeText(this,"您已经注册过密码，请回想一下！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"您已经注册过密码，请回想一下！", Toast.LENGTH_SHORT).show()
         aPassword.setText("")
         bPassword.setText("")
     }

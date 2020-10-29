@@ -126,6 +126,8 @@ class AnalysisFragment : Fragment() {
         //图表视图
         aaChartView= view.findViewById(R.id.AAChartView)
 
+        
+
         //获取图表类型
         val ChartRadioGroup :RadioGroup = view.findViewById(R.id.chart_radiogroup)
         getChartType(ChartRadioGroup)
@@ -357,7 +359,7 @@ class AnalysisFragment : Fragment() {
 
             window.showAtLocation(
                 TimePeriodText,
-                Gravity.BOTTOM or Gravity.START,
+                Gravity.BOTTOM,
                 TimePeriodText.getX().toInt(),
                 TimePeriodText.getY().toInt()
             )

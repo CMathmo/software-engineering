@@ -6,7 +6,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.wad.tBook.MyApplication
+import android.hardware.fingerprint.*
 import com.wad.tBook.R
+import org.jetbrains.anko.fingerprintManager
 
 class PasswordActivity : AppCompatActivity() {
 

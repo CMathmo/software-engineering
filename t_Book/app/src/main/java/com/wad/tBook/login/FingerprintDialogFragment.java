@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -66,7 +67,11 @@ public class FingerprintDialogFragment extends DialogFragment {
             public void onClick(View v) {
                 dismiss();
                 stopListening();
+//                Intent intent=new Intent(this, LoginActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
             }
+
         });
         return v;
     }

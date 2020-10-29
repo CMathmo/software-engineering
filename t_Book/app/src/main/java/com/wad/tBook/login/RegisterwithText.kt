@@ -21,11 +21,11 @@ class RegisterwithText : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registerwith_text)
 
-        Toast.makeText(this,"成功进入页面！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"成功进入页面！", Toast.LENGTH_SHORT).show()
 
         makesurtochange.setOnClickListener {
             if (find<EditText>(R.id.Passwordone).text.toString().equals("")){
-                Toast.makeText(this,"密码不能为空！", Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"密码不能为空！", Toast.LENGTH_SHORT).show()
             }
             else{
                 when(find<EditText>(R.id.Passwordone).text.toString()){
@@ -39,12 +39,12 @@ class RegisterwithText : AppCompatActivity() {
     private fun changeSucess(password:String){
         editor.putString("textpassword",password)
         editor.apply()
-        Toast.makeText(this,"修改成功！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"修改成功！", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     private fun changeFailure(){
-        Toast.makeText(this,"两次密码不一致，请重新输入！", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"两次密码不一致，请重新输入！", Toast.LENGTH_SHORT).show()
         Passwordone.setText("")
         Passwordtwo.setText("")
     }
