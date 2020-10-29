@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_pipeline.pipeline_recycle
 class DatePipelineFragment(type:String) : Fragment() {
 
     private val TAG = DatePipelineFragment::class.qualifiedName
-    private val viewModel by lazy { ViewModelProvider(this).get(DatePipeLineViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(DatePipelineViewModel::class.java) }
     private val type = type
     private var date = DateUtil.getLocalTimeNow_00()
     private var startDate :String = ""

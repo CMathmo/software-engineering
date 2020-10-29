@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
 
-class DatePipeLineViewModel(application: Application) : AndroidViewModel(application) {
+class DatePipelineViewModel(application: Application) : AndroidViewModel(application) {
     var readAccountingData : LiveData<List<Accounting>>
     private val repo : DatePipelineRepository
 

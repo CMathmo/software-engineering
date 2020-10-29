@@ -70,13 +70,17 @@ class SettingFragment : Fragment(){
         view?.find<Button>(R.id.test_button)?.setOnClickListener {
            addTestData()
         }
+
+        view?.find<Button>(R.id.clear_button)?.setOnClickListener {
+            val roomdb = tBookDatabase.getDBInstace(requireActivity().application)
+            roomdb.actDao().deleteAll()
+        }
     }
 
 
     fun addTestData(){
         Thread{
             val roomdb = tBookDatabase.getDBInstace(requireActivity().application)
-            if(roomdb.actDao().getAllAccountingData().size > 1000) return@Thread
             roomdb.actDao().deleteAll()
             for(i in 1..3000){
                 val type = mutableListOf<String>("收入","支出","转账").random()

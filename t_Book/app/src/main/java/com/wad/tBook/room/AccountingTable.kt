@@ -35,6 +35,10 @@ interface AccountingDao {
     @Query("SELECT * FROM accounting_table")
     fun readAccountingData() : LiveData<List<Accounting>>
 
+    //获取表中所有数据（livedata）（排序）
+    @Query("SELECT * FROM accounting_table ORDER BY accounting_id DESC")
+    fun readAccountingDataOrderById() : LiveData<List<Accounting>>
+
     //获取表中所有数据（list）
     @Query("SELECT * FROM accounting_table")
     fun readAccountingDataWithoutLiveData() : List<Accounting>
@@ -42,6 +46,10 @@ interface AccountingDao {
     //获取表中所有数据（list）
     @Query("SELECT * FROM accounting_table")
     fun getAllAccountingData() : List<Accounting>
+
+    //获取表中所有数据（list）（排序）
+    @Query("SELECT * FROM accounting_table ORDER BY accounting_id DESC")
+    fun <T> readAllAccountingDataOrderById() : List<Accounting>
 
     //获取所有收入金额之和
     @Query("SELECT SUM(accounting_amount) FROM accounting_table WHERE accounting_type = '收入'  ")
@@ -112,7 +120,7 @@ interface AccountingDao {
     fun readAccountDetailData(accountingAccount:String) : List<AccountRepository.TypeAmount>
 
     //获取所有在startDate~endDate内的数据（list）
-    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate")
+    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate ORDER BY accounting_time")
     fun readAllDateFromAndTo(startDate:String,endDate:String) : List<Accounting>
 
     //获取所有在startDate~endDate内的满足Type的数据的总和()
@@ -120,7 +128,7 @@ interface AccountingDao {
     fun readAllDateFromToAndAbout(startDate:String,endDate:String,type:String) : Double
 
     //获取所有在startDate~endDate内的数据（livedata）
-    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate")
+    @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate ORDER BY accounting_time")
     fun readAllLiveDateFromAndTo(startDate:String,endDate:String) : LiveData<List<Accounting>>
 
 

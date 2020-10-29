@@ -28,6 +28,7 @@
             android:id="@+id/type_select_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:minHeight="20dp"
             android:text="..."
             android:textSize="15dp"
@@ -36,7 +37,8 @@
         <com.aachartmodel.aainfographics.AAInfographicsLib.AAChartCreator.AAChartView
             android:id="@+id/AAChartView"
             android:layout_width="match_parent"
-            android:layout_height="450dp" />
+            android:layout_height="450dp"
+            android:layout_weight="1" />
 
         <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
         <!--                android:layout_width="match_parent"-->
@@ -46,7 +48,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
 
             <RadioGroup
                 android:id="@+id/chart_radiogroup"
@@ -92,7 +95,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
 
 
             <androidx.appcompat.widget.LinearLayoutCompat

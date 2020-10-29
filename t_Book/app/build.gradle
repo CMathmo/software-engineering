@@ -6,19 +6,13 @@ apply plugin: 'kotlin-kapt'
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('D:\\software-engineering\\android_second.keystore')
+/*        debug {
+            storeFile file('D:\\File\\Program\\software_engineering')
             storePassword 'WAD2333'
             keyAlias 'key'
             keyPassword 'WAD2333'
-        }
+        }*/
 
-//        debug {
-//            storeFile file('D:\\software-engineering\\android.keystore')
-//            storePassword 'WAD2333'
-//            keyAlias 'key'
-//            keyPassword 'WAD2333'
-//        }
     }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
