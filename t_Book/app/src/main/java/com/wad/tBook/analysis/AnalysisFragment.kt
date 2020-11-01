@@ -50,9 +50,9 @@ enum class LevelType{
     MAIN, SUB, SUM
 }
 
-//单用户或多用户
+//统计类型（默认，账户分类，成员分类，商家分类，项目分类）
 enum class AccountType{
-    SINGLE, MULTI
+    DEFAULT, ACCOUNT, MEMBER, MERCHANT, PROJECT
 }
 
 //时间范围
@@ -83,8 +83,8 @@ class AnalysisFragment : Fragment() {
     var TypeSelected :InExType = InExType.EXPENSE
     //分类级别，默认为一级
     var LevelSelected :LevelType = LevelType.MAIN
-    //是否多用户，默认为否
-    var Account :AccountType = AccountType.SINGLE
+    //默认分类
+    var Account :AccountType = AccountType.DEFAULT
     //选定的时间范围，默认为周
     var TimeRange: TimeRangeType = TimeRangeType.WEEK
     //当前时间范围的起始日期
@@ -179,7 +179,7 @@ class AnalysisFragment : Fragment() {
         Log.i(TAG, "onPause: ")
     }
 
-    //获取图表类型（饼图或者柱状图）
+    //获取图表类型（饼图或者柱状图或者折线图）
     private fun getChartType(ChartRadioGroup:RadioGroup){
         //获取图表类型
         ChartRadioGroup.setOnCheckedChangeListener{buttonView, isChecked ->
@@ -211,17 +211,22 @@ class AnalysisFragment : Fragment() {
         window.contentView = chartTypeView
         window.setOutsideTouchable(true)
         window.setFocusable(true)
+
         val ExRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.ex_radiogroup)
         val InRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.in_radiogroup)
         val AccRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.acc_radiogroup)
+        val MemRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.mem_radiogroup)
+        val MerchRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.merch_radiogroup)
+        val ProjRadioGroup :RadioGroup = chartTypeView.findViewById(R.id.proj_radiogroup)
 
         //控制弹窗的显示与隐藏
         TypeSelectButton.setOnClickListener {
-            println(window.isShowing())
             if(window.isShowing()) {
                 window.dismiss()
             }
             else {
+                val width = TypeSelectButton.width
+                window.setWidth(width)
                 window.showAsDropDown(TypeSelectButton)
             }
         }
@@ -231,18 +236,24 @@ class AnalysisFragment : Fragment() {
         chartTypeView.findViewById<RadioButton>(R.id.MainEx).setOnClickListener{
             this.TypeSelected = InExType.EXPENSE
             this.LevelSelected = LevelType.MAIN
-            this.Account = AccountType.SINGLE
+            this.Account = AccountType.DEFAULT
             InRadioGroup.clearCheck()
             AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
         chartTypeView.findViewById<RadioButton>(R.id.SubEx).setOnClickListener{
             this.TypeSelected = InExType.EXPENSE
             this.LevelSelected = LevelType.SUB
-            this.Account = AccountType.SINGLE
+            this.Account = AccountType.DEFAULT
             InRadioGroup.clearCheck()
             AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
@@ -250,18 +261,24 @@ class AnalysisFragment : Fragment() {
         chartTypeView.findViewById<RadioButton>(R.id.MainIn).setOnClickListener{
             this.TypeSelected = InExType.INCOME
             this.LevelSelected = LevelType.MAIN
-            this.Account = AccountType.SINGLE
+            this.Account = AccountType.DEFAULT
             ExRadioGroup.clearCheck()
             AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
         chartTypeView.findViewById<RadioButton>(R.id.SubIn).setOnClickListener{
             this.TypeSelected = InExType.INCOME
             this.LevelSelected = LevelType.SUB
-            this.Account = AccountType.SINGLE
+            this.Account = AccountType.DEFAULT
             ExRadioGroup.clearCheck()
             AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
@@ -269,18 +286,99 @@ class AnalysisFragment : Fragment() {
         chartTypeView.findViewById<RadioButton>(R.id.AccEx).setOnClickListener{
             this.TypeSelected = InExType.EXPENSE
             this.LevelSelected = LevelType.SUM
-            this.Account = AccountType.MULTI
+            this.Account = AccountType.ACCOUNT
             InRadioGroup.clearCheck()
             ExRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
         chartTypeView.findViewById<RadioButton>(R.id.AccIn).setOnClickListener{
             this.TypeSelected = InExType.INCOME
             this.LevelSelected = LevelType.SUM
-            this.Account = AccountType.MULTI
+            this.Account = AccountType.ACCOUNT
             InRadioGroup.clearCheck()
             ExRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+
+        chartTypeView.findViewById<RadioButton>(R.id.MemEx).setOnClickListener{
+            this.TypeSelected = InExType.EXPENSE
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.MEMBER
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+        chartTypeView.findViewById<RadioButton>(R.id.MemIn).setOnClickListener{
+            this.TypeSelected = InExType.INCOME
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.MEMBER
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+
+        chartTypeView.findViewById<RadioButton>(R.id.MerchEx).setOnClickListener{
+            this.TypeSelected = InExType.EXPENSE
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.MERCHANT
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+        chartTypeView.findViewById<RadioButton>(R.id.MerchIn).setOnClickListener{
+            this.TypeSelected = InExType.INCOME
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.MERCHANT
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            ProjRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+
+        chartTypeView.findViewById<RadioButton>(R.id.ProjEx).setOnClickListener{
+            this.TypeSelected = InExType.EXPENSE
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.PROJECT
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
+            UpdateChart()
+            window.dismiss()
+        }
+        chartTypeView.findViewById<RadioButton>(R.id.ProjIn).setOnClickListener{
+            this.TypeSelected = InExType.INCOME
+            this.LevelSelected = LevelType.SUM
+            this.Account = AccountType.PROJECT
+            InRadioGroup.clearCheck()
+            ExRadioGroup.clearCheck()
+            AccRadioGroup.clearCheck()
+            MemRadioGroup.clearCheck()
+            MerchRadioGroup.clearCheck()
             UpdateChart()
             window.dismiss()
         }
@@ -517,6 +615,12 @@ class AnalysisFragment : Fragment() {
         var SubCateMap :MutableMap<String, Double> = mutableMapOf()
         //账户类型
         var AccountMap :MutableMap<String, Double> = mutableMapOf()
+        //成员类型
+        var MemberMap :MutableMap<String, Double> = mutableMapOf()
+        //商家类型
+        var MerchMap :MutableMap<String, Double> = mutableMapOf()
+        //项目类型
+        var ProjMap :MutableMap<String, Double> = mutableMapOf()
 
         val typeName: String
 
@@ -531,12 +635,21 @@ class AnalysisFragment : Fragment() {
                             var mainclass = account.accountingClass.firstClass
                             var subclass = account.accountingClass.secondClass
                             var accname = account.accountingAcconut.secondClass ?: "未知账户"
+                            var memname = if(account.accountingMember != null) account.accountingMember!!.secondClass else "未知成员"
+                            var merchname = if(account.accountingMerchant != null) account.accountingMerchant!!.secondClass else "未知商家"
+                            var projname = if(account.accountingProject != null) account.accountingProject!!.secondClass else "未知项目"
                             if (!(mainclass in MainCateMap.keys)) {MainCateMap[mainclass] = 0.0}
                             if (!(subclass in SubCateMap.keys)) {SubCateMap[subclass] = 0.0}
                             if (!(accname in AccountMap.keys)) {AccountMap[subclass] = 0.0}
+                            if (!(memname in MemberMap.keys)) {MemberMap[subclass] = 0.0}
+                            if (!(merchname in MerchMap.keys)) {MerchMap[subclass] = 0.0}
+                            if (!(projname in ProjMap.keys)) {ProjMap[subclass] = 0.0}
                             MainCateMap[mainclass] = (MainCateMap[mainclass]?:0.0) + account.accountingAmount
                             SubCateMap[subclass] = (SubCateMap[subclass]?:0.0) + account.accountingAmount
                             AccountMap[accname] = (AccountMap[accname]?:0.0) + account.accountingAmount
+                            MemberMap[memname] = (MemberMap[memname]?:0.0) + account.accountingAmount
+                            MerchMap[merchname] = (MerchMap[merchname]?:0.0) + account.accountingAmount
+                            ProjMap[projname] = (ProjMap[projname]?:0.0) + account.accountingAmount
                         }
                     }
                 }
@@ -546,15 +659,30 @@ class AnalysisFragment : Fragment() {
                 if (Accountings != null) {
                     for (account in Accountings ){
                         if (account.accountingType == "支出"){
+//                            var mainclass = account.accountingClass.firstClass
+//                            var subclass = account.accountingClass.secondClass
+//                            var accname = account.accountingAcconut.secondClass ?: "未知账户"
+//                            MainCateMap[mainclass] = (MainCateMap[mainclass]?:0.0) + account.accountingAmount
+//                            SubCateMap[subclass] = (SubCateMap[subclass]?:0.0) + account.accountingAmount
+//                            AccountMap[accname] = (AccountMap[accname]?:0.0) + account.accountingAmount
                             var mainclass = account.accountingClass.firstClass
                             var subclass = account.accountingClass.secondClass
                             var accname = account.accountingAcconut.secondClass ?: "未知账户"
-                            //println("money: ${account.accountingAmount}")
-                            //println("- mainclass = $mainclass, subclass = $subclass, Maincatemap = $MainCateMap")
+                            var memname = if(account.accountingMember != null) account.accountingMember!!.secondClass else "未知成员"
+                            var merchname = if(account.accountingMerchant != null) account.accountingMerchant!!.secondClass else "未知商家"
+                            var projname = if(account.accountingProject != null) account.accountingProject!!.secondClass else "未知项目"
+                            if (!(mainclass in MainCateMap.keys)) {MainCateMap[mainclass] = 0.0}
+                            if (!(subclass in SubCateMap.keys)) {SubCateMap[subclass] = 0.0}
+                            if (!(accname in AccountMap.keys)) {AccountMap[subclass] = 0.0}
+                            if (!(memname in MemberMap.keys)) {MemberMap[subclass] = 0.0}
+                            if (!(merchname in MerchMap.keys)) {MerchMap[subclass] = 0.0}
+                            if (!(projname in ProjMap.keys)) {ProjMap[subclass] = 0.0}
                             MainCateMap[mainclass] = (MainCateMap[mainclass]?:0.0) + account.accountingAmount
                             SubCateMap[subclass] = (SubCateMap[subclass]?:0.0) + account.accountingAmount
                             AccountMap[accname] = (AccountMap[accname]?:0.0) + account.accountingAmount
-                            //println("--- mainclass = $mainclass, subclass = $subclass, Maincatemap = $MainCateMap")
+                            MemberMap[memname] = (MemberMap[memname]?:0.0) + account.accountingAmount
+                            MerchMap[merchname] = (MerchMap[merchname]?:0.0) + account.accountingAmount
+                            ProjMap[projname] = (ProjMap[projname]?:0.0) + account.accountingAmount
                         }
                     }
                 }
@@ -568,7 +696,13 @@ class AnalysisFragment : Fragment() {
             //二级分类
             LevelType.SUB -> SubCateMap
             //按账户分类
-            LevelType.SUM -> AccountMap
+            LevelType.SUM -> when(this.Account){
+                AccountType.ACCOUNT -> AccountMap
+                AccountType.MEMBER -> MemberMap
+                AccountType.PROJECT -> ProjMap
+                AccountType.MERCHANT -> MerchMap
+                else -> AccountMap
+            }
         }
 
         println("MainCateMap: $MainCateMap")
@@ -613,9 +747,9 @@ class AnalysisFragment : Fragment() {
                     activity?.let {
                         tBookDatabase.getDBInstace(it).actDao().readAllDateFromToAndAbout(timeRange[0], timeRange[1], "收入")
                             .let { sumList.add(it) }
+                    }
                 }
             }
-        }
             InExType.EXPENSE ->{
                 for (timeRange in timeRangeList){
                     activity?.let {
