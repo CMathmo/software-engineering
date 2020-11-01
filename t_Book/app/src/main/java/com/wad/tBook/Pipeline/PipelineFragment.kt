@@ -38,10 +38,10 @@ class PipelineFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         pipeline_recycle.layoutManager = LinearLayoutManager(context)
         val pipeline_adapter =
-            PipelineAdapter(application)
+            PipelineAdapter(requireActivity())
         pipeline_recycle.adapter = pipeline_adapter
         viewModel.readAllData.observe(requireActivity(), Observer {
-            accountingList: List<Accounting> ->
+                accountingList: List<Accounting> ->
             Log.d(TAG,"momo")
             pipeline_adapter.readData(accountingList)
         })

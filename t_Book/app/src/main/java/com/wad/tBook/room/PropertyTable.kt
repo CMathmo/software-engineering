@@ -62,6 +62,10 @@ interface PropertyDao {
     @Query("SELECT DISTINCT property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:PropertyFirstClass")
     fun getLiveSecondClassFrom(PropertyType:String, PropertyItem:String, PropertyFirstClass:String): LiveData<List<String>>
 
+    //检查二级类型是否存在
+    @Query("SELECT COUNT(*)FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem AND property_first_class =:PropertyFirstClass AND property_second_class =:PropertySecondClass")
+    fun checkClass(PropertyType:String, PropertyItem:String, PropertyFirstClass:String, PropertySecondClass:String): Int
+
     //获取指定type下指定item下的所有一级分类和二级分类（以OtherStatisticalRepository.proType形式）
     @Query("SELECT DISTINCT property_first_class,property_second_class FROM property_table WHERE property_type = :PropertyType AND property_item =:PropertyItem")
     fun getLiveClassFrom(PropertyType:String, PropertyItem:String): LiveData<OtherStatisticalRepository.proType>

@@ -1,6 +1,5 @@
-package com.wad.tBook.pipeline
+package com.wad.tBook.statistical.datepipeline
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.wad.tBook.MainActivity
 import com.wad.tBook.accounting.AccountingActivity
 import com.wad.tBook.R
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.tBookDatabase
 
 
-class PipelineAdapter (
+class DatePipelineAdapter (
     context: Context
 ):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -104,9 +101,9 @@ class PipelineAdapter (
                 }
                 viewHolder.deleteButton.setOnClickListener {
                     val roomdb = tBookDatabase.getDBInstace(context)
-                    roomdb.actDao().deleteAccountingData((viewHolder.textID.text as String).toInt())
-                    (context as MainActivity).update()
-
+                    Thread{
+                        roomdb.actDao().deleteAccountingData((viewHolder.textID.text as String).toInt())
+                    }.start()
                 }
                 viewHolder.editButton.setOnClickListener {
                     val intent = Intent(context,

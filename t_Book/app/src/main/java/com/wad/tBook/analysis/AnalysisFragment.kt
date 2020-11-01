@@ -498,7 +498,7 @@ class AnalysisFragment : Fragment() {
 
 
     //更新图表
-    private fun UpdateChart(){
+    fun UpdateChart(){
         if (ChartType == ChartList.Line){
             UpdateLineChart()
         }

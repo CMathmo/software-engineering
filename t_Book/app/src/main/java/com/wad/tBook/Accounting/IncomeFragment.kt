@@ -117,7 +117,7 @@ class IncomeFragment : Fragment() {
             val item_class = if(class_list.size == 1) null
             else  MultilevelClassification(firstClass = class_list[0],secondClass = class_list[1])
             if(item_class == null){
-                Toast.makeText(activity,"class must be writen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"请选择类别", Toast.LENGTH_SHORT).show()
                 Log.d(TAG,"momo:class must be writen")
                 return@setOnClickListener
             }
@@ -126,7 +126,7 @@ class IncomeFragment : Fragment() {
             val account = if(account_list.size == 1) null
             else  MultilevelClassification(firstClass = account_list[0],secondClass = account_list[1])
             if(account == null) {
-                Toast.makeText(activity,"account must be writen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"请选择账户", Toast.LENGTH_SHORT).show()
                 Log.d(TAG,"momo:account must be writen")
                 return@setOnClickListener
             }

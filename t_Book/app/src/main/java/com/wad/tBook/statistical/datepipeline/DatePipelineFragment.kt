@@ -55,7 +55,7 @@ class DatePipelineFragment(type:String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pipeline_recycle.layoutManager = LinearLayoutManager(context)
-        val pipeline_adapter = PipelineAdapter(application)
+        val pipeline_adapter = DatePipelineAdapter(application)
         pipeline_recycle.adapter = pipeline_adapter
         setDate()
         setText()

@@ -9,10 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.wad.tBook.accounting.AccountingActivity
@@ -119,20 +116,27 @@ class EditSecondAdapter (
         normalDialog.setView(dialogView)
         val firstClassText = dialogView.find<TextView>(R.id.first_dialog_textview)
         firstClassText.setText(firstClass)
-        normalDialog.setPositiveButton("确定", DialogInterface.OnClickListener { dialogInterface, i ->
-            val secondClass = dialogView.find<EditText>(R.id.second_dialog_edittext).text.toString()
-            if (item == "类别"){
-                dao.addPropertyData(Property(0,type,item,firstClass,secondClass))
-            }else{
-                dao.addPropertyData(Property(0,"收入",item,firstClass,secondClass))
-                dao.addPropertyData(Property(0,"支出",item,firstClass,secondClass))
-                dao.addPropertyData(Property(0,"转账",item,firstClass,secondClass))
-            }
-        })
-        normalDialog.setNegativeButton("关闭", DialogInterface.OnClickListener { dialogInterface, i ->
-
-        })
+        normalDialog.setPositiveButton("确定", null)
+        normalDialog.setNegativeButton("关闭", DialogInterface.OnClickListener { dialogInterface, i ->})
+        val dialog = normalDialog.create()
         // 显示
-        normalDialog.show();
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val secondClass = dialogView.find<EditText>(R.id.second_dialog_edittext).text.toString()
+            if(secondClass == ""){
+                Toast.makeText(context, "请输入条目名称", Toast.LENGTH_SHORT).show()
+            }else if(dao.checkClass(type,item,firstClass,secondClass) == 0){
+                if (item == "类别"){
+                    dao.addPropertyData(Property(0,type,item,firstClass,secondClass))
+                }else {
+                    dao.addPropertyData(Property(0, "收入", item, firstClass, secondClass))
+                    dao.addPropertyData(Property(0, "支出", item, firstClass, secondClass))
+                    dao.addPropertyData(Property(0, "转账", item, firstClass, secondClass))
+                }
+                dialog.dismiss()
+            }else {
+                Toast.makeText(context, "该条目已存在", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

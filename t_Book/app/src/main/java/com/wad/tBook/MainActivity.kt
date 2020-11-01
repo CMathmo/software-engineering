@@ -61,14 +61,12 @@ class MainActivity : FragmentActivity() {
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)
         //tBookDatabase.getDBInstace(this).actDao().deleteAll()
-        if(roomdb.actDao().getAllAccountingData().isEmpty()){
+        /*if(roomdb.actDao().getAllAccountingData().isEmpty()){
             for (acc in getTestData()){
                 println("testdata: $acc")
                     roomdb.actDao().addAccountingData(acc)
             }
-
-        }
-        //initTestData()
+        }*/
     }
 
     override fun onStart() {
@@ -250,7 +248,7 @@ class MainActivity : FragmentActivity() {
 
 
     fun initPropertyRoom(roomdb: tBookDatabase){
-        roomdb.proDao().deleteAllPropertyData()
+        //roomdb.proDao().deleteAllPropertyData()
         if (roomdb.proDao().getAllPropertyData().isEmpty()){
             val typeList = arrayListOf<String>("收入", "支出", "转账")
             val memberList = "本人、家庭公用、老婆、老公、子女、父母".split("、")
@@ -531,6 +529,9 @@ class MainActivity : FragmentActivity() {
         }
     }
 
+    fun update(){
+        (fragmentList[2] as AnalysisFragment).UpdateChart()
+    }
 
 }
 
