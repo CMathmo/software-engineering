@@ -54,7 +54,6 @@ class AccountFragment : Fragment() {
 
 
     private fun setUpRecyclerView() {
-        println("debug 1024")
         val InfoAccountData : MutableList<OtherStatisticalRepository.TA> = AccountDataInfo()
         recycle_account.layoutManager = LinearLayoutManager(context)
         val account_adapter = activity?.application?.let { AccountAdapter(InfoAccountData) }
@@ -76,11 +75,6 @@ class AccountFragment : Fragment() {
                 if (accountClass != null) {
                     intent.putExtra("account_class",accountClass.text)
                 }
-                Toast.makeText(
-                    context,
-                    "点击的item位置是${position}",
-                    Toast.LENGTH_SHORT
-                ).show()
                 context?.startActivity(intent)
             }
         }
@@ -89,9 +83,16 @@ class AccountFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val typeList:List<AccountRepository.TypeAmount> = dataInfo()
-        view?.let { dataDisplay(it, typeList) }
+        setUpCardView()
         setUpRecyclerView()
+    }
+
+    private fun setUpCardView() {
+        viewModel.readAllData.observe(requireActivity()) {
+                accountingList: List<Accounting> ->
+            val typeList:List<AccountRepository.TypeAmount> = dataInfo()
+            view?.let { dataDisplay(it, typeList) }
+        }
     }
 
     private fun dataInfo(): List<AccountRepository.TypeAmount> {
@@ -124,6 +125,7 @@ class AccountFragment : Fragment() {
         outcomeView.text = "流出：" + typeList[1].Amount.toMoneyFormatted()
         return liabilityView.text
     }
+
 
 
     private fun AccountDataInfo(): MutableList<OtherStatisticalRepository.TA> {
