@@ -73,7 +73,7 @@ class SettingFragment : Fragment(){
 
         view?.find<Button>(R.id.clear_button)?.setOnClickListener {
             val roomdb = tBookDatabase.getDBInstace(requireActivity().application)
-            roomdb.actDao().deleteAll()
+            roomdb.actDao().deleteAllTestData()
         }
     }
 
@@ -107,7 +107,8 @@ class SettingFragment : Fragment(){
                     accountingProject = results[4],
                     accountingMember = results[5],
                     accountingTime = date,
-                    accountingRemark = ""
+                    accountingRemark = "",
+                    testTag = 1
                 )
                 roomdb.actDao().addAccountingData(accounting)
             }

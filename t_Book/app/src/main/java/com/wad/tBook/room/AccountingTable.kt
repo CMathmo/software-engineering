@@ -131,7 +131,9 @@ interface AccountingDao {
     @Query("SELECT * FROM accounting_table WHERE accounting_time >=:startDate AND accounting_time <=:endDate ORDER BY accounting_time")
     fun readAllLiveDateFromAndTo(startDate:String,endDate:String) : LiveData<List<Accounting>>
 
-
+    //删除所有测试数据
+    @Query("DELETE FROM accounting_table WHERE test_tag == 1")
+    fun deleteAllTestData():Int
 
 }
 
@@ -161,6 +163,8 @@ data class Accounting(
     var accountingMerchant: MultilevelClassification? = null,//商家，选填
     @ColumnInfo(name = "accounting_remark")
     var accountingRemark: String,//备注，选填
+    @ColumnInfo(name = "test_tag")
+    var testTag: Int = 0,//测试标记
     @ColumnInfo(name = "accounting_imagine")
     var accountingImg: String? = null//图片
 )
