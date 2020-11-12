@@ -16,7 +16,6 @@ import java.nio.channels.FileChannel;
 public class BackupTask extends AsyncTask<String, Void, Integer> {
     private static final String COMMAND_BACKUP = "backupDatabase";
     public static final String COMMAND_RESTORE = "restoreDatabase";
-    @SuppressLint("StaticFieldLeak")
     private Context mContext;
 
     public BackupTask(Context context) {
@@ -62,11 +61,20 @@ public class BackupTask extends AsyncTask<String, Void, Integer> {
 
     private void fileCopy(File dbFile, File backup) throws IOException {
         // TODO Auto-generated method stub
-        try (FileChannel inChannel = new FileInputStream(dbFile).getChannel(); FileChannel outChannel = new FileOutputStream(backup).getChannel()) {
+        FileChannel inChannel = new FileInputStream(dbFile).getChannel();
+        FileChannel outChannel = new FileOutputStream(backup).getChannel();
+        try {
             inChannel.transferTo(0, inChannel.size(), outChannel);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            if (inChannel != null){
+                inChannel.close();
+            }
+            if (outChannel != null){
+                outChannel.close();
+            }
         }
     }
+
 }

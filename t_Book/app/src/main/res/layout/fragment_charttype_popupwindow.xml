@@ -24,7 +24,7 @@
             <RadioGroup
                 android:id="@+id/ex_radiogroup"
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.16"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <RadioButton
@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:text="一级支出"
                     android:checked="true"/>
+
 
                 <RadioButton
                     android:id="@+id/SubEx"
@@ -45,7 +46,7 @@
             <RadioGroup
                 android:id="@+id/in_radiogroup"
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.16"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -64,23 +65,84 @@
             </RadioGroup>
 
             <RadioGroup
-                android:id="@+id/acc_radiogroup"
+            android:id="@+id/acc_radiogroup"
+            android:layout_width="0dp"
+            android:layout_weight="0.16"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/AccIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="账户收入"/>
+
+            <RadioButton
+                android:id="@+id/AccEx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="账户支出"/>
+        </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/mem_radiogroup"
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.16"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <RadioButton
-                    android:id="@+id/AccIn"
+                    android:id="@+id/MemIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="账户收入"/>
+                    android:text="成员收入"/>
 
                 <RadioButton
-                    android:id="@+id/AccEx"
+                    android:id="@+id/MemEx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="账户支出"/>
+                    android:text="成员支出"/>
+            </RadioGroup>
+
+
+            <RadioGroup
+                android:id="@+id/proj_radiogroup"
+                android:layout_width="0dp"
+                android:layout_weight="0.16"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/ProjIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="项目收入"/>
+
+                <RadioButton
+                    android:id="@+id/ProjEx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="项目支出"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/merch_radiogroup"
+                android:layout_width="0dp"
+                android:layout_weight="0.16"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/MerchIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="商家收入"/>
+
+                <RadioButton
+                    android:id="@+id/MerchEx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="商家支出"/>
             </RadioGroup>
 
 

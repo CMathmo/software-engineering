@@ -72,7 +72,7 @@ class AccountDetailActivity : AppCompatActivity() {
 //            .title("title")
             .dataLabelsEnabled(true)
             .legendEnabled(false)
-            .backgroundColor("#D2FFE57F")
+            .backgroundColor("#D2FFE57F v")
             .series(arrayOf(
                 AASeriesElement()
                     .name("")

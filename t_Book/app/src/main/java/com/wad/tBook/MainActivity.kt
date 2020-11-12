@@ -60,13 +60,6 @@ class MainActivity : FragmentActivity() {
         initPropertyRoom(roomdb)
         val DBpath = applicationContext.getDatabasePath("tBook.db").path
         println(DBpath)
-        //tBookDatabase.getDBInstace(this).actDao().deleteAll()
-        /*if(roomdb.actDao().getAllAccountingData().isEmpty()){
-            for (acc in getTestData()){
-                println("testdata: $acc")
-                    roomdb.actDao().addAccountingData(acc)
-            }
-        }*/
     }
 
     override fun onStart() {
@@ -93,6 +86,11 @@ class MainActivity : FragmentActivity() {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             applicationContext.startActivity(intent)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        BackupTask(baseContext).execute("backupDatabase")
     }
 
     /**

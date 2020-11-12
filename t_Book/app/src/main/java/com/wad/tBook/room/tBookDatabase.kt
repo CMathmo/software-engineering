@@ -4,7 +4,11 @@ import android.content.Context
 import androidx.room.*
 
 
+<<<<<<< HEAD
 @Database(entities = [Accounting::class, User::class,Property::class], version = 5)
+=======
+@Database(entities = [Accounting::class, User::class,Property::class], version = 3)
+>>>>>>> 88bbd4731ab1e07900c39658023d5c8ed380d902
 abstract class tBookDatabase : RoomDatabase() {
     //获取接口
     abstract fun actDao() : AccountingDao

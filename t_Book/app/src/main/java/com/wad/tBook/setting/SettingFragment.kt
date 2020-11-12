@@ -1,8 +1,8 @@
 package com.wad.tBook.setting
 
 import android.annotation.SuppressLint
-import android.app.Application
-import android.content.Context
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -13,12 +13,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.wad.tBook.*
+import com.wad.tBook.BackupTask
+import com.wad.tBook.MyApplication
+import com.wad.tBook.R
 import com.wad.tBook.analysis.DateUtil
 import com.wad.tBook.room.Accounting
 import com.wad.tBook.room.MultilevelClassification
 import com.wad.tBook.room.tBookDatabase
 import kotlinx.android.synthetic.main.fragment_setting.*
+import org.jetbrains.anko.AlertBuilder
 import org.jetbrains.anko.find
 
 class SettingFragment : Fragment(){
@@ -40,13 +43,26 @@ class SettingFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-        Log.d("status","on Resume")
+        Log.d("status", "on Resume")
         //val button = findViewById(R.id.button1) as Button
         view?.find<Button>(R.id.backup_button)?.setOnClickListener {
             dataBackup()
         }
         view?.find<Button>(R.id.restore_button)?.setOnClickListener {
-            dataRecover()
+            val builder = AlertDialog.Builder(requireContext())
+            with(builder)
+            {
+                setMessage("恢复数据将重启app并可能造成现有数据丢失，确认吗？")
+                setPositiveButton("确认",DialogInterface.OnClickListener { dialog, which ->
+                    dataRecover()
+                })
+                setNegativeButton("取消",DialogInterface.OnClickListener { dialog, which ->
+                    Toast.makeText(requireContext(),"已取消",Toast.LENGTH_SHORT).show()
+                })
+            }
+            val alert = builder.create()
+            alert.show()
+//            dataRecover()
         }
         view?.find<Button>(R.id.person_button)?.setOnClickListener {
             val intent = Intent(requireContext(), PersonMsgActivity::class.java)
@@ -83,24 +99,24 @@ class SettingFragment : Fragment(){
             val roomdb = tBookDatabase.getDBInstace(requireActivity().application)
             roomdb.actDao().deleteAll()
             for(i in 1..3000){
-                val type = mutableListOf<String>("收入","支出","转账").random()
-                val items = mutableListOf<String>("类别","账户","账户","商家","项目","成员")
+                val type = mutableListOf<String>("收入", "支出", "转账").random()
+                val items = mutableListOf<String>("类别", "账户", "账户", "商家", "项目", "成员")
                 val results = mutableListOf<MultilevelClassification>()
-                val date = DateUtil.getRandomDateFromTo(2018,2020)
+                val date = DateUtil.getRandomDateFromTo(2018, 2020)
                 for(item in items){
                     //Log.d(TAG,"momo-test:"+type+item+roomdb.proDao().getFirstClassFrom("收入","类别"))
-                    val fclass = roomdb.proDao().getFirstClassFrom(type,item).random()
-                    val sclass = roomdb.proDao().getSecondClassFrom(type,item,fclass).random()
-                    results.add(MultilevelClassification(fclass,sclass))
+                    val fclass = roomdb.proDao().getFirstClassFrom(type, item).random()
+                    val sclass = roomdb.proDao().getSecondClassFrom(type, item, fclass).random()
+                    results.add(MultilevelClassification(fclass, sclass))
                 }
                 val accounting = Accounting(
                     accountingType = type,
                     accountingAmount = (1..5000).random().toDouble(),
                     accountingClass = results[0],
                     accountingAcconut = results[1],
-                    accountingAcconut_2 = if (type == "转账"){
+                    accountingAcconut_2 = if (type == "转账") {
                         results[2]
-                    }else{
+                    } else {
                         null
                     },
                     accountingMerchant = results[3],
@@ -118,32 +134,32 @@ class SettingFragment : Fragment(){
     @SuppressLint("CommitPrefEdits")
     override fun onStart() {
         super.onStart()
-        Log.d("status","on Start")
+        Log.d("status", "on Start")
         if (pref.contains("email")){
-            println(pref.getString("email",""))
-            edt_email.text = pref.getString("email","")
+            println(pref.getString("email", ""))
+            edt_email.text = pref.getString("email", "")
         }
         if (pref.contains("phone")){
-            edt_phone.text = pref.getString("phone","")
+            edt_phone.text = pref.getString("phone", "")
         }
         if (pref.contains("address")){
-            edt_address.text = pref.getString("address","")
+            edt_address.text = pref.getString("address", "")
         }
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("status","on Stop")
+        Log.d("status", "on Stop")
         val editor = pref.edit()
-        editor.putString("email",edt_email.text.toString())
-        editor.putString("phone",edt_phone.text.toString())
-        editor.putString("address",edt_address.text.toString())
+        editor.putString("email", edt_email.text.toString())
+        editor.putString("phone", edt_phone.text.toString())
+        editor.putString("address", edt_address.text.toString())
         editor.apply()
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("status","on Pause")
+        Log.d("status", "on Pause")
     }
 
     private fun dataRecover() {
@@ -164,6 +180,11 @@ class SettingFragment : Fragment(){
             "备份成功",
             Toast.LENGTH_SHORT
         ).show()
+        val intent: Intent? = MyApplication.context.packageManager.getLaunchIntentForPackage(MyApplication.context.packageName)
+        //与正常页面跳转一样可传递序列化数据,在Launch页面内获得
+        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        android.os.Process.killProcess(android.os.Process.myPid())
     }
 
 

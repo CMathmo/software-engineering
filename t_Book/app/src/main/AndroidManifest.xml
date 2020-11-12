@@ -21,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity" />
+
         <activity android:name=".login.LoginwithFingerprint" />
         <activity android:name=".setting.SettingPassword" />
         <activity android:name=".edit.EditActivity" />
@@ -43,7 +43,7 @@
         <activity android:name=".accounting.AddActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".setting.PersonMsgActivity" />
-        <activity android:name=".login.PasswordActivity">
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

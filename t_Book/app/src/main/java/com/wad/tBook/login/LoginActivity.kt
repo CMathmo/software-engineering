@@ -18,6 +18,7 @@ import com.wad.tBook.R
 import com.wad.tBook.R.id.loginway_list
 import com.wad.tBook.TextFragment
 import com.wad.tBook.login.FingerprintDialogFragment
+import com.wad.tBook.login.LoginwithFingerprint
 
 
 
@@ -27,16 +28,25 @@ class LoginActivity : AppCompatActivity() {
         ViewPagerAdapter(supportFragmentManager)
     }
     val fragmentList:MutableList<Fragment> = mutableListOf(TextFragment(), NinelockFragment())
-
+    private val CUSTOM_PREF_NAME = "User_data"
+    private val sharedPreferences: SharedPreferences = MyApplication.context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    private val conditionNumber = sharedPreferences.getInt("fingerprintpassword",0)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<ViewPager>(R.id.loginway_list).offscreenPageLimit = 2
-        //设置ViewPager
-        findViewById<ViewPager>(R.id.loginway_list).adapter = mViewPagerAdapter
+        if (conditionNumber == 0){
+            findViewById<ViewPager>(R.id.loginway_list).offscreenPageLimit = 2
+            //设置ViewPager
+            findViewById<ViewPager>(R.id.loginway_list).adapter = mViewPagerAdapter
+        }
+        else{
+            val intent = Intent(this, LoginwithFingerprint::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
